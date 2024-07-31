@@ -58,7 +58,7 @@
 
 }
 
-@media (max-width: 320px) {
+@media (max-width: 426px) {
 	.hero-frame {
         width: 80%;
         margin: 0 auto;

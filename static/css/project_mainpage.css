@@ -88,8 +88,8 @@ body {
 	display: block;
 	max-width:24px;
 	max-height:24px;
-	width: auto;
-	height: auto;
+	width: 24px;
+	height: 24px;
 }
 
 .next-page {

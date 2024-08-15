@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requirements Tables</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    <link rel="stylesheet" href="../static/css/requirements.css">
+	<link rel="stylesheet" href="../static/css/header.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" data-i18n="logo">Software Documentation</div>
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="../index.html#home" data-i18n="nav-home">Home</a></li>
+                    <li><a href="../engineer_thesis_docs/index.html" data-i18n="nav-portfolio">Project</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Functional requirements</h1>
+        <table>
+            <tr>
+                <th>Requirement</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Display of function graphs</td>
+                <td>Functionality for displaying differential equation results in the form of function graphs.</td>
+            </tr>
+            <tr>
+                <td>Input of initial parameters</td>
+                <td>Ability to input initial values necessary to start RK algorithms.</td>
+            </tr>
+            <tr>
+                <td>Implementation of Runge-Kutta method of order 1</td>
+                <td>Implementation of Runge-Kutta method of order 1.</td>
+            </tr>
+            <tr>
+                <td>Implementation of Runge-Kutta method of order 2</td>
+                <td>Implementation of Runge-Kutta method of order 2.</td>
+            </tr>
+            <tr>
+                <td>Implementation of Runge-Kutta method of order 3</td>
+                <td>Implementation of Runge-Kutta method of order 3.</td>
+            </tr>
+            <tr>
+                <td>Implementation of Runge-Kutta method of order 4</td>
+                <td>Implementation of Runge-Kutta method of order 4.</td>
+            </tr>
+            <tr>
+                <td>Implementation of Runge-Kutta method of order 5</td>
+                <td>Implementation of Runge-Kutta method of order 5.</td>
+            </tr>
+            <tr>
+                <td>Implementation of Runge-Kutta method of order 6</td>
+                <td>Implementation of Runge-Kutta method of order 6.</td>
+            </tr>
+            <tr>
+                <td>Implementation of a differential equations system</td>
+                <td>Implementation of a differential equations system.</td>
+            </tr>
+            <tr>
+                <td>Selection of the order of the method</td>
+                <td>Ability to select the order of the method for solving the problem.</td>
+            </tr>
+            <tr>
+                <td>Interface language</td>
+                <td>The interface is written in English.</td>
+            </tr>
+            <tr>
+                <td>Display of calculated points</td>
+                <td>Ability to view points from which graphs are created.</td>
+            </tr>
+            <tr>
+                <td>Saving data to a .csv file</td>
+                <td>Ability to save data in a format accepted by Excel spreadsheet applications.</td>
+            </tr>
+            <tr>
+                <td>Saving data in Mathematica format</td>
+                <td>Ability to save data in a format accepted by Mathematica.</td>
+            </tr>
+            <tr>
+                <td>Saving data to a .dat file</td>
+                <td>Ability to save data to a file in .dat format, where a space is a column separator and each row is a new line.</td>
+            </tr>
+            <tr>
+                <td>Saving data to 3 files in .dat format</td>
+                <td>Ability to save data to 3 files, with each graph being its own file.</td>
+            </tr>
+            <tr>
+                <td>Selection of file path</td>
+                <td>Ability to specify where files will be saved.</td>
+            </tr>
+        </table>
+
+        <h1>Non-functional requirements</h1>
+        <table>
+            <tr>
+                <th>Requirement</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Programming Language</td>
+                <td>The application is written in C++.</td>
+            </tr>
+            <tr>
+                <td>Work Environment</td>
+                <td>The program is developed in a Windows 10 environment.</td>
+            </tr>
+            <tr>
+                <td>Interface Appearance</td>
+                <td>The interface is intuitive and easy to use.</td>
+            </tr>
+            <tr>
+                <td>Separation of Numerical Modules for Function Calculations and RK Methods</td>
+                <td>Numerical modules are organized into separate classes, which significantly facilitate future modifications.</td>
+            </tr>
+            <tr>
+                <td>Separation of Numerical and Interface Modules</td>
+                <td>The interface is in a separate class, making any modifications easier.</td>
+            </tr>
+            <tr>
+                <td>Implementation Method</td>
+                <td>The code is as understandable as possible, with comments explaining the operation of individual lines of code.</td>
+            </tr>
+        </table>
+    </div>
+	<div class="navigation">
+        <a href="scope.html" class="prev-link">Previous</a>
+        <!--<a href="interface.html" class="next-link">Next</a>-->
+    </div>
+    <footer>
+        <p data-i18n="copyright">&copy; 2024, Patrick Schröder, Software Documentation. All rights reserved. All logos are trademarks of their respective owners and are used here for informational purposes only.</p>
+    </footer>
+    <script src="../static/js/main.js"></script>
+</body>
+</html>

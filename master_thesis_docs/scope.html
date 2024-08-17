@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scope</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    <link rel="stylesheet" href="../static/css/scope.css">
+    <link rel="stylesheet" href="../static/css/header.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" data-i18n="logo">Software Documentation</div>
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="../index.html#home" data-i18n="nav-home">Home</a></li>
+                    <li><a href="../master_thesis_docs/index.html" data-i18n="nav-portfolio">Project</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1 class="title">Project Scope</h1>
+        <table class="scope-table">
+            <tr class="highlight-row">
+                <td colspan="2">Project Description</td>
+            </tr>
+            <tr>
+                <td colspan="2">The aim of the diploma thesis was to present the change in the electromagnetic field connected to a high-intensity pulsed laser. To calculate changes in the dynamics of electromagnetic fields, Maxwell's equations and boundary conditions for electric and magnetic fields at the metal-vacuum boundary were used. The calculation was made in the representation of the vector potential A for the s and p polarization of the incident laser light beam. The calculations were performed using a program written in the Python. The results are presented in graphs using an interface generated using the Qt graphics package. The work focuses on presenting the method of solving Maxwell's equations for s and p polarizations. The functional specification of the application and solutions regarding technical issues of the program are described. The section devoted to the results shows graphs exhibiting the attenuation of the wave potential vector and its amplitude for both polarizations. Statistics on the technical implementation of the program are also presented. The user manual allows to learn the correct way to use the program.
+                </td>
+            </tr>
+            <tr class="highlight-row">
+                <td>Problem</td>
+                <td>Benefits of Solving</td>
+            </tr>
+            <tr>
+                <td>Calculating the reflectance coefficients for polarization S and P.</td>
+                <td>Implementation of the module to calculate the coefficients will be an important step in this thesis, allowing to see visualize how the outcome depends on angle of laser beam strike, for both polarizations.</td>
+            </tr>
+            <tr>
+                <td>Calculating the change in electromagnetic field for both polarizations.</td>
+                <td>Implementation of the module to calculate the difference in EMF using the Maxwell Equations will allow user to visualize the outcome of the project, for both polarizations.</td>
+            </tr>
+            <tr>
+                <td>Results needs to be displayed in a proper way.</td>
+                <td>Using plots implemented with Qt libraries will allow user to see the results in a clear way.</td>
+            </tr>
+            <tr>
+                <td>User needs an easy way to interact with application.</td>
+                <td>An interface constructed Qt libraries will allow user to interact with the application.</td>
+            </tr>
+            <tr>
+                <td>User needs a way to save data.</td>
+                <td>An module dedicated to save output data in various format will allow user to work in various environments.</td>
+            </tr>
+            <tr class="highlight-row">
+                <td colspan="2">Indicative Schedule</td>
+            </tr>
+            <tr>
+                <td>Project Start Date: 04.10.2021</td>
+                <td>Project End Date: 21.12.2023</td>
+            </tr>
+            <tr class="highlight-row">
+                <td colspan="2">Solution Scope</td>
+            </tr>
+            
+            <tr class="lists">
+                <td colspan="2">
+                    During implementation the developer will:
+                    <ul>
+                        <li>Implement modules for data, Maxwelll Equations, and plots.</li>
+                        <li>Design and implement the interface.</li>
+                        <li>Describe the problem and the way to solve it in thesis.</li>
+                        <li>Prepare the software documentation of project.</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr class="highlight-row">
+                <td colspan="2">Project Assumptions</td>
+            </tr>
+            <tr class="lists">
+                <td colspan="2">
+                    <ol>
+                        <li>All literature listed in bibliography is available.</li>
+                        <li>User is familiar with the presented physics problem.</li>
+                    </ol>
+                </td>
+            </tr>
+            <tr class="highlight-row">
+                <td>Key Risks</td>
+                <td>Rating</td>
+            </tr>
+            <tr>
+                <td>Errors in RK methods constants in sources.</td>
+                <td class="rating low">Low</td>
+            </tr>
+            <tr>
+                <td>Extension of time needed for completing the thesis.</td>
+                <td class="rating medium">Medium</td>
+            </tr>
+        </table>
+        <div class="navigation">
+            <a href="index.html" class="prev-link">Previous</a>
+            <a href="requirements.html" class="next-link">Next</a>
+        </div>
+    </div>
+    <footer>
+        <p data-i18n="copyright">&copy; 2024, Patrick Schröder, Software Documentation. All rights reserved. All logos are trademarks of their respective owners and are used here for informational purposes only.</p>
+    </footer>
+    <script src="../static/js/main.js"></script>
+</body>
+</html>

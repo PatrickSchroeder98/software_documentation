@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface Documentation</title>
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.ico">
+    <link rel="stylesheet" href="../../static/css/interface.css">
+    <link rel="stylesheet" href="../../static/css/header.css">
+    <link rel="stylesheet" href="../../static/css/footer.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" data-i18n="logo">Software Documentation</div>
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="../../index.html#home" data-i18n="nav-home">Home</a></li>
+                    <li><a href="../../matrix_library_docs/index.html" data-i18n="nav-portfolio">Project</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Class: MatrixOperations</h1>
+        <p><strong>Description:</strong> The <code>MatrixOperations</code> class provides various methods for performing matrix calculations such as addition, subtraction, multiplication, and inversion.</p>
+
+        <h2>Methods</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Method Name</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><code>addMatrix(matrixA, matrixB)</code></td>
+                <td>Performs addition of two matrices and returns the result as a new matrix.</td>
+            </tr>
+            <tr>
+                <td><code>subtractMatrix(matrixA, matrixB)</code></td>
+                <td>Performs subtraction of matrixB from matrixA and returns the result.</td>
+            </tr>
+            <tr>
+                <td><code>multiplyMatrix(matrixA, matrixB)</code></td>
+                <td>Multiplies two matrices and returns the product as a new matrix.</td>
+            </tr>
+            <tr>
+                <td><code>invertMatrix(matrix)</code></td>
+                <td>Returns the inverse of the given matrix if it exists.</td>
+            </tr>
+            <tr>
+                <td><code>transposeMatrix(matrix)</code></td>
+                <td>Transposes the given matrix and returns the transposed matrix.</td>
+            </tr>
+            <tr>
+                <td><code>determinant(matrix)</code></td>
+                <td>Calculates the determinant of the matrix.</td>
+            </tr>
+            <tr>
+                <td><code>isSquareMatrix(matrix)</code></td>
+                <td>Checks if the given matrix is a square matrix (equal number of rows and columns).</td>
+            </tr>
+        </table>
+
+        <section class="navigation">
+            <a href="matrixchecks.html">Previous</a>
+            <a href="matrixcalculationsapi.html">Next</a>
+        </section>
+    </div>
+    <div id="footer"></div>
+	<footer>
+        <p data-i18n="copyright">&copy; 2024, Patrick Schröder, Software Documentation. All rights reserved. All logos are trademarks of their respective owners and are used here for informational purposes only.</p>
+    </footer>
+    <script src="../static/js/main.js"></script>
+</body>
+</html>
+

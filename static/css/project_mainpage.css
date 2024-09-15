@@ -108,3 +108,20 @@ body {
     color: #0056b3;
 }
 
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 20px auto;
+}
+
+.navigation a {
+    text-decoration: none;
+    font-size: 1.2em;
+    color: #007BFF;
+    transition: color 0.3s ease;
+}
+
+.navigation a:hover {
+    color: #0056b3;
+}

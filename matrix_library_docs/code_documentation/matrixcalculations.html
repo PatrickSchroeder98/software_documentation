@@ -22,8 +22,8 @@
         </nav>
     </header>
     <div class="container">
-        <h1>Class: MatrixOperations</h1>
-        <p><strong>Description:</strong> The <code>MatrixOperations</code> class provides various methods for performing matrix calculations such as addition, subtraction, multiplication, and inversion.</p>
+        <h1>Class: MatrixCalculations</h1>
+        <p><strong>Description:</strong> The <code>MatrixCalculations</code> class provides various methods to perform matrix calculations, including setting matrices, performing matrix operations like addition, subtraction, multiplication, and finding determinants.</p>
 
         <h2>Methods</h2>
         <table class="interface-table">
@@ -32,32 +32,116 @@
                 <th>Description</th>
             </tr>
             <tr>
-                <td><code>addMatrix(matrixA, matrixB)</code></td>
-                <td>Performs addition of two matrices and returns the result as a new matrix.</td>
+                <td><code>MatrixCalculations()</code></td>
+                <td>Constructor sets up the default values of attributes.</td>
             </tr>
             <tr>
-                <td><code>subtractMatrix(matrixA, matrixB)</code></td>
-                <td>Performs subtraction of matrixB from matrixA and returns the result.</td>
+                <td><code>view(vect)</code></td>
+                <td>Method that allows user to view the matrix given as argument in the console.</td>
             </tr>
             <tr>
-                <td><code>multiplyMatrix(matrixA, matrixB)</code></td>
-                <td>Multiplies two matrices and returns the product as a new matrix.</td>
+                <td><code>set_input_matrix_1(input_data)</code></td>
+                <td>Method that allows to set the value of input_matrix_1.</td>
             </tr>
             <tr>
-                <td><code>invertMatrix(matrix)</code></td>
-                <td>Returns the inverse of the given matrix if it exists.</td>
+                <td><code>get_input_matrix_1()</code></td>
+                <td>Method that allows to get the value of input_matrix_1.</td>
             </tr>
             <tr>
-                <td><code>transposeMatrix(matrix)</code></td>
-                <td>Transposes the given matrix and returns the transposed matrix.</td>
+                <td><code>set_input_matrix_2(input_data)</code></td>
+                <td>Method that allows to set the value of input_matrix_2.</td>
             </tr>
             <tr>
-                <td><code>determinant(matrix)</code></td>
-                <td>Calculates the determinant of the matrix.</td>
+                <td><code>get_input_matrix_2()</code></td>
+                <td>Method that allows to get the value of input_matrix_2.</td>
             </tr>
             <tr>
-                <td><code>isSquareMatrix(matrix)</code></td>
-                <td>Checks if the given matrix is a square matrix (equal number of rows and columns).</td>
+                <td><code>set_output_matrix(output_data)</code></td>
+                <td>Method that allows to set the value of output_matrix.</td>
+            </tr>
+            <tr>
+                <td><code>get_output_matrix()</code></td>
+                <td>Method that allows to get the value of output_matrix.</td>
+            </tr>
+            <tr>
+                <td><code>set_scalar(scalar_value)</code></td>
+                <td>Method that allows to set the value of scalar.</td>
+            </tr>
+            <tr>
+                <td><code>get_scalar()</code></td>
+                <td>Method that allows to get the value of scalar.</td>
+            </tr>
+            <tr>
+                <td><code>set_det(det_value)</code></td>
+                <td>Method that allows to set the value of determinant.</td>
+            </tr>
+            <tr>
+                <td><code>get_det()</code></td>
+                <td>Method that allows to get the value of determinant.</td>
+            </tr>
+            <tr>
+                <td><code>set_sizes(sizes_value)</code></td>
+                <td>Method that allows to set the value of sizes.</td>
+            </tr>
+            <tr>
+                <td><code>get_sizes()</code></td>
+                <td>Method that allows to get the value of sizes.</td>
+            </tr>
+            <tr>
+                <td><code>set_minor_matrix(minor_data)</code></td>
+                <td>Method that allows to set the value of minor_matrix.</td>
+            </tr>
+            <tr>
+                <td><code>get_minor_matrix()</code></td>
+                <td>Method that allows to get the value of minor_matrix.</td>
+            </tr>
+            <tr>
+                <td><code>set_transposed_matrix(transposed_data)</code></td>
+                <td>Method that allows to set the value of transposed_matrix.</td>
+            </tr>
+            <tr>
+                <td><code>get_transposed_matrix()</code></td>
+                <td>Method that allows to get the value of transposed_matrix.</td>
+            </tr>
+            <tr>
+                <td><code>set_all_minors(all_minors_data)</code></td>
+                <td>Method that allows to set the value of all_minors.</td>
+            </tr>
+            <tr>
+                <td><code>get_all_minors()</code></td>
+                <td>Method that allows to get the value of all_minors.</td>
+            </tr>
+            <tr>
+                <td><code>multiply_by_scalar()</code></td>
+                <td>Method that allows to multiply a matrix by the scalar.</td>
+            </tr>
+            <tr>
+                <td><code>check_matrix_size()</code></td>
+                <td>Sets the attribute 'sizes' with the value of sizes of given matrix.</td>
+            </tr>
+            <tr>
+                <td><code>check_matrix_det()</code></td>
+                <td>Sets the determinant of 1x1, 2x2, or 3x3 matrix. Returns 0 if the matrix is different from these options.</td>
+            </tr>
+            <tr>
+                <td><code>cut_minor_matrix(n, m)</code></td>
+                <td>Sets the minor matrix of a given matrix by cutting specified row and column.</td>
+            </tr>
+            <tr>
+                <td><code>transpose_matrix()</code></td>
+                <td>Sets a transposed matrix.</td>
+            </tr>
+            <tr>
+                <td><code>cut_all_minor_matrices()</code></td>
+                <td>Sets vector with all minor matrices cut from a given matrix.</td>
+            </tr>
+            <tr>
+                <td><code>add_subtract(add)</code></td>
+                <td>Sets the output matrix as the sum or difference of two input matrices.</td>
+            </tr>
+            <tr>
+                <td><code>multiply_matrices()</code></td>
+                <td>Method to multiply two matrices.</td>
             </tr>
         </table>
 

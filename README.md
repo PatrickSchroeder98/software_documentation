@@ -2,6 +2,7 @@
 This website was created to showcase the software documentation of my projects. Currently contains the documentation of: RK and FRK comparison application, Portfolio Website and Software Documentation Website.
 
 Changelog:  
+1.3.2 - added interface and code documentation of MCL  
 1.3.1 - added bibliography and updated schedule in MCL docs  
 1.3.0 - added Master thesis docs and MCL docs  
 1.2.0 - added 3TM application docs, updated icons  

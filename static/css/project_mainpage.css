@@ -80,11 +80,11 @@ body {
 }
 
 .code-docs a {
-    margin-left: 10px;
     display: inline-flex;
 }
 
 .code-docs img {
+    padding: 10px;
 	display: block;
 	max-width:24px;
 	max-height:24px;

@@ -1,7 +1,39 @@
 # Software Documentation Website
-This website was created to showcase the software documentation of my projects. Currently contains the documentation of: RK and FRK comparison application, Portfolio Website and Software Documentation Website.
+This website was created to showcase the software documentation of my projects. Usage of a website allows a quick access to documentation when needed. This project was developed using HTML, CSS, and JavaScript
 
-Changelog:  
+## Features
+
+- **Software Documentation Showcase:** View multiple pages of software documentation of my projects.
+- **Responsive Design:** The website is optimized for various screen sizes and devices.
+- **Dynamic Image Scaling:** The pages scale proportionally, ensuring a clean layout with no unnecessary white spaces.
+
+## Pages
+- **Project main page:** View project title and documentation index.
+- **Scope:** View scope with descriptions and schedule.
+- **Requirements:** View functional and non-functional requirements.
+- **Interfaces Documentation:** View the list of interfaces in project.
+- **Code Documentation:** View description of code.
+- **Bibliography:** View all publications used referenced the project.
+
+## Language
+   - The website is available in English language.
+
+## Technologies Used
+
+- **HTML5**: For the structure and layout of the web pages.
+- **CSS3**: For styling and responsiveness of the website.
+- **JavaScript**: For dynamic functionality, including version number in the footer.
+
+## Deployment  
+
+The website has been deployed using GitHub Pages and can be accessed [here](https://patrickschroeder98.github.io/software_documentation/index.html).
+
+## Documentation  
+
+The full documentation of project can be found on my [Software Documentation Website](https://patrickschroeder98.github.io/software_documentation/software_docs/index.html) or alternatively in the [SDW documentation repository](https://github.com/PatrickSchroeder98/software_documentation/tree/main/software_docs).
+
+
+## Changelog:  
 1.3.3 - added GitHub links for MCL and RK & FRK Comparison   
 1.3.2 - added interface and code documentation of MCL  
 1.3.1 - added bibliography and updated schedule in MCL docs  

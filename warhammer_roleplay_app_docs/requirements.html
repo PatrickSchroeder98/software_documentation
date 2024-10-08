@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requirements Tables</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    <link rel="stylesheet" href="../static/css/requirements.css">
+	<link rel="stylesheet" href="../static/css/header.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" data-i18n="logo">Software Documentation</div>
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="../index.html#home" data-i18n="nav-home">Home</a></li>
+                    <li><a href="../warhammer_roleplay_app_docs/index.html" data-i18n="nav-portfolio">Project</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Functional requirements</h1>
+        <table>
+            <tr>
+                <th>Requirement</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>User Registration and Login</td>
+                <td>The application shall allow users to create an account to save and access their characters and progress.</td>
+            </tr>
+            <tr>
+                <td>Character Management</td>
+                <td>Users shall be able to create, edit, and delete characters within the application. The application shall also allow users to input and store character attributes such as name, race, profession, skills, and equipment. The characters shall be retriveable later.</td>
+            </tr>
+            <tr>
+                <td>Character Creation Module</td>
+                <td>The application shall provide a module for creating new characters by selecting various options such as race, skills, and equipment. It shall include checks to ensure characters are created according to Warhammer Fantasy Roleplay game rules.</td>
+            </tr>
+            <tr>
+                <td>Equipment and Statistics Management</td>
+                <td>Users shall be able to manage and update their character's equipment and statistics within the application.</td>
+            </tr>
+            <tr>
+                <td>Database for Data Storage</td>
+                <td>The application shall store character data, equipment, and statistics in a centralized database for easy retrieval.</td>
+            </tr>
+            <tr>
+                <td>Battle Simulation (Future Scope)</td>
+                <td>In future iterations, the application shall allow users to simulate battles between characters or parties, taking into account their equipment and skills.</td>
+            </tr>
+        </table>
+
+        <h1>Non-functional requirements</h1>
+        <table>
+            <tr>
+                <th>Requirement</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Performance</td>
+                <td>The application shall support fast loading times and quick database queries for retrieving and saving character information.</td>
+            </tr>
+            <tr>
+                <td>Scalability</td>
+                <td>The system shall scale to accommodate a growing number of users and characters as the user base increases over time. It shall be designed in a way that future features (like battle simulation) can be added without significant rework.</td>
+            </tr>
+            <tr>
+                <td>Usability</td>
+                <td>The user interface shall be intuitive and easy to navigate, enabling users to manage characters and equipment with minimal effort. The character creation process shall be user-friendly, even for users unfamiliar with Warhammer rules.</td>
+            </tr>
+            <tr>
+                <td>Reliability</td>
+                <td>The application shall provide high uptime, with minimal downtime or disruptions to service. It shall consistently save and retrieve user data without any loss or corruption of information.</td>
+            </tr>
+            <tr>
+                <td>Maintainability</td>
+                <td>The codebase shall be modular and well-documented to ensure future updates and enhancements (e.g., new modules or rule changes) can be implemented easily. Proper version control shall be maintained for easy tracking of changes and collaboration.</td>
+            </tr>
+            <tr>
+                <td>Compliance with Warhammer Game Rules</td>
+                <td>The character creation module and other features shall strictly follow Warhammer Fantasy Roleplay rules to maintain game consistency.</td>
+            </tr>
+        </table>
+    </div>
+	<div class="navigation">
+        <a href="scope.html" class="prev-link">Previous</a>
+        <!--<a href="interface.html" class="next-link">Next</a>-->
+    </div>
+    <footer>
+        <p data-i18n="copyright">&copy; 2024, Patrick Schröder, Software Documentation. All rights reserved. All logos are trademarks of their respective owners and are used here for informational purposes only.</p>
+    </footer>
+    <script src="../static/js/main.js"></script>
+</body>
+</html>

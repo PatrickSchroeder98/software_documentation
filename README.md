@@ -34,6 +34,7 @@ The full documentation of project can be found on my [Software Documentation Web
 
 
 ## Changelog:  
+1.3.4 - added WFRA scope and requirements  
 1.3.3 - added GitHub links for MCL and RK & FRK Comparison   
 1.3.2 - added interface and code documentation of MCL  
 1.3.1 - added bibliography and updated schedule in MCL docs  

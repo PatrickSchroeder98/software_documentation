@@ -23,7 +23,7 @@
     </header>
     <div class="container">
         <h1>Class: MatrixCalculationsAPI</h1>
-        <p><strong>Description:</strong> The <code>MatrixCalculationsAPI</code> class provides various methods for performing comunication with library by calling methods for calculations and manage memory.</p>
+        <p><strong>Description:</strong> The <code>MatrixCalculationsAPI</code> class provides various methods for performing comunication with library by calling methods for calculations and manage memory. This is the class that should be used by end user. </p>
 
         <h2>Methods</h2>
         <table class="interface-table">
@@ -54,6 +54,26 @@
             <tr>
                 <td><code>transpose_matrix(matrix)</code></td>
                 <td> API method for matrix transposition.</td>
+            </tr>
+            <tr>
+                <td><code>cut_minor(matrix, row, column)</code></td>
+                <td> API method for cutting a minor from matrix.</td>
+            </tr>
+            <tr>
+                <td><code>cut_all_minors(matrix)</code></td>
+                <td> API method for cutting all minors from given matrix.</td>
+            </tr>
+            <tr>
+                <td><code>load_matrix(path)</code></td>
+                <td> API method for loading a matrix from a file.</td>
+            </tr>
+            <tr>
+                <td><code>save_matrix(path, matrix)</code></td>
+                <td> API method for saving a matrix to a file.</td>
+            </tr>
+            <tr>
+                <td><code>view(matrix)</code></td>
+                <td> API method for displaying a matrix.</td>
             </tr>
             
         </table>

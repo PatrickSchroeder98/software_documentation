@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Documentation</title>
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.ico">
+    <link rel="stylesheet" href="../../static/css/interface.css">
+    <link rel="stylesheet" href="../../static/css/header.css">
+    <link rel="stylesheet" href="../../static/css/footer.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" data-i18n="logo">Software Documentation</div>
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="../../index.html#home" data-i18n="nav-home">Home</a></li>
+                    <li><a href="../warhammer_roleplay_app_docs/index.html" data-i18n="nav-portfolio">Project</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Database Documentation</h1>
+
+
+        <h2>melee_weapons</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>price</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>weight</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>length</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>damage</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>pros_and_cons</td>
+                <td>STR</td>
+            </tr>
+        </table>
+
+        <h2>ranged_weapons</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>price</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>weight</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>range</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>damage</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>pros_and_cons</td>
+                <td>STR</td>
+            </tr>
+        </table>
+
+        <h2>armors</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <!--<tr>
+                <td><code>MatrixCalculations()</code></td>
+                <td>Constructor sets up the default values of attributes.</td>
+            </tr>-->
+            
+        </table>
+
+        <h2>items</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <!--<tr>
+                <td><code>MatrixCalculations()</code></td>
+                <td>Constructor sets up the default values of attributes.</td>
+            </tr>-->
+            
+        </table>
+
+        <h2>character_melee_weapons</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character_id</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>melee_weapon_id</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>quantity</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>equipped</td>
+                <td>Bool</td>
+            </tr>
+            
+        </table>
+
+        <h2>character_ranged_weapons</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK.</td>
+            </tr>
+            <tr>
+                <td>character_id</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>ranged_weapon_id</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>quantity</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>equipped</td>
+                <td>Bool</td>
+            </tr>
+            
+        </table>
+
+
+
+        <h2>character_armors</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK.</td>
+            </tr>
+            <tr>
+                <td>character_id</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>armors_id</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>quantity</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>equipped</td>
+                <td>Bool</td>
+            </tr>
+            
+        </table>
+
+        <h2>character_items</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK.</td>
+            </tr>
+            <tr>
+                <td>character_id</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>items_id</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>quantity</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>equipped</td>
+                <td>Bool</td>
+            </tr>
+            
+        </table>
+
+
+            
+
+        <section class="navigation">
+            <a href="scope.html">Previous</a>
+            <a href="other_tables_schema.html">Next</a>
+        </section> 
+
+    </div>
+    <div id="footer"></div>
+	<footer>
+        <p data-i18n="copyright">&copy; 2024, Patrick Schröder, Software Documentation. All rights reserved. All logos are trademarks of their respective owners and are used here for informational purposes only.</p>
+    </footer>
+    <script src="../../static/js/main.js"></script>
+</body>
+</html>

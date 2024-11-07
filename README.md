@@ -34,6 +34,7 @@ The full documentation of project can be found on my [Software Documentation Web
 
 
 ## Changelog:  
+1.3.7 - added new MCL method documentation, updated layout of WFRA documentation, added links to WFRA external sources  
 1.3.6 - added first version database documentation for WFRA  
 1.3.5 - added documentation of new methods in MCL, updated links to media for MCL and RK & FRK Comparison Application  
 1.3.4 - added WFRA scope and requirements  

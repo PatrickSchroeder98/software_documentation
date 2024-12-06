@@ -88,8 +88,12 @@
                 <th>Data type</th>
             </tr>
             <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
                 <td>character_id</td>
-                <td>INT PK.</td>
+                <td>INT FK</td>
             </tr>
             <tr>
                 <td>WS_initial</td>
@@ -223,8 +227,189 @@
             
         </table>
 
+        <h2>fate</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character_id</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>fate</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>fortune</td>
+                <td>INT</td>
+            </tr>
+        </table>
 
-        
+        <h2>resilience</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character_id</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>resilience</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>resolve</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>motivation</td>
+                <td>STR</td>
+            </tr>
+        </table>
+
+
+        <h2>experience</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character_id</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>current</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>spent</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>total</td>
+                <td>INT</td>
+            </tr>
+        </table>
+
+        <h2>movement</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character_id</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>movement</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>walk</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>run</td>
+                <td>INT</td>
+            </tr>
+        </table>
+
+        <h2>basic_skills</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character_id</td>
+                <td>INT FK</td>
+            </tr>
+            <!-- TODO-->
+        </table>
+
+        <h2>advanced_skills</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character_id</td>
+                <td>INT FK</td>
+            </tr>
+            <!-- TODO-->
+        </table>
+
+        <h2>ambitions</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character_id</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>short_term</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>long_term</td>
+                <td>STR</td>
+            </tr>
+        </table>
+
+        <h2>party</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character_id</td>
+                <td>INT FK</td>
+            </tr>
+            <!-- TODO-->
+        </table>
 
         <section class="navigation">
             <a href="db.html">Previous</a>

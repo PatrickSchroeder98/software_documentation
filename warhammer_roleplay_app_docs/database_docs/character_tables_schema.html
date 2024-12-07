@@ -370,6 +370,34 @@
             <!-- TODO-->
         </table>
 
+        <h2>talents</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character_id</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>talent</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>times_taken</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>description</td>
+                <td>STR</td>
+        </table>
+
+
         <h2>ambitions</h2>
         <table class="interface-table">
             <tr class="highlight-row">
@@ -408,8 +436,121 @@
                 <td>character_id</td>
                 <td>INT FK</td>
             </tr>
-            <!-- TODO-->
+            <tr>
+                <td>party_name</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>short_term</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>long_term</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>members</td>
+                <td>STR</td>
+            </tr>
         </table>
+
+
+        <h2>psychology</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character_id</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>effect</td>
+                <td>STR</td>
+            </tr>
+        </table>
+
+        <h2>corruption_and_mutation</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character_id</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>effect</td>
+                <td>STR</td>
+            </tr>
+        </table>
+
+        <h2>wounds</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character_id</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>sb</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>tb_x2</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>wbp</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>hardy</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>wounds</td>
+                <td>INT</td>
+            </tr>
+        </table>
+
+        <h2>sin</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character_id</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>sin</td>
+                <td>INT</td>
+            </tr>
+        </table>
+
 
         <section class="navigation">
             <a href="db.html">Previous</a>

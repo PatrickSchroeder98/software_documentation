@@ -34,6 +34,7 @@ The full documentation of project can be found on my [Software Documentation Web
 
 
 ## Changelog:  
+1.3.11 - fixed schedule view in MCL documentation  
 1.3.10 - updated WFRA database documentation  
 1.3.9 - updated MCL documentation, fixed links in WFRA, added bibliography to WFRA  
 1.3.8 - added new MCL methods and tests documentation  

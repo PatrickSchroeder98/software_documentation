@@ -34,6 +34,7 @@ The full documentation of project can be found on my [Software Documentation Web
 
 
 ## Changelog:  
+1.3.13 - added code statistics for 3TM and MSA  
 1.3.12 - updated WFRA documentation  
 1.3.11 - fixed schedule view in MCL documentation  
 1.3.10 - updated WFRA database documentation  

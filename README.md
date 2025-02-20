@@ -34,6 +34,7 @@ The full documentation of project can be found on my [Software Documentation Web
 
 
 ## Changelog:  
+1.3.15 - second update to WFRA interface documentation  
 1.3.14 - updated WFRA interface documentation  
 1.3.13 - added code statistics for 3TM and MSA  
 1.3.12 - updated WFRA documentation  

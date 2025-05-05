@@ -411,6 +411,262 @@
             </tr>
         </table>
 
+        <h2>drugs_and_poisons</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>price</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>encumbrance</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>availability</td>
+                <td>STR</td>
+            </tr>
+        </table>
+
+        <h2>herbs_and_draughts</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>price</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>encumbrance</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>availability</td>
+                <td>STR</td>
+            </tr>
+        </table>
+
+        <h2>prosthetics</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>price</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>encumbrance</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>availability</td>
+                <td>STR</td>
+            </tr>
+        </table>
+
+        <h2>miscellaneous_trappings</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>price</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>encumbrance</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>availability</td>
+                <td>STR</td>
+            </tr>
+        </table>
+
+        <h2>hirelings</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>quick_job</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>daily_cost</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>weekly_cost</td>
+                <td>STR</td>
+            </tr>
+            <tr>
+                <td>notes</td>
+                <td>STR</td>
+            </tr>
+        </table>
+
+        <h2>character_melee_weapons</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>melee_weapon</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>quantity</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>equipped</td>
+                <td>BOOL</td>
+            </tr>
+        </table>
+
+        <h2>character_ranged_weapons</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>ranged_weapon</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>quantity</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>equipped</td>
+                <td>BOOL</td>
+            </tr>
+        </table>
+
+        <h2>character_ammunition</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>ammunition</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>quantity</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>equipped</td>
+                <td>BOOL</td>
+            </tr>
+        </table>
+
+        <h2>character_armour</h2>
+        <table class="interface-table">
+            <tr class="highlight-row">
+                <th>Column</th>
+                <th>Data type</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>INT PK</td>
+            </tr>
+            <tr>
+                <td>character</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>armour</td>
+                <td>INT FK</td>
+            </tr>
+            <tr>
+                <td>quantity</td>
+                <td>INT</td>
+            </tr>
+            <tr>
+                <td>equipped</td>
+                <td>BOOL</td>
+            </tr>
+        </table>
+
         <section class="navigation">
             <a href="character_tables_schema.html">Previous</a>
             <a href="other_tables_schema.html">Next</a>

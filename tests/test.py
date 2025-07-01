@@ -11,7 +11,7 @@ class FractalArtWebsiteTests(unittest.TestCase):
     def setUpClass(cls):
         """Method that prepares the driver for testing"""
         cls.driver = webdriver.Chrome()
-        # cls.base_url = ""
+        # cls.base_url = "https://patrickschroeder98.github.io/software_documentation/index.html"
         cls.base_url = "http://127.0.0.1:5500/index.html"
         cls.driver.get(cls.base_url)
 
@@ -35,6 +35,8 @@ class FractalArtWebsiteTests(unittest.TestCase):
             "Development of a program for numerical solving Maxwell Equations for electromagnetic field of metal exposed to high power laser beam in the vacuum-metal system."
         ]
 
+        self.assertEqual(len(values), len(texts))
+
         def run(val, expected_text):
             """Method that runs the test with given parameters."""
             self.driver.find_element(By.CSS_SELECTOR, val).click()
@@ -45,13 +47,75 @@ class FractalArtWebsiteTests(unittest.TestCase):
             run(values[i], texts[i])
             self.setUp()
 
-    def test_msa(self):
-        """Method that checks if the MSA documentation is displayed correctly."""
-        self.driver.find_element(
-            By.CSS_SELECTOR, "a[href='master_thesis_docs/index.html']"
-        ).click()
-        title = self.driver.title
-        self.assertEqual("Master Thesis Documentation", title)
+    def test_master_thesis_pages(self):
+        """Method that checks if the master thesis documentation is displayed correctly."""
+
+        values = [
+            "a[href='master_thesis_docs/index.html']",
+            "a[data-i18n='scope']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='requirements']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='statistics']",
+            "a[data-i18n='nav-project']",
+        ]
+
+        texts = [
+            "Master Thesis Documentation",
+            "Master Thesis Scope",
+            "Master Thesis Documentation",
+            "Master Thesis Requirements",
+            "Master Thesis Documentation",
+            "Master Thesis Statistics",
+            "Master Thesis Documentation",
+        ]
+
+        self.assertEqual(len(values), len(texts))
+
+        def run(val, expected_text):
+            self.driver.find_element(
+                By.CSS_SELECTOR, val
+            ).click()
+            page_title = self.driver.title
+            self.assertEqual(expected_text, page_title)
+
+        for i in range(len(values)):
+            run(values[i], texts[i])
+
+    def test_master_thesis_navigation(self):
+        """Method that checks if the master thesis documentation navigation works correctly."""
+
+        values = [
+            "a[href='master_thesis_docs/index.html']",
+            "a[data-i18n='next']",
+            "a[class='next-link']",
+            "a[class='next-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+        ]
+
+        texts = [
+            "Master Thesis Documentation",
+            "Master Thesis Scope",
+            "Master Thesis Requirements",
+            "Master Thesis Statistics",
+            "Master Thesis Requirements",
+            "Master Thesis Scope",
+            "Master Thesis Documentation",
+        ]
+
+        self.assertEqual(len(values), len(texts))
+
+        def run(val, expected_text):
+            self.driver.find_element(
+                By.CSS_SELECTOR, val
+            ).click()
+            page_title = self.driver.title
+            self.assertEqual(expected_text, page_title)
+
+        for i in range(len(values)):
+            run(values[i], texts[i])
 
     @classmethod
     def tearDownClass(cls):

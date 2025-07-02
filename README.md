@@ -34,6 +34,7 @@ The full documentation of project can be found on my [Software Documentation Web
 
 
 ## Changelog:  
+1.3.21 - first update to Selenium tests, small fixes    
 1.3.20 - added Selenium Tests, small fixes  
 1.3.19 - updated WFRA equipment database documentation  
 1.3.18 - updated WFRA schedule and database documentation  

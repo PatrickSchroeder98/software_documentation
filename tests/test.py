@@ -2,6 +2,8 @@ import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class FractalArtWebsiteTests(unittest.TestCase):
@@ -28,11 +30,15 @@ class FractalArtWebsiteTests(unittest.TestCase):
         """Method that checks if the titles of projects are displayed correctly."""
 
         values = [
-            "a[href='master_thesis_docs/index.html']"
+            "a[href='master_thesis_docs/index.html']",
+            "a[href='engineer_thesis_docs/index.html']",
+            "a[href='rk_comparison_docs/index.html']",
         ]
 
         texts = [
-            "Development of a program for numerical solving Maxwell Equations for electromagnetic field of metal exposed to high power laser beam in the vacuum-metal system."
+            "Development of a program for numerical solving Maxwell Equations for electromagnetic field of metal exposed to high power laser beam in the vacuum-metal system.",
+            "Development of a program for numerical analysis of heating process and energy transfer in metals exposed to high power laser beam in piko- and femtosecond regime",
+            "Development of a program for comparison of Runge-Kutta and Runge-Kutta-Fehlberg methods of various orders based on the analytical solution to nuclear decay problem.",
         ]
 
         self.assertEqual(len(values), len(texts))
@@ -52,6 +58,7 @@ class FractalArtWebsiteTests(unittest.TestCase):
 
         values = [
             "a[href='master_thesis_docs/index.html']",
+            "a[data-i18n='nav-project']",
             "a[data-i18n='scope']",
             "a[data-i18n='nav-project']",
             "a[data-i18n='requirements']",
@@ -62,6 +69,7 @@ class FractalArtWebsiteTests(unittest.TestCase):
 
         texts = [
             "Master Thesis Documentation",
+            "Master Thesis Documentation",
             "Master Thesis Scope",
             "Master Thesis Documentation",
             "Master Thesis Requirements",
@@ -70,17 +78,7 @@ class FractalArtWebsiteTests(unittest.TestCase):
             "Master Thesis Documentation",
         ]
 
-        self.assertEqual(len(values), len(texts))
-
-        def run(val, expected_text):
-            self.driver.find_element(
-                By.CSS_SELECTOR, val
-            ).click()
-            page_title = self.driver.title
-            self.assertEqual(expected_text, page_title)
-
-        for i in range(len(values)):
-            run(values[i], texts[i])
+        self.check(values, texts)
 
     def test_master_thesis_navigation(self):
         """Method that checks if the master thesis documentation navigation works correctly."""
@@ -105,9 +103,272 @@ class FractalArtWebsiteTests(unittest.TestCase):
             "Master Thesis Documentation",
         ]
 
+        self.check(values, texts)
+
+    def test_master_thesis_home_button(self):
+        """Method that checks if the home button on the master thesis documentation pages works correctly."""
+
+        values = [
+            "a[href='master_thesis_docs/index.html']",
+            "a[data-i18n='nav-home']",
+            "a[href='master_thesis_docs/index.html']",
+            "a[data-i18n='scope']",
+            "a[data-i18n='nav-home']",
+            "a[href='master_thesis_docs/index.html']",
+            "a[data-i18n='requirements']",
+            "a[data-i18n='nav-home']",
+            "a[href='master_thesis_docs/index.html']",
+            "a[data-i18n='statistics']",
+            "a[data-i18n='nav-home']",
+
+        ]
+
+        texts = [
+            "Master Thesis Documentation",
+            "Software Documentation Website",
+            "Master Thesis Documentation",
+            "Master Thesis Scope",
+            "Software Documentation Website",
+            "Master Thesis Documentation",
+            "Master Thesis Requirements",
+            "Software Documentation Website",
+            "Master Thesis Documentation",
+            "Master Thesis Statistics",
+            "Software Documentation Website",
+        ]
+
+        self.check(values, texts)
+
+    def test_engineer_thesis_pages(self):
+        """Method that checks if the engineer thesis documentation is displayed correctly."""
+
+        values = [
+            "a[href='engineer_thesis_docs/index.html']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='scope']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='requirements']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='statistics']",
+            "a[data-i18n='nav-project']",
+        ]
+
+        texts = [
+            "Engineer Thesis Documentation",
+            "Engineer Thesis Documentation",
+            "Engineer Thesis Scope",
+            "Engineer Thesis Documentation",
+            "Engineer Thesis Requirements",
+            "Engineer Thesis Documentation",
+            "Engineer Thesis Statistics",
+            "Engineer Thesis Documentation",
+        ]
+
+        self.check(values, texts)
+
+    def test_engineer_thesis_navigation(self):
+        """Method that checks if the engineer thesis documentation navigation works correctly."""
+
+        values = [
+            "a[href='engineer_thesis_docs/index.html']",
+            "a[data-i18n='next']",
+            "a[class='next-link']",
+            "a[class='next-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+        ]
+        texts = [
+            "Engineer Thesis Documentation",
+            "Engineer Thesis Scope",
+            "Engineer Thesis Requirements",
+            "Engineer Thesis Statistics",
+            "Engineer Thesis Requirements",
+            "Engineer Thesis Scope",
+            "Engineer Thesis Documentation",
+        ]
+
+        self.check(values, texts)
+
+    def test_engineer_thesis_home_button(self):
+        """Method that checks if the home button on the engineer thesis documentation pages works correctly."""
+
+        values = [
+            "a[href='engineer_thesis_docs/index.html']",
+            "a[data-i18n='nav-home']",
+            "a[href='engineer_thesis_docs/index.html']",
+            "a[data-i18n='scope']",
+            "a[data-i18n='nav-home']",
+            "a[href='engineer_thesis_docs/index.html']",
+            "a[data-i18n='requirements']",
+            "a[data-i18n='nav-home']",
+            "a[href='engineer_thesis_docs/index.html']",
+            "a[data-i18n='statistics']",
+            "a[data-i18n='nav-home']",
+        ]
+
+        texts = [
+            "Engineer Thesis Documentation",
+            "Software Documentation Website",
+            "Engineer Thesis Documentation",
+            "Engineer Thesis Scope",
+            "Software Documentation Website",
+            "Engineer Thesis Documentation",
+            "Engineer Thesis Requirements",
+            "Software Documentation Website",
+            "Engineer Thesis Documentation",
+            "Engineer Thesis Statistics",
+            "Software Documentation Website",
+        ]
+
+        self.check(values, texts)
+
+    def test_RK_comparison_pages(self):
+        """Method that checks if the RK comparison documentation pages are working correctly."""
+
+        values = [
+            "a[href='rk_comparison_docs/index.html']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='scope']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='requirements']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='interface']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='bibliography']",
+            "a[data-i18n='nav-project']",
+        ]
+
+        texts = [
+            "RK Comparison Documentation",
+            "RK Comparison Documentation",
+            "RK Comparison Scope",
+            "RK Comparison Documentation",
+            "RK Comparison Requirements",
+            "RK Comparison Documentation",
+            "RK Comparison Interface Documentation",
+            "RK Comparison Documentation",
+            "RK Comparison Bibliography",
+            "RK Comparison Documentation",
+        ]
+
+        self.check(values, texts)
+
+    def test_RK_comparison_navigation(self):
+        """Method that checks if the RK comparison documentation navigation works correctly."""
+
+        values = [
+            "a[href='rk_comparison_docs/index.html']",
+            "a[data-i18n='next']",
+            "a[class='next-link']",
+            "a[class='next-link']",
+            "a[class='next-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+        ]
+
+        texts = [
+            "RK Comparison Documentation",
+            "RK Comparison Scope",
+            "RK Comparison Requirements",
+            "RK Comparison Interface Documentation",
+            "RK Comparison Bibliography",
+            "RK Comparison Interface Documentation",
+            "RK Comparison Requirements",
+            "RK Comparison Scope",
+            "RK Comparison Documentation",
+        ]
+
+        self.check(values, texts)
+
+    def test_RK_comparison_home_button(self):
+        """Method that checks if the home button on the RK comparison documentation pages works correctly."""
+
+        values = [
+            "a[href='rk_comparison_docs/index.html']",
+            "a[data-i18n='nav-home']",
+            "a[href='rk_comparison_docs/index.html']",
+            "a[data-i18n='scope']",
+            "a[data-i18n='nav-home']",
+            "a[href='rk_comparison_docs/index.html']",
+            "a[data-i18n='requirements']",
+            "a[data-i18n='nav-home']",
+            "a[href='rk_comparison_docs/index.html']",
+            "a[data-i18n='interface']",
+            "a[data-i18n='nav-home']",
+            "a[href='rk_comparison_docs/index.html']",
+            "a[data-i18n='bibliography']",
+            "a[data-i18n='nav-home']",
+        ]
+
+        texts = [
+            "RK Comparison Documentation",
+            "Software Documentation Website",
+            "RK Comparison Documentation",
+            "RK Comparison Scope",
+            "Software Documentation Website",
+            "RK Comparison Documentation",
+            "RK Comparison Requirements",
+            "Software Documentation Website",
+            "RK Comparison Documentation",
+            "RK Comparison Interface Documentation",
+            "Software Documentation Website",
+            "RK Comparison Documentation",
+            "RK Comparison Bibliography",
+            "Software Documentation Website",
+        ]
+
+        self.check(values, texts)
+
+    def test_RK_comparison_sphinx(self):
+        original_window = self.driver.current_window_handle
+        self.assertEqual(len(self.driver.window_handles), 1)
+
+        self.driver.find_element(
+            By.CSS_SELECTOR, "a[href='rk_comparison_docs/index.html']"
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "a[data-i18n='sphinx']"
+        ).click()
+
+        WebDriverWait(self.driver, 10).until(EC.new_window_is_opened([original_window]))
+
+        for handle in self.driver.window_handles:
+            if handle != original_window:
+                self.driver.switch_to.window(handle)
+                break
+
+        self.assertEqual(
+            self.driver.title,
+            "rk_comparison documentation — rk_comparison 1.0.0 documentation"
+        )
+
+        self.assertIn("sphinx_docs/index.html", self.driver.current_url)
+
+        self.driver.find_element(
+            By.CSS_SELECTOR, "a[data-i18n='project_mainpage_link']"
+        ).click()
+
+        self.assertEqual(
+            self.driver.title,
+            "RK Comparison Documentation"
+        )
+
+    @classmethod
+    def tearDownClass(cls):
+        """Method that runs after testing."""
+        cls.driver.quit()
+
+
+    def check(self, values, texts):
+        """Method that runs checks during tests."""
+
         self.assertEqual(len(values), len(texts))
 
         def run(val, expected_text):
+            """Method that runs checks with given parameters."""
             self.driver.find_element(
                 By.CSS_SELECTOR, val
             ).click()
@@ -116,12 +377,6 @@ class FractalArtWebsiteTests(unittest.TestCase):
 
         for i in range(len(values)):
             run(values[i], texts[i])
-
-    @classmethod
-    def tearDownClass(cls):
-        """Method that runs after testing."""
-        cls.driver.quit()
-
 
 if __name__ == "__main__":
     unittest.main()

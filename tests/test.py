@@ -33,12 +33,14 @@ class FractalArtWebsiteTests(unittest.TestCase):
             "a[href='master_thesis_docs/index.html']",
             "a[href='engineer_thesis_docs/index.html']",
             "a[href='rk_comparison_docs/index.html']",
+            "a[href='matrix_library_docs/index.html']",
         ]
 
         texts = [
             "Development of a program for numerical solving Maxwell Equations for electromagnetic field of metal exposed to high power laser beam in the vacuum-metal system.",
             "Development of a program for numerical analysis of heating process and energy transfer in metals exposed to high power laser beam in piko- and femtosecond regime",
             "Development of a program for comparison of Runge-Kutta and Runge-Kutta-Fehlberg methods of various orders based on the analytical solution to nuclear decay problem.",
+            "Development of C++ Library for Matrix Calculations",
         ]
 
         self.assertEqual(len(values), len(texts))
@@ -355,6 +357,95 @@ class FractalArtWebsiteTests(unittest.TestCase):
             self.driver.title,
             "RK Comparison Documentation"
         )
+
+    def test_mcl_pages(self):
+        """Method that checks if the MCL documentation pages are working correctly."""
+
+        values = [
+            "a[href='matrix_library_docs/index.html']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='scope']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='requirements']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='interface']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='code_documentation']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='bibliography']",
+            "a[data-i18n='nav-project']",
+        ]
+
+        texts = [
+            "MCL Documentation",
+            "MCL Documentation",
+            "MCL Scope",
+            "MCL Documentation",
+            "MCL Requirements",
+            "MCL Documentation",
+            "MCL Interface Documentation",
+            "MCL Documentation",
+            "MCL Code Documentation",
+            "MCL Documentation",
+            "MCL Bibliography",
+            "MCL Documentation",
+        ]
+
+        self.check(values, texts)
+
+    def test_mcl_code_documentation_pages(self):
+        """Method that checks if the MCL code documentation pages are working correctly."""
+        values = [
+            "a[href='mcl_library_docs/index.html']",
+            "a[data-i18n='code_documentation']",
+            "a[data-i18n='matrixcalculations']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='code_documentation']",
+            "a[data-i18n='matrixchecks']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='code_documentation']",
+            "a[data-i18n='matrixio']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='code_documentation']",
+            "a[data-i18n='matrixcalculationsapi']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='code_documentation']",
+            "a[data-i18n='matrixcalculationstests']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='code_documentation']",
+            "a[data-i18n='matrixcheckstests']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='code_documentation']",
+            "a[data-i18n='matrixcapitests']",
+            "a[data-i18n='nav-project']",
+        ]
+
+        texts = [
+            "MCL Documentation",
+            "MCL Code Documentation",
+            "MCL Code Documentation - MatrixCalculations",
+            "MCL Documentation",
+            "MCL Code Documentation",
+            "MCL Code Documentation - MatrixChecks",
+            "MCL Documentation",
+            "MCL Code Documentation",
+            "MCL Code Documentation - MatrixIO",
+            "MCL Documentation",
+            "MCL Code Documentation",
+            "MCL Code Documentation - MatrixCalculationsAPI",
+            "MCL Documentation",
+            "MCL Code Documentation",
+            "MCL Code Documentation - MatrixCalculationsLibraryTests",
+            "MCL Documentation",
+            "MCL Code Documentation",
+            "MCL Code Documentation - MatrixChecksTests",
+            "MCL Documentation",
+            "MCL Code Documentation",
+            "MCL Code Documentation - MatrixApiTests",
+            "MCL Documentation",
+        ]
+
+        self.check(values, texts)
 
     @classmethod
     def tearDownClass(cls):

@@ -396,7 +396,7 @@ class FractalArtWebsiteTests(unittest.TestCase):
     def test_mcl_code_documentation_pages(self):
         """Method that checks if the MCL code documentation pages are working correctly."""
         values = [
-            "a[href='mcl_library_docs/index.html']",
+            "a[href='matrix_library_docs/index.html']",
             "a[data-i18n='code_documentation']",
             "a[data-i18n='matrixcalculations']",
             "a[data-i18n='nav-project']",
@@ -442,6 +442,67 @@ class FractalArtWebsiteTests(unittest.TestCase):
             "MCL Documentation",
             "MCL Code Documentation",
             "MCL Code Documentation - MatrixApiTests",
+            "MCL Documentation",
+        ]
+
+        self.check(values, texts)
+
+    def test_mcl_navigation(self):
+        """Method that checks if the MCL documentation navigation works correctly."""
+
+        values = [
+            "a[href='matrix_library_docs/index.html']",
+            "a[data-i18n='next']",
+            "a[class='next-link']",
+            "a[class='next-link']",
+            "a[class='next-link']",
+            "a[class='next-link']",
+            "a[class='next-link']",
+            "a[class='next-link']",
+            "a[class='next-link']",
+            "a[class='next-link']",
+            "a[class='next-link']",
+            "a[class='next-link']",
+            "a[class='next-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+        ]
+
+        texts = [
+            "MCL Documentation",
+            "MCL Scope",
+            "MCL Requirements",
+            "MCL Interface Documentation",
+            "MCL Code Documentation",
+            "MCL Code Documentation - MatrixCalculations",
+            "MCL Code Documentation - MatrixChecks",
+            "MCL Code Documentation - MatrixIO",
+            "MCL Code Documentation - MatrixCalculationsAPI",
+            "MCL Code Documentation - MatrixCalculationsLibraryTests",
+            "MCL Code Documentation - MatrixChecksTests",
+            "MCL Code Documentation - MatrixApiTests",
+            "MCL Bibliography",
+            "MCL Code Documentation - MatrixApiTests",
+            "MCL Code Documentation - MatrixChecksTests",
+            "MCL Code Documentation - MatrixCalculationsLibraryTests",
+            "MCL Code Documentation - MatrixCalculationsAPI",
+            "MCL Code Documentation - MatrixIO",
+            "MCL Code Documentation - MatrixChecks",
+            "MCL Code Documentation - MatrixCalculations",
+            "MCL Code Documentation",
+            "MCL Interface Documentation",
+            "MCL Requirements",
+            "MCL Scope",
             "MCL Documentation",
         ]
 

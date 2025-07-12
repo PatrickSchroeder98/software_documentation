@@ -34,6 +34,7 @@ class FractalArtWebsiteTests(unittest.TestCase):
             "a[href='engineer_thesis_docs/index.html']",
             "a[href='rk_comparison_docs/index.html']",
             "a[href='matrix_library_docs/index.html']",
+            "a[href='portfolio_docs/index.html']",
         ]
 
         texts = [
@@ -41,6 +42,7 @@ class FractalArtWebsiteTests(unittest.TestCase):
             "Development of a program for numerical analysis of heating process and energy transfer in metals exposed to high power laser beam in piko- and femtosecond regime",
             "Development of a program for comparison of Runge-Kutta and Runge-Kutta-Fehlberg methods of various orders based on the analytical solution to nuclear decay problem.",
             "Development of C++ Library for Matrix Calculations",
+            "Portfolio Website",
         ]
 
         self.assertEqual(len(values), len(texts))
@@ -608,6 +610,59 @@ class FractalArtWebsiteTests(unittest.TestCase):
         ]
 
         self.check(values, texts)
+
+    def test_portfolio_documentation_pages(self):
+        """Method that checks if the Portfolio Website documentation is displayed correctly."""
+
+        values = [
+            "a[href='portfolio_docs/index.html']",
+            "a[data-i18n='scope']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='requirements']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='interface']",
+            "a[data-i18n='nav-project']",
+
+        ]
+
+        texts = [
+            "Portfolio Website Documentation",
+            "Portfolio Website Scope",
+            "Portfolio Website Documentation",
+            "Portfolio Website Requirements",
+            "Portfolio Website Documentation",
+            "Portfolio Website Interface Documentation",
+            "Portfolio Website Documentation",
+        ]
+
+        self.check(values, texts)
+
+    def test_portfolio_documentation_navigation(self):
+        """Method that checks if the Portfolio Website documentation navigation works correctly."""
+
+        values = [
+            "a[href='portfolio_docs/index.html']",
+            "a[data-i18n='next']",
+            "a[class='next-link']",
+            "a[class='next-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+        ]
+
+        texts = [
+            "Portfolio Website Documentation",
+            "Portfolio Website Scope",
+            "Portfolio Website Requirements",
+            "Portfolio Website Interface Documentation",
+            "Portfolio Website Requirements",
+            "Portfolio Website Scope",
+            "Portfolio Website Documentation",
+        ]
+
+        self.check(values, texts)
+
+    
 
     @classmethod
     def tearDownClass(cls):

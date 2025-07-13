@@ -662,7 +662,40 @@ class FractalArtWebsiteTests(unittest.TestCase):
 
         self.check(values, texts)
 
-    
+    def test_portfolio_documentation_home_button(self):
+        """Method that checks if the home button on the Portfolio Website documentation pages works correctly."""
+
+        values = [
+            "a[href='portfolio_docs/index.html']",
+            "a[data-i18n='nav-home']",
+            "a[href='portfolio_docs/index.html']",
+            "a[data-i18n='scope']",
+            "a[data-i18n='nav-home']",
+            "a[href='portfolio_docs/index.html']",
+            "a[data-i18n='requirements']",
+            "a[data-i18n='nav-home']",
+            "a[href='portfolio_docs/index.html']",
+            "a[data-i18n='interface']",
+            "a[data-i18n='nav-home']",
+
+        ]
+
+        texts = [
+            "Portfolio Website Documentation",
+            "Software Documentation Website",
+            "Portfolio Website Documentation",
+            "Portfolio Website Scope",
+            "Software Documentation Website",
+            "Portfolio Website Documentation",
+            "Portfolio Website Requirements",
+            "Software Documentation Website",
+            "Portfolio Website Documentation",
+            "Portfolio Website Interface Documentation",
+            "Software Documentation Website",
+        ]
+
+        self.check(values, texts)
+
 
     @classmethod
     def tearDownClass(cls):

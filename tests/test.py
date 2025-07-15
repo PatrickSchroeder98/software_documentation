@@ -697,6 +697,58 @@ class FractalArtWebsiteTests(unittest.TestCase):
         self.check(values, texts)
 
 
+    def test_software_documentation_pages(self):
+        """Method that checks if the Software Documentation Website documentation is displayed correctly."""
+
+        values = [
+            "a[href='software_docs/index.html']",
+            "a[data-i18n='scope']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='requirements']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='interface']",
+            "a[data-i18n='nav-project']",
+
+        ]
+
+        texts = [
+            "Software Documentation Website Documentation",
+            "Software Documentation Website Scope",
+            "Software Documentation Website Documentation",
+            "Software Documentation Website Requirements",
+            "Software Documentation Website Documentation",
+            "Software Documentation Website Interface Documentation",
+            "Software Documentation Website Documentation",
+        ]
+
+        self.check(values, texts)
+
+    def test_software_documentation_navigation(self):
+        """Method that checks if the Software Documentation Website documentation navigation works correctly."""
+
+        values = [
+            "a[href='software_docs/index.html']",
+            "a[data-i18n='next']",
+            "a[class='next-link']",
+            "a[class='next-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+        ]
+
+        texts = [
+            "Software Documentation Website Documentation",
+            "Software Documentation Website Scope",
+            "Software Documentation Website Requirements",
+            "Software Documentation Website Interface Documentation",
+            "Software Documentation Website Requirements",
+            "Software Documentation Website Scope",
+            "Software Documentation Website Documentation",
+        ]
+
+        self.check(values, texts)
+
+
     @classmethod
     def tearDownClass(cls):
         """Method that runs after testing."""

@@ -35,6 +35,8 @@ class FractalArtWebsiteTests(unittest.TestCase):
             "a[href='rk_comparison_docs/index.html']",
             "a[href='matrix_library_docs/index.html']",
             "a[href='portfolio_docs/index.html']",
+            "a[href='software_docs/index.html']",
+            "a[href='fractal_art_docs/index.html']",
         ]
 
         texts = [
@@ -43,6 +45,8 @@ class FractalArtWebsiteTests(unittest.TestCase):
             "Development of a program for comparison of Runge-Kutta and Runge-Kutta-Fehlberg methods of various orders based on the analytical solution to nuclear decay problem.",
             "Development of C++ Library for Matrix Calculations",
             "Portfolio Website",
+            "Software Documentation Website",
+            "Fractal Art Website",
         ]
 
         self.assertEqual(len(values), len(texts))
@@ -778,6 +782,57 @@ class FractalArtWebsiteTests(unittest.TestCase):
             "Software Documentation Website Documentation",
             "Software Documentation Website Interface Documentation",
             "Software Documentation Website",
+        ]
+
+        self.check(values, texts)
+
+    def test_fractal_documentation_pages(self):
+        """Method that checks if the Fractal Art Website documentation is displayed correctly."""
+
+        values = [
+            "a[href='fractal_art_docs/index.html']",
+            "a[data-i18n='scope']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='requirements']",
+            "a[data-i18n='nav-project']",
+            "a[data-i18n='interface']",
+            "a[data-i18n='nav-project']",
+
+        ]
+
+        texts = [
+            "Fractal Art Website Documentation",
+            "Fractal Art Website Scope",
+            "Fractal Art Website Documentation",
+            "Fractal Art Website Requirements",
+            "Fractal Art Website Documentation",
+            "Fractal Art Website Interface Documentation",
+            "Fractal Art Website Documentation",
+        ]
+
+        self.check(values, texts)
+
+    def test_fractal_documentation_navigation(self):
+        """Method that checks if the Fractal Art Website documentation navigation works correctly."""
+
+        values = [
+            "a[href='fractal_art_docs/index.html']",
+            "a[data-i18n='next']",
+            "a[class='next-link']",
+            "a[class='next-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+            "a[class='prev-link']",
+        ]
+
+        texts = [
+            "Fractal Art Website Documentation",
+            "Fractal Art Website Scope",
+            "Fractal Art Website Requirements",
+            "Fractal Art Website Interface Documentation",
+            "Fractal Art Website Requirements",
+            "Fractal Art Website Scope",
+            "Fractal Art Website Documentation",
         ]
 
         self.check(values, texts)

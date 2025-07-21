@@ -837,6 +837,40 @@ class FractalArtWebsiteTests(unittest.TestCase):
 
         self.check(values, texts)
 
+    def test_fractal_documentation_home_button(self):
+        """Method that checks if the home button on the Fractal Art Website documentation pages works correctly."""
+
+        values = [
+            "a[href='fractal_art_docs/index.html']",
+            "a[data-i18n='nav-home']",
+            "a[href='fractal_art_docs/index.html']",
+            "a[data-i18n='scope']",
+            "a[data-i18n='nav-home']",
+            "a[href='fractal_art_docs/index.html']",
+            "a[data-i18n='requirements']",
+            "a[data-i18n='nav-home']",
+            "a[href='fractal_art_docs/index.html']",
+            "a[data-i18n='interface']",
+            "a[data-i18n='nav-home']",
+
+        ]
+
+        texts = [
+            "Fractal Art Website Documentation",
+            "Software Documentation Website",
+            "Fractal Art Website Documentation",
+            "Fractal Art Website Scope",
+            "Software Documentation Website",
+            "Fractal Art Website Documentation",
+            "Fractal Art Website Requirements",
+            "Software Documentation Website",
+            "Fractal Art Website Documentation",
+            "Fractal Art Website Interface Documentation",
+            "Software Documentation Website",
+        ]
+
+        self.check(values, texts)
+
     @classmethod
     def tearDownClass(cls):
         """Method that runs after testing."""

@@ -34,6 +34,7 @@ The full documentation of project can be found on my [Software Documentation Web
 
 
 ## Changelog:  
+1.3.26 - sixth update to Selenium tests, small fixes  
 1.3.25 - fifth update to Selenium tests, small fixes  
 1.3.24 - fourth update to Selenium tests, small fixes  
 1.3.23 - third update to Selenium tests, small fixes  

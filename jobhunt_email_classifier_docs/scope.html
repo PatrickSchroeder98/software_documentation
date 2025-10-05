@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobhunt Email Classifier Scope</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    <link rel="stylesheet" href="../static/css/scope.css">
+    <link rel="stylesheet" href="../static/css/header.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" data-i18n="logo">Software Documentation</div>
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="../index.html#home" data-i18n="nav-home">Home</a></li>
+                    <li><a href="../rk_comparison_docs/index.html" data-i18n="nav-project">Project</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1 class="title">Project Scope</h1>
+        <table class="scope-table">
+            <tr class="highlight-row">
+                <td colspan="2">Project Description</td>
+            </tr>
+            <tr>
+                <td colspan="2">This project focuses on the development of a Natural Language Processing (NLP) based email classifier designed to support job seekers in managing recruitment-related communication. Using Scikit-learn pipelines, the system automatically categorizes incoming emails into key classes such as Invitation, Rejection, Confirmation, or Other. The solution demonstrates the use of machine learning, TF-IDF vectorization, and multiple model architectures (Naive Bayes, Logistic Regression, and a Two-Stage Pipeline). It highlights both the practical application of NLP techniques and the implementation of clean, modular Python code for a real-world use case.</td>
+            </tr>
+            <tr class="highlight-row">
+                <td>Problem</td>
+                <td>Benefits of Solving</td>
+            </tr>
+            <tr>
+                <td>Email overload during job search</td>
+                <td>Candidates often receive dozens of emails (spam, confirmations, rejections, invitations), that can be categorized with the usage of this library.</td>
+            </tr>
+            <tr>
+                <td>Manual categorization is inefficient</td>
+                <td>Using NLP will allow user to set up an automatic classifier, saving time.</td>
+            </tr>
+            <tr>
+                <td>User needs an easy way to interact with library.</td>
+                <td>An interface class will allow user to interact with the application in an easy way.</td>
+            </tr>
+            <tr class="highlight-row">
+                <td colspan="2">Indicative Schedule</td>
+            </tr>
+            <tr>
+                <td>Project Start Date: 01.10.2025</td>
+                <td>Indicative Project End Date: 01.11.2025</td>
+            </tr>
+            <tr class="highlight-row">
+                <td colspan="2">Solution Scope</td>
+            </tr>
+            
+            <tr class="lists">
+                <td colspan="2">
+                    During implementation the developer will:
+                    <ul>
+                        <li>Collect and prepare a dataset of emails labeled into four categories: Invitation, Rejection, Confirmation, Other.</li>
+                        <li>Preprocess email text and apply NLP vectorization techniques (TF-IDF).</li>
+                        <li>Develop and compare three classification approaches.</li>
+                        <li>Implement object-oriented code structure with reusable classes for training and inference.</li>
+                        <li>Build a simple interface to allow users to select the model and test predictions on custom input.</li>
+                        <li>Evaluate performance using accuracy, precision, recall, and F1-score with stratified train-test splits.</li>
+                        <li>Prepare the software documentation of project.</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr class="highlight-row">
+                <td colspan="2">Project Assumptions</td>
+            </tr>
+            <tr class="lists">
+                <td colspan="2">
+                    <ol>
+                        <li>Dataset will consist of a mix of emails to cover all categories.</li>
+                        <li>The system will be trained and tested on a limited dataset but structured for scalability.</li>
+                        <li>Users will interact with the classifier through a simple interface.</li>
+                        <li>Scikit-learn will be the main ML framework, chosen for interpretability and simplicity.</li>
+                        <li>No integration with live email inboxes will be developed, scope is limited to classification only.</li>
+                    </ol>
+                </td>
+            </tr>
+            <tr class="highlight-row">
+                <td>Key Risks</td>
+                <td>Rating</td>
+            </tr>
+            <tr>
+                <td>Insufficient dataset size</td>
+                <td class="rating high">High</td>
+            </tr>
+            <tr>
+                <td>Class imbalance</td>
+                <td class="rating medium">Medium</td>
+            </tr>
+            <tr>
+                <td>Overfitting on synthetic data</td>
+                <td class="rating medium">Medium</td>
+            </tr>
+        </table>
+        <div class="navigation">
+            <a href="index.html" class="prev-link">Previous</a>
+            <a href="requirements.html" class="next-link">Next</a>
+        </div>
+    </div>
+    <footer>
+        <p data-i18n="copyright">&copy; 2024, Patrick Schröder, Software Documentation. All rights reserved. All logos are trademarks of their respective owners and are used here for informational purposes only.</p>
+    </footer>
+    <script src="../static/js/main.js"></script>
+</body>
+</html>

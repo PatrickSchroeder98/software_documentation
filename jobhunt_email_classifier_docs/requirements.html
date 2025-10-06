@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobhunt Email Classifier Requirements</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    <link rel="stylesheet" href="../static/css/requirements.css">
+	<link rel="stylesheet" href="../static/css/header.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" data-i18n="logo">Software Documentation</div>
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="../index.html#home" data-i18n="nav-home">Home</a></li>
+                    <li><a href="../jobhunt_email_classifier_docs/index.html" data-i18n="nav-project">Project</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Functional requirements</h1>
+        <table>
+            <tr>
+                <th>Requirement</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Dataset loading</td>
+                <td>The system shall be able to load a CSV dataset containing email texts and their labels.</td>
+            </tr>
+            <tr>
+                <td>Preprocessing text data</td>
+                <td>The system shall convert email text into numerical features using NLP techniques.</td>
+            </tr>
+            <tr>
+                <td>Training of classification models</td>
+                <td>The system shall allow training of multiple machine learning models.</td>
+            </tr>
+            <tr>
+                <td>Evaluation of models</td>
+                <td>The system shall generate performance metrics after training.</td>
+            </tr>
+            <tr>
+                <td>Classification of new emails</td>
+                <td>The system shall predict the category of a new, unseen email provided by the user.</td>
+            </tr>
+            <tr>
+                <td>Model selection by user</td>
+                <td>The system shall allow the user to choose which classifier to run for inference.</td>
+            </tr>
+            <tr>
+                <td>User interface</td>
+                <td>The system shall expose a simple interface (CLI or API) where users can train models, test predictions, and select classifiers.</td>
+            </tr>
+        </table>
+
+        <h1>Non-functional requirements</h1>
+        <table>
+            <tr>
+                <th>Requirement</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Language</td>
+                <td>Application interface shall be created in English language.</td>
+            </tr>
+            <tr>
+                <td>Performance</td>
+                <td>The system shall classify a single email in less than 1 second on a standard laptop.</td>
+            </tr>
+            <tr>
+                <td>Usability</td>
+                <td>The interface shall be intuitive and easy to navigate.</td>
+            </tr>
+            <tr>
+                <td>Portability</td>
+                <td>The application shall run on any system with Python 3.9+ and the required dependencies installed.</td>
+            </tr>
+            <tr>
+                <td>Maintainability</td>
+                <td>The code shall follow an object-oriented and modular design to allow easy extension.</td>
+            </tr>
+            <tr>
+                <td>Reliability</td>
+                <td>The system shall provide consistent classification results for the same input and model.</td>
+            </tr>
+            <tr>
+                <td>Transparency</td>
+                <td>The project shall include clear documentation to ensure reproducibility.</td>
+            </tr>
+            <tr>
+                <td>Scalability</td>
+                <td>The design shall allow integration with external APIs or inbox parsers in the future without major refactoring.</td>
+            </tr>
+        </table>
+    </div>
+	<div class="navigation">
+        <a href="scope.html" class="prev-link">Previous</a>
+        <!-- <a href="interface.html" class="next-link">Next</a> -->
+    </div>
+    <footer>
+        <p data-i18n="copyright">&copy; 2024, Patrick Schröder, Software Documentation. All rights reserved. All logos are trademarks of their respective owners and are used here for informational purposes only.</p>
+    </footer>
+    <script src="../static/js/main.js"></script>
+</body>
+</html>

@@ -30,17 +30,21 @@
             <tr>
                 <td colspan="2">The Cloud Data Extractor is a Python library designed to simplify and standardize the process of downloading structured data from Google Cloud Firestore and transforming it into formats commonly used in data analysis, machine learning, and application development. The library is designed to be lightweight, easy to integrate, and suitable for handling Google service account credentials, navigating the Firestore API, and performing repetitive transformations to convert documents into pandas DataFrames or other usable structures.</td>
             </tr>
-            <!--<tr class="highlight-row">
+            <tr class="highlight-row">
                 <td>Problem</td>
                 <td>Benefits of Solving</td>
             </tr>
             <tr>
-                <td>Email overload during job search</td>
-                <td>Candidates often receive dozens of emails (spam, confirmations, rejections, invitations), that can be categorized with the usage of this library.</td>
+                <td>Firestore requires setup that can be complicated for users.</td>
+                <td>The library will make the process of connecting GCP Firestore to an app easier and more user-friendly.</td>
             </tr>
             <tr>
-                <td>Manual categorization is inefficient</td>
-                <td>Using NLP will allow user to set up an automatic classifier, saving time.</td>
+                <td>Lack of a built-in way to convert Firestore documents to pandas DataFrames.</td>
+                <td>The library will have methods that allows user to convert fetched data into pandas DataFrames and other useful data structures.</td>
+            </tr>
+            <tr>
+                <td>No easy mechanism to reuse Firestore data across different applications.</td>
+                <td>Using this library will prevent users from having duplicate code for Firestore connection across various projects. </td>
             </tr>
             <tr>
                 <td>User needs an easy way to interact with library.</td>
@@ -53,7 +57,7 @@
                 <td>Project Start Date: 29.11.2025</td>
                 <td>Indicative Project End Date: 01.02.2026</td>
             </tr>
-             <tr class="highlight-row">
+            <tr class="highlight-row">
                 <td colspan="2">Solution Scope</td>
             </tr>
             
@@ -61,13 +65,15 @@
                 <td colspan="2">
                     During implementation the developer will:
                     <ul>
-                        <li>Collect and prepare a dataset of emails labeled into four categories: Invitation, Rejection, Confirmation, Other.</li>
-                        <li>Preprocess email text and apply NLP vectorization techniques (TF-IDF).</li>
-                        <li>Develop and compare three classification approaches.</li>
-                        <li>Implement object-oriented code structure with reusable classes for training and inference.</li>
-                        <li>Build a simple interface to allow users to select the model and test predictions on custom input.</li>
-                        <li>Evaluate performance using accuracy, precision, recall, and F1-score with stratified train-test splits.</li>
-                        <li>Prepare the software documentation of project.</li>
+                        <li>Design the overall library structure using a modern Python package layout.</li>
+                        <li>Implement a credential-loading mechanism that securely reads Google service account keys and validates them.</li>
+                        <li>Implement high-level data extraction functions.</li>
+                        <li>Ensure compatibility with multiple Firestore projects, allowing users to specify project IDs on initialization.</li>
+                        <li>Add error-handling and custom exception classes for clearer debugging and user-friendly messages.</li>
+                        <li>Implement example scripts that show the library in action.</li>
+                        <li>Prepare comprehensive documentation of project.</li>
+                        <li>Create tests of the library methods.</li>    
+                        <li>Ensure the library follows clean code standards, including docstrings and modular design.</li>                     
                     </ul>
                 </td>
             </tr>
@@ -77,11 +83,13 @@
             <tr class="lists">
                 <td colspan="2">
                     <ol>
-                        <li>Dataset will consist of a mix of emails to cover all categories.</li>
-                        <li>The system will be trained and tested on a limited dataset but structured for scalability.</li>
-                        <li>Users will interact with the classifier through a simple interface.</li>
-                        <li>Scikit-learn will be the main ML framework, chosen for interpretability and simplicity.</li>
-                        <li>No integration with live email inboxes will be developed, scope is limited to classification only.</li>
+                        <li>The user possesses valid Google Cloud Platform (GCP) credentials, specifically a service account JSON with Firestore read permissions.</li>
+                        <li>A Firestore database exists in the target GCP project and contains at least one collection.</li>
+                        <li>The user knows their GCP project ID and Firestore collection names.</li>
+                        <li>Internet access is available when using the library to connect to Firestore.</li>
+                        <li>The library will be run in a Python 3.9+ environment.</li>
+                        <li>Firestore data structures are reasonably consistent.</li>
+                        <li>Firestore collections are expected to contain a manageable amount of data that can fit into memory when converted to a DataFrame.</li>
                     </ol>
                 </td>
             </tr>
@@ -90,21 +98,29 @@
                 <td>Rating</td>
             </tr>
             <tr>
-                <td>Insufficient dataset size</td>
+                <td>Invalid or misconfigured GCP credentials provided by users</td>
                 <td class="rating high">High</td>
             </tr>
             <tr>
-                <td>Class imbalance</td>
+                <td>Insufficient Firestore service permissions</td>
                 <td class="rating medium">Medium</td>
             </tr>
             <tr>
-                <td>Overfitting on synthetic data</td>
+                <td>Network issues while using library</td>
                 <td class="rating medium">Medium</td>
-            </tr>-->
+            </tr>
+            <tr>
+                <td>Too large dataset sizes</td>
+                <td class="rating medium">Medium</td>
+            </tr>
+            <tr>
+                <td>Firestore schema inconsistency</td>
+                <td class="rating medium">Medium</td>
+            </tr>
         </table>
         <div class="navigation">
             <a href="index.html" class="prev-link">Previous</a>
-            <a href="requirements.html" class="next-link">Next</a>
+            <!--<a href="requirements.html" class="next-link">Next</a>-->
         </div>
     </div>
     <footer>

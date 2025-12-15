@@ -34,6 +34,7 @@ The full documentation of project can be found on my [Software Documentation Web
 
 
 ## Changelog:  
+1.5.1 - updated JEC documentation  
 1.5.0 - added CDE documentation pages  
 1.4.0 - added JEC documentation pages  
 1.3.27 - updated WFRA scope and index  

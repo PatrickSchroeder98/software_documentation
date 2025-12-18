@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Data Extractor Requirements</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    <link rel="stylesheet" href="../static/css/requirements.css">
+	<link rel="stylesheet" href="../static/css/header.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" data-i18n="logo">Software Documentation</div>
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="../index.html#home" data-i18n="nav-home">Home</a></li>
+                    <li><a href="../cloud_data_extractor_docs/index.html" data-i18n="nav-project">Project</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Functional requirements</h1>
+        <table>
+            <tr>
+                <th>Requirement</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Credential Loading</td>
+                <td>The library must allow users to authenticate using a Google Cloud service account JSON file.</td>
+            </tr>
+            <tr>
+                <td>Collection Retrieval</td>
+                <td>The library must retrieve all documents from a specified Firestore collection.</td>
+            </tr>
+            <tr>
+                <td>Document Conversion</td>
+                <td>Retrieved Firestore documents must be converted into Python dictionaries.</td>
+            </tr>
+            <tr>
+                <td>DataFrame Output</td>
+                <td>The library must provide a method to convert Firestore data into a pandas DataFrame.</td>
+            </tr>
+            <tr>
+                <td>Error Handling</td>
+                <td>The system must raise user-friendly, custom exceptions for credential errors, connection issues, or invalid input.</td>
+            </tr>
+            <tr>
+                <td>Input Validation</td>
+                <td>The library must validate required parameters.</td>
+            </tr>
+            <tr>
+                <td>Example Usage Code</td>
+                <td>The project must include example scripts demonstrating typical usage patterns.</td>
+            </tr>
+            <tr>
+                <td>Efficient Data Fetching</td>
+                <td>The library must support a high-level functions that return Firestore data with minimal amount of calls.</td>
+            </tr>
+        </table>
+
+        <!--<h1>Non-functional requirements</h1>
+        <table>
+            <tr>
+                <th>Requirement</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>TODO</td>
+                <td>TODO</td>
+            </tr>
+        </table>-->
+    </div>
+	<div class="navigation">
+        <a href="scope.html" class="prev-link">Previous</a>
+        <a href="interface.html" class="next-link">Next</a>
+    </div>
+    <footer>
+        <p data-i18n="copyright">&copy; 2024, Patrick Schröder, Software Documentation. All rights reserved. All logos are trademarks of their respective owners and are used here for informational purposes only.</p>
+    </footer>
+    <script src="../static/js/main.js"></script>
+</body>
+</html>

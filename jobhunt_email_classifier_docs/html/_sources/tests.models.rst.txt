@@ -1,0 +1,21 @@
+tests.models package
+====================
+
+Submodules
+----------
+
+tests.models.test\_model module
+-------------------------------
+
+.. automodule:: tests.models.test_model
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: tests.models
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,8 @@
+jobhunt_emails_classifier
+=========================
+
+.. toctree::
+   :maxdepth: 4
+
+   src
+   tests

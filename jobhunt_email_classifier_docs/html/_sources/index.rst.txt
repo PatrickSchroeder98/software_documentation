@@ -1,0 +1,15 @@
+.. Jobhunt Emails Classifier documentation master file, created by
+   sphinx-quickstart on Wed Jan 28 15:40:40 2026.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Jobhunt Emails Classifier documentation
+=======================================
+
+Welcome to the documentation for **Jobhunt Emails Classifier**.
+
+.. toctree::
+   :maxdepth: 3
+   :caption: Project Documentation
+
+   modules

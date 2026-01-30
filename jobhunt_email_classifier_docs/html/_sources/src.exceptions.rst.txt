@@ -1,0 +1,21 @@
+src.exceptions package
+======================
+
+Submodules
+----------
+
+src.exceptions.exceptions module
+--------------------------------
+
+.. automodule:: src.exceptions.exceptions
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: src.exceptions
+   :members:
+   :show-inheritance:
+   :undoc-members:

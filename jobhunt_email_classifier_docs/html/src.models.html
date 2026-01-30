@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.models package &mdash; Jobhunt Emails Classifier 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="./_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="./_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="./_static/jquery.js?v=5d32c60e"></script>
+      <script src="./_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="./_static/documentation_options.js?v=8d563738"></script>
+      <script src="./_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="./_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="./_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="./genindex.html" />
+    <link rel="search" title="Search" href="./search.html" />
+    <link rel="next" title="tests package" href="./tests.html" />
+    <link rel="prev" title="src.interface package" href="./src.interface.html" /> 
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.ico">  
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Jobhunt Emails Classifier
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">jobhunt_emails_classifier</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="src.html">src package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="src.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="src.classifiers.html">src.classifiers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.data_module.html">src.data_module package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.exceptions.html">src.exceptions package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.interface.html">src.interface package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">src.models package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#module-src">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html">tests package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Jobhunt Emails Classifier</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">jobhunt_emails_classifier</a></li>
+          <li class="breadcrumb-item"><a href="src.html">src package</a></li>
+      <li class="breadcrumb-item active">src.models package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/src.models.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-models-package">
+<h1>src.models package<a class="headerlink" href="#src-models-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-src.models.model">
+<span id="src-models-model-module"></span><h2>src.models.model module<a class="headerlink" href="#module-src.models.model" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.models.model.Model">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">src.models.model.</span></span><span class="sig-name descname"><span class="pre">Model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class represents the model used in classification</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.build_pipeline">
+<span class="sig-name descname"><span class="pre">build_pipeline</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.build_pipeline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.build_pipeline" title="Link to this definition"></a></dt>
+<dd><p>Method builds the pipeline with TfidfVectorizer and chosen classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.count_accuracy">
+<span class="sig-name descname"><span class="pre">count_accuracy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.count_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.count_accuracy" title="Link to this definition"></a></dt>
+<dd><p>Method returns the accuracy of the model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.get_X">
+<span class="sig-name descname"><span class="pre">get_X</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.get_X"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.get_X" title="Link to this definition"></a></dt>
+<dd><p>Method returns the X data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.get_X_test">
+<span class="sig-name descname"><span class="pre">get_X_test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.get_X_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.get_X_test" title="Link to this definition"></a></dt>
+<dd><p>Method returns the X test data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.get_X_train">
+<span class="sig-name descname"><span class="pre">get_X_train</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.get_X_train"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.get_X_train" title="Link to this definition"></a></dt>
+<dd><p>Method returns the X training data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.get_clf">
+<span class="sig-name descname"><span class="pre">get_clf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.get_clf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.get_clf" title="Link to this definition"></a></dt>
+<dd><p>Method returns the classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.get_pipeline">
+<span class="sig-name descname"><span class="pre">get_pipeline</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.get_pipeline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.get_pipeline" title="Link to this definition"></a></dt>
+<dd><p>Method returns the pipeline.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.get_random_state">
+<span class="sig-name descname"><span class="pre">get_random_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.get_random_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.get_random_state" title="Link to this definition"></a></dt>
+<dd><p>Method returns the random state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.get_test_size">
+<span class="sig-name descname"><span class="pre">get_test_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.get_test_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.get_test_size" title="Link to this definition"></a></dt>
+<dd><p>Method returns the test size.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.get_y">
+<span class="sig-name descname"><span class="pre">get_y</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.get_y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.get_y" title="Link to this definition"></a></dt>
+<dd><p>Method returns the y data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.get_y_pred">
+<span class="sig-name descname"><span class="pre">get_y_pred</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.get_y_pred"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.get_y_pred" title="Link to this definition"></a></dt>
+<dd><p>Method returns the y_pred.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.get_y_test">
+<span class="sig-name descname"><span class="pre">get_y_test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.get_y_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.get_y_test" title="Link to this definition"></a></dt>
+<dd><p>Method returns the y test data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.get_y_train">
+<span class="sig-name descname"><span class="pre">get_y_train</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.get_y_train"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.get_y_train" title="Link to this definition"></a></dt>
+<dd><p>Method returns the y training data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.set_X">
+<span class="sig-name descname"><span class="pre">set_X</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.set_X"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.set_X" title="Link to this definition"></a></dt>
+<dd><p>Method sets the X data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.set_X_test">
+<span class="sig-name descname"><span class="pre">set_X_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_test</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.set_X_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.set_X_test" title="Link to this definition"></a></dt>
+<dd><p>Method sets the X test data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.set_X_train">
+<span class="sig-name descname"><span class="pre">set_X_train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.set_X_train"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.set_X_train" title="Link to this definition"></a></dt>
+<dd><p>Method sets the X training data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.set_clf">
+<span class="sig-name descname"><span class="pre">set_clf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.set_clf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.set_clf" title="Link to this definition"></a></dt>
+<dd><p>Method sets the classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.set_random_state">
+<span class="sig-name descname"><span class="pre">set_random_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">random_state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.set_random_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.set_random_state" title="Link to this definition"></a></dt>
+<dd><p>Method sets the random state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.set_test_size">
+<span class="sig-name descname"><span class="pre">set_test_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.set_test_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.set_test_size" title="Link to this definition"></a></dt>
+<dd><p>Method sets the test size.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.set_y">
+<span class="sig-name descname"><span class="pre">set_y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.set_y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.set_y" title="Link to this definition"></a></dt>
+<dd><p>Method sets the y data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.set_y_pred">
+<span class="sig-name descname"><span class="pre">set_y_pred</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.set_y_pred"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.set_y_pred" title="Link to this definition"></a></dt>
+<dd><p>Method sets the y_pred.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.set_y_test">
+<span class="sig-name descname"><span class="pre">set_y_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_test</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.set_y_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.set_y_test" title="Link to this definition"></a></dt>
+<dd><p>Method sets the y test data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.set_y_train">
+<span class="sig-name descname"><span class="pre">set_y_train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_train</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.set_y_train"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.set_y_train" title="Link to this definition"></a></dt>
+<dd><p>Method sets the y training data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.models.model.Model.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/models/model.html#Model.train"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.models.model.Model.train" title="Link to this definition"></a></dt>
+<dd><p>Method trains the model.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.models">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.models" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="src.interface.html" class="btn btn-neutral float-left" title="src.interface package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tests.html" class="btn btn-neutral float-right" title="tests package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Patrick Schröder.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

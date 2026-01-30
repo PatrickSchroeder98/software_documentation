@@ -1,0 +1,21 @@
+tests.interface package
+=======================
+
+Submodules
+----------
+
+tests.interface.test\_emailclassifierapp module
+-----------------------------------------------
+
+.. automodule:: tests.interface.test_emailclassifierapp
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: tests.interface
+   :members:
+   :show-inheritance:
+   :undoc-members:

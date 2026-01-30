@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.classifiers package &mdash; Jobhunt Emails Classifier 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="./_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="./_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="./_static/jquery.js?v=5d32c60e"></script>
+      <script src="./_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="./_static/documentation_options.js?v=8d563738"></script>
+      <script src="./_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="./_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="./_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="./genindex.html" />
+    <link rel="search" title="Search" href="./search.html" />
+    <link rel="next" title="src.data_module package" href="./src.data_module.html" />
+    <link rel="prev" title="src package" href="./src.html" /> 
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.ico">  
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Jobhunt Emails Classifier
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">jobhunt_emails_classifier</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="src.html">src package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="src.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">src.classifiers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.data_module.html">src.data_module package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.exceptions.html">src.exceptions package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.interface.html">src.interface package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.models.html">src.models package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#module-src">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html">tests package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Jobhunt Emails Classifier</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">jobhunt_emails_classifier</a></li>
+          <li class="breadcrumb-item"><a href="src.html">src package</a></li>
+      <li class="breadcrumb-item active">src.classifiers package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/src.classifiers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-classifiers-package">
+<h1>src.classifiers package<a class="headerlink" href="#src-classifiers-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-src.classifiers.classifier">
+<span id="src-classifiers-classifier-module"></span><h2>src.classifiers.classifier module<a class="headerlink" href="#module-src.classifiers.classifier" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">src.classifiers.classifier.</span></span><span class="sig-name descname"><span class="pre">Classifier</span></span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class responsible for classifiers used in predictive model.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.get_classifier">
+<span class="sig-name descname"><span class="pre">get_classifier</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.get_classifier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.get_classifier" title="Link to this definition"></a></dt>
+<dd><p>Method that returns classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.get_max_iter">
+<span class="sig-name descname"><span class="pre">get_max_iter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.get_max_iter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.get_max_iter" title="Link to this definition"></a></dt>
+<dd><p>Return maximum number of iterations.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.get_sc_clf_1">
+<span class="sig-name descname"><span class="pre">get_sc_clf_1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.get_sc_clf_1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.get_sc_clf_1" title="Link to this definition"></a></dt>
+<dd><p>Return 1st estimator for scoring classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.get_sc_clf_2">
+<span class="sig-name descname"><span class="pre">get_sc_clf_2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.get_sc_clf_2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.get_sc_clf_2" title="Link to this definition"></a></dt>
+<dd><p>Return 2nd estimator for scoring classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.get_sc_clf_3">
+<span class="sig-name descname"><span class="pre">get_sc_clf_3</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.get_sc_clf_3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.get_sc_clf_3" title="Link to this definition"></a></dt>
+<dd><p>Return 3rd estimator for scoring classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.get_vc_clf_1">
+<span class="sig-name descname"><span class="pre">get_vc_clf_1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.get_vc_clf_1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.get_vc_clf_1" title="Link to this definition"></a></dt>
+<dd><p>Return 1st estimator for voting classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.get_vc_clf_2">
+<span class="sig-name descname"><span class="pre">get_vc_clf_2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.get_vc_clf_2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.get_vc_clf_2" title="Link to this definition"></a></dt>
+<dd><p>Return 2nd estimator for voting classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.get_vc_clf_3">
+<span class="sig-name descname"><span class="pre">get_vc_clf_3</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.get_vc_clf_3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.get_vc_clf_3" title="Link to this definition"></a></dt>
+<dd><p>Return 3rd estimator for voting classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_classifier">
+<span class="sig-name descname"><span class="pre">set_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classifier</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_classifier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_classifier" title="Link to this definition"></a></dt>
+<dd><p>Method that can set classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_clf_abc">
+<span class="sig-name descname"><span class="pre">set_clf_abc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_clf_abc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_clf_abc" title="Link to this definition"></a></dt>
+<dd><p>Method that can set classifier as AdaBoostClassifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_clf_bnb">
+<span class="sig-name descname"><span class="pre">set_clf_bnb</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_clf_bnb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_clf_bnb" title="Link to this definition"></a></dt>
+<dd><p>Method that can set classifier as BernoulliNB.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_clf_cnb">
+<span class="sig-name descname"><span class="pre">set_clf_cnb</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_clf_cnb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_clf_cnb" title="Link to this definition"></a></dt>
+<dd><p>Method that can set classifier as ComplementNB.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_clf_dtc">
+<span class="sig-name descname"><span class="pre">set_clf_dtc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_clf_dtc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_clf_dtc" title="Link to this definition"></a></dt>
+<dd><p>Method that can set classifier as DecisionTreeClassifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_clf_etc">
+<span class="sig-name descname"><span class="pre">set_clf_etc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_clf_etc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_clf_etc" title="Link to this definition"></a></dt>
+<dd><p>Method that can set classifier as ExtraTreeClassifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_clf_gbc">
+<span class="sig-name descname"><span class="pre">set_clf_gbc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_clf_gbc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_clf_gbc" title="Link to this definition"></a></dt>
+<dd><p>Method that can set classifier as GradientBoostingClassifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_clf_knn">
+<span class="sig-name descname"><span class="pre">set_clf_knn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_clf_knn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_clf_knn" title="Link to this definition"></a></dt>
+<dd><p>Method that can set classifier as KNeighborsClassifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_clf_lr">
+<span class="sig-name descname"><span class="pre">set_clf_lr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_clf_lr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_clf_lr" title="Link to this definition"></a></dt>
+<dd><p>Method that can set classifier as LogisticRegression.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_clf_lsv">
+<span class="sig-name descname"><span class="pre">set_clf_lsv</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_clf_lsv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_clf_lsv" title="Link to this definition"></a></dt>
+<dd><p>Method that can set classifier as LinearSVC.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_clf_nb">
+<span class="sig-name descname"><span class="pre">set_clf_nb</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_clf_nb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_clf_nb" title="Link to this definition"></a></dt>
+<dd><p>Method that can set classifier as MultinomialNB.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_clf_rdg">
+<span class="sig-name descname"><span class="pre">set_clf_rdg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_clf_rdg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_clf_rdg" title="Link to this definition"></a></dt>
+<dd><p>Method that can set classifier as RidgeClassifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_clf_rfc">
+<span class="sig-name descname"><span class="pre">set_clf_rfc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_clf_rfc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_clf_rfc" title="Link to this definition"></a></dt>
+<dd><p>Method that can set classifier as RandomForestClassifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_clf_sgd">
+<span class="sig-name descname"><span class="pre">set_clf_sgd</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_clf_sgd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_clf_sgd" title="Link to this definition"></a></dt>
+<dd><p>Method that can set classifier as SGDClassifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_clf_stc">
+<span class="sig-name descname"><span class="pre">set_clf_stc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_clf_stc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_clf_stc" title="Link to this definition"></a></dt>
+<dd><p>Method that can set classifier as StackingClassifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_clf_svc">
+<span class="sig-name descname"><span class="pre">set_clf_svc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_clf_svc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_clf_svc" title="Link to this definition"></a></dt>
+<dd><p>Method that can set classifier as SVC.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_clf_vtc">
+<span class="sig-name descname"><span class="pre">set_clf_vtc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_clf_vtc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_clf_vtc" title="Link to this definition"></a></dt>
+<dd><p>Method that can set classifier as VotingClassifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_max_iter">
+<span class="sig-name descname"><span class="pre">set_max_iter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_max_iter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_max_iter" title="Link to this definition"></a></dt>
+<dd><p>Set maximum number of iterations.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_sc_clf_1">
+<span class="sig-name descname"><span class="pre">set_sc_clf_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sc_clf_1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_sc_clf_1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_sc_clf_1" title="Link to this definition"></a></dt>
+<dd><p>Set 1st estimator for scoring classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_sc_clf_2">
+<span class="sig-name descname"><span class="pre">set_sc_clf_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sc_clf_2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_sc_clf_2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_sc_clf_2" title="Link to this definition"></a></dt>
+<dd><p>Set 2nd estimator for scoring classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_sc_clf_3">
+<span class="sig-name descname"><span class="pre">set_sc_clf_3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sc_clf_3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_sc_clf_3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_sc_clf_3" title="Link to this definition"></a></dt>
+<dd><p>Set 3rd estimator for scoring classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_vc_clf_1">
+<span class="sig-name descname"><span class="pre">set_vc_clf_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vc_clf_1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_vc_clf_1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_vc_clf_1" title="Link to this definition"></a></dt>
+<dd><p>Set 1st estimator for voting classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_vc_clf_2">
+<span class="sig-name descname"><span class="pre">set_vc_clf_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vc_clf_2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_vc_clf_2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_vc_clf_2" title="Link to this definition"></a></dt>
+<dd><p>Set 2nd estimator for voting classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_vc_clf_3">
+<span class="sig-name descname"><span class="pre">set_vc_clf_3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vc_clf_3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_vc_clf_3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_vc_clf_3" title="Link to this definition"></a></dt>
+<dd><p>Set 3rd estimator for voting classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_voting_hard">
+<span class="sig-name descname"><span class="pre">set_voting_hard</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_voting_hard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_voting_hard" title="Link to this definition"></a></dt>
+<dd><p>Set voting option as ‘hard’ for classifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.classifiers.classifier.Classifier.set_voting_soft">
+<span class="sig-name descname"><span class="pre">set_voting_soft</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classifiers/classifier.html#Classifier.set_voting_soft"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.classifiers.classifier.Classifier.set_voting_soft" title="Link to this definition"></a></dt>
+<dd><p>Set voting option as ‘soft’ for classifier.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.classifiers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.classifiers" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="src.html" class="btn btn-neutral float-left" title="src package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="src.data_module.html" class="btn btn-neutral float-right" title="src.data_module package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Patrick Schröder.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

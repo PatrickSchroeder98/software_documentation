@@ -1,0 +1,1591 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tests.interface.test_emailclassifierapp &mdash; Jobhunt Emails Classifier 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Jobhunt Emails Classifier
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">jobhunt_emails_classifier</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Jobhunt Emails Classifier</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tests.interface.test_emailclassifierapp</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tests.interface.test_emailclassifierapp</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">unittest.mock</span><span class="w"> </span><span class="kn">import</span> <span class="n">patch</span><span class="p">,</span> <span class="n">MagicMock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.classifiers.classifier</span><span class="w"> </span><span class="kn">import</span> <span class="n">Classifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.data_module.dataloader</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.interface.emailclassifierapp</span><span class="w"> </span><span class="kn">import</span> <span class="n">EmailClassifierApp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.models.model</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TestEmailClassifierApp</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class with tests associated with EmailClassifierApp class.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_init">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_init">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the initialization of a class&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+        <span class="n">data_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
+        <span class="n">classifier</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model1</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">model2</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">model3</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">multiclassifier_model</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">CLASSIFIERS</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">:</span> <span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_nb</span><span class="p">,</span>
+            <span class="s2">&quot;LogisticRegression&quot;</span><span class="p">:</span> <span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_lr</span><span class="p">,</span>
+            <span class="s2">&quot;ComplementNB&quot;</span><span class="p">:</span> <span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_cnb</span><span class="p">,</span>
+            <span class="s2">&quot;BernoulliNB&quot;</span><span class="p">:</span> <span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_bnb</span><span class="p">,</span>
+            <span class="s2">&quot;SGDClassifier&quot;</span><span class="p">:</span> <span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_sgd</span><span class="p">,</span>
+            <span class="s2">&quot;RidgeClassifier&quot;</span><span class="p">:</span> <span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_rdg</span><span class="p">,</span>
+            <span class="s2">&quot;RandomForestClassifier&quot;</span><span class="p">:</span> <span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_rfc</span><span class="p">,</span>
+            <span class="s2">&quot;GradientBoostingClassifier&quot;</span><span class="p">:</span> <span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_gbc</span><span class="p">,</span>
+            <span class="s2">&quot;AdaBoostClassifier&quot;</span><span class="p">:</span> <span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_abc</span><span class="p">,</span>
+            <span class="s2">&quot;LinearSVC&quot;</span><span class="p">:</span> <span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_lsv</span><span class="p">,</span>
+            <span class="s2">&quot;SVC&quot;</span><span class="p">:</span> <span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_svc</span><span class="p">,</span>
+            <span class="s2">&quot;KNeighborsClassifier&quot;</span><span class="p">:</span> <span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_knn</span><span class="p">,</span>
+            <span class="s2">&quot;VotingClassifier&quot;</span><span class="p">:</span> <span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_vtc</span><span class="p">,</span>
+            <span class="s2">&quot;StackingClassifier&quot;</span><span class="p">:</span> <span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_stc</span><span class="p">,</span>
+            <span class="s2">&quot;DecisionTreeClassifier&quot;</span><span class="p">:</span> <span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_dtc</span><span class="p">,</span>
+            <span class="s2">&quot;ExtraTreeClassifier&quot;</span><span class="p">:</span> <span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_etc</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">CLASSIFIERS</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="nb">set</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">CLASSIFIERS</span><span class="p">:</span>
+            <span class="n">expected_val</span> <span class="o">=</span> <span class="n">CLASSIFIERS</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="n">actual_val</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">actual_val</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">expected_val</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">data_loader</span><span class="p">,</span> <span class="n">DataLoader</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">data_loader</span><span class="p">,</span> <span class="n">DataLoader</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">model1</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">model1</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">model2</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">model2</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">model3</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">model3</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">multiclassifier_model</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">multiclassifier_model</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">del</span> <span class="n">app</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_set_model1_clf">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_set_model1_clf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_model1_clf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the set_model1_clf method of the class.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">set_model1_clf</span><span class="p">(</span><span class="s2">&quot;ExampleClf&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">model1</span><span class="o">.</span><span class="n">clf</span><span class="p">,</span> <span class="s2">&quot;ExampleClf&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">Model</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">app</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_set_model2_clf">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_set_model2_clf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_model2_clf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the set_model2_clf method of the class.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">set_model2_clf</span><span class="p">(</span><span class="s2">&quot;ExampleClf&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">model2</span><span class="o">.</span><span class="n">clf</span><span class="p">,</span> <span class="s2">&quot;ExampleClf&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">Model</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">app</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_set_model3_clf">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_set_model3_clf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_model3_clf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the set_model3_clf method of the class.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">set_model3_clf</span><span class="p">(</span><span class="s2">&quot;ExampleClf&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">model3</span><span class="o">.</span><span class="n">clf</span><span class="p">,</span> <span class="s2">&quot;ExampleClf&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">Model</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">app</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_set_multiclassifier_model_clf">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_set_multiclassifier_model_clf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_multiclassifier_model_clf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the set_multiclassifier_model_clf method of the class.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">set_multiclassifier_model_clf</span><span class="p">(</span><span class="s2">&quot;ExampleClf&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">multiclassifier_model</span><span class="o">.</span><span class="n">clf</span><span class="p">,</span> <span class="s2">&quot;ExampleClf&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">Model</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">app</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_load_data_csv_exception">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_load_data_csv_exception">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_load_data_csv_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the load_data_csv method of the class, in the environment that returns an exception.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">load_data_csv</span><span class="p">(</span><span class="s2">&quot;./nonexistentpath/test.csv&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">app</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_load_data_csv_success">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_load_data_csv_success">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_load_data_csv_success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that checks if load_data_csv returns a DataFrame when given a valid path.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+        <span class="n">fake_path</span> <span class="o">=</span> <span class="s2">&quot;fake/path/to/data.csv&quot;</span>
+        <span class="n">fake_df</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">data_loader</span><span class="p">,</span> <span class="s2">&quot;set_path&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mock_set_path</span><span class="p">,</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">data_loader</span><span class="p">,</span> <span class="s2">&quot;load_data_csv&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="n">fake_df</span>
+        <span class="p">)</span> <span class="k">as</span> <span class="n">mock_load</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">load_data_csv</span><span class="p">(</span><span class="n">fake_path</span><span class="p">)</span>
+
+            <span class="c1"># Ensures set_path() was called correctly</span>
+            <span class="n">mock_set_path</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="n">fake_path</span><span class="p">)</span>
+
+            <span class="c1"># Ensures data_loader.load_data_csv() was called</span>
+            <span class="n">mock_load</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+
+            <span class="c1"># Ensures returned DF is exactly what mocked loader returned</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIs</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">fake_df</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">app</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_classifier_option_check_true">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_classifier_option_check_true">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_classifier_option_check_true</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the classifier_option_check method of the class when it returns true.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+        <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;Example1&quot;</span>
+        <span class="n">const</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Example1&quot;</span><span class="p">:</span> <span class="s2">&quot;Example1&quot;</span><span class="p">,</span> <span class="s2">&quot;Example2&quot;</span><span class="p">:</span> <span class="s2">&quot;Example2&quot;</span><span class="p">}</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">classifier_option_check</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="n">const</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">app</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_classifier_option_check_false">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_classifier_option_check_false">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_classifier_option_check_false</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the classifier_option_check method of the class when it returns false.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+        <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;Example3&quot;</span>
+        <span class="n">const</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Example1&quot;</span><span class="p">:</span> <span class="s2">&quot;Example1&quot;</span><span class="p">,</span> <span class="s2">&quot;Example2&quot;</span><span class="p">:</span> <span class="s2">&quot;Example2&quot;</span><span class="p">}</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">classifier_option_check</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="n">const</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">app</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_train_3_stage_pipelines_invalid_classifier">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_train_3_stage_pipelines_invalid_classifier">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_train_3_stage_pipelines_invalid_classifier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the train_3_stage_pipelines method of the class when the provided classifier is invalid.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s2">&quot;load_data_csv&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="n">MagicMock</span><span class="p">()),</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span>
+            <span class="n">app</span><span class="p">,</span> <span class="s2">&quot;classifier_option_check&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">train_3_stage_pipelines</span><span class="p">(</span>
+                <span class="n">classifier_option_1</span><span class="o">=</span><span class="s2">&quot;BadClf&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Models set to None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">model1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">model2</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">model3</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_train_3_stage_voting_classifier_not_supported">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_train_3_stage_voting_classifier_not_supported">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_train_3_stage_voting_classifier_not_supported</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the train_3_stage_pipelines method of the class when the provided classifier</span>
+<span class="sd">        is an unsupported VotingClassifier.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="n">fake_df</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">fake_model</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">set_model1_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">fake_model</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_model2_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">fake_model</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_model3_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">fake_model</span><span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">get_classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="s2">&quot;FAKE_CLF&quot;</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s2">&quot;load_data_csv&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="n">fake_df</span><span class="p">),</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span>
+            <span class="n">app</span><span class="p">,</span> <span class="s2">&quot;classifier_option_check&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">),</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span>
+            <span class="n">app</span><span class="p">,</span> <span class="s2">&quot;CLASSIFIERS&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">:</span> <span class="n">MagicMock</span><span class="p">()}</span>
+        <span class="p">)</span> <span class="k">as</span> <span class="n">mock_clf_dict</span><span class="p">:</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">train_3_stage_pipelines</span><span class="p">(</span>
+                <span class="n">classifier_option_1</span><span class="o">=</span><span class="s2">&quot;VotingClassifier&quot;</span><span class="p">,</span>
+                <span class="n">classifier_option_2</span><span class="o">=</span><span class="s2">&quot;VotingClassifier&quot;</span><span class="p">,</span>
+                <span class="n">classifier_option_3</span><span class="o">=</span><span class="s2">&quot;VotingClassifier&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="c1"># MultinomialNB should be called as fallback 3×</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">mock_clf_dict</span><span class="p">[</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">call_count</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_train_3_stage_stacking_classifier_not_supported">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_train_3_stage_stacking_classifier_not_supported">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_train_3_stage_stacking_classifier_not_supported</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the train_3_stage_pipelines method of the class when the provided classifier</span>
+<span class="sd">        is an unsupported StackingClassifier.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="n">fake_df</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">fake_model</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">set_model1_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">fake_model</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_model2_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">fake_model</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_model3_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">fake_model</span><span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">get_classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="s2">&quot;FAKE_CLF&quot;</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s2">&quot;load_data_csv&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="n">fake_df</span><span class="p">),</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span>
+            <span class="n">app</span><span class="p">,</span> <span class="s2">&quot;classifier_option_check&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">),</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span>
+            <span class="n">app</span><span class="p">,</span> <span class="s2">&quot;CLASSIFIERS&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">:</span> <span class="n">MagicMock</span><span class="p">()}</span>
+        <span class="p">)</span> <span class="k">as</span> <span class="n">mock_clf_dict</span><span class="p">:</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">train_3_stage_pipelines</span><span class="p">(</span>
+                <span class="n">classifier_option_1</span><span class="o">=</span><span class="s2">&quot;StackingClassifier&quot;</span><span class="p">,</span>
+                <span class="n">classifier_option_2</span><span class="o">=</span><span class="s2">&quot;StackingClassifier&quot;</span><span class="p">,</span>
+                <span class="n">classifier_option_3</span><span class="o">=</span><span class="s2">&quot;StackingClassifier&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">mock_clf_dict</span><span class="p">[</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">call_count</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_train_3_stage_pipelines_success">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_train_3_stage_pipelines_success">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_train_3_stage_pipelines_success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the train_3_stage_pipelines method of the class.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="c1"># Fake dataframe with required columns</span>
+        <span class="n">fake_df</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;email_text&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;text1&quot;</span><span class="p">,</span> <span class="s2">&quot;text2&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;related_to_jobhunt&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="s2">&quot;is_confirmation&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="s2">&quot;is_invitation&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="n">fake_df</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">fake_df</span><span class="o">.</span><span class="fm">__getitem__</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">key</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Fake pipeline model</span>
+        <span class="n">fake_model</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">fake_model</span><span class="o">.</span><span class="n">build_pipeline</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">fake_model</span><span class="o">.</span><span class="n">set_X</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">fake_model</span><span class="o">.</span><span class="n">set_y</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">fake_model</span><span class="o">.</span><span class="n">train</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="c1"># Mock setter functions set_model1_clf etc.</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_model1_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">fake_model</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_model2_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">fake_model</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_model3_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">fake_model</span><span class="p">)</span>
+
+        <span class="c1"># Fake classifier setter</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">get_classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="s2">&quot;FAKE_CLF&quot;</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s2">&quot;load_data_csv&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="n">fake_df</span><span class="p">),</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span>
+            <span class="n">app</span><span class="p">,</span> <span class="s2">&quot;classifier_option_check&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">),</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s2">&quot;CLASSIFIERS&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">:</span> <span class="n">MagicMock</span><span class="p">()}):</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">train_3_stage_pipelines</span><span class="p">(</span>
+                <span class="n">path1</span><span class="o">=</span><span class="s2">&quot;p1&quot;</span><span class="p">,</span>
+                <span class="n">path2</span><span class="o">=</span><span class="s2">&quot;p2&quot;</span><span class="p">,</span>
+                <span class="n">path3</span><span class="o">=</span><span class="s2">&quot;p3&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="c1"># 3 calls to load_data_csv</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">load_data_csv</span><span class="o">.</span><span class="n">call_count</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+            <span class="c1"># 3 classifier setters called</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">set_model1_clf</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">set_model2_clf</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">set_model3_clf</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+
+            <span class="c1"># Check training was triggered 3 times</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">fake_model</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">call_count</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_view_3_stage_pipelines_accuracy_model_not_found">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_view_3_stage_pipelines_accuracy_model_not_found">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_view_3_stage_pipelines_accuracy_model_not_found</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests if view_3_stage_pipelines_accuracy returns None when any model is missing.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="c1"># Case: model1 is None → triggers ModelNotFound</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model1</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model2</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model3</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">view_3_stage_pipelines_accuracy</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_view_3_stage_pipelines_accuracy_success">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_view_3_stage_pipelines_accuracy_success">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_view_3_stage_pipelines_accuracy_success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the success route for view_3_stage_pipelines_accuracy where accuracy of</span>
+<span class="sd">        all 3 models is displayed.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="c1"># Fake accuracy values for count_accuracy()</span>
+        <span class="n">fake_accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.85</span><span class="p">,</span> <span class="mf">0.90</span><span class="p">)</span>
+
+        <span class="c1"># Create three fake model objects</span>
+        <span class="n">model1</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">model2</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">model3</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="n">model1</span><span class="o">.</span><span class="n">count_accuracy</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">fake_accuracy</span>
+        <span class="n">model2</span><span class="o">.</span><span class="n">count_accuracy</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">fake_accuracy</span>
+        <span class="n">model3</span><span class="o">.</span><span class="n">count_accuracy</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">fake_accuracy</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">model1</span> <span class="o">=</span> <span class="n">model1</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model2</span> <span class="o">=</span> <span class="n">model2</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model3</span> <span class="o">=</span> <span class="n">model3</span>
+
+        <span class="c1"># Patch print to avoid console output during tests</span>
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;builtins.print&quot;</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">view_3_stage_pipelines_accuracy</span><span class="p">()</span>
+
+        <span class="c1"># Ensure accuracy was computed for each model</span>
+        <span class="n">model1</span><span class="o">.</span><span class="n">count_accuracy</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+        <span class="n">model2</span><span class="o">.</span><span class="n">count_accuracy</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+        <span class="n">model3</span><span class="o">.</span><span class="n">count_accuracy</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+
+        <span class="c1"># Method does not return accuracy, only prints → should be None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_classify_3_stage_model1_not_found">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_classify_3_stage_model1_not_found">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_classify_3_stage_model1_not_found</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the classify_emails_3_stage_pipelines when model1 is missing.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">model1</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># missing → triggers exception</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model2</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model3</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">classify_emails_3_stage_pipelines</span><span class="p">(</span><span class="s2">&quot;test email&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_classify_3_stage_model2_not_found">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_classify_3_stage_model2_not_found">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_classify_3_stage_model2_not_found</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the classify_emails_3_stage_pipelines when model2 is missing.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">model1</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model2</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model3</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">classify_emails_3_stage_pipelines</span><span class="p">(</span><span class="s2">&quot;test email&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_classify_3_stage_model3_not_found">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_classify_3_stage_model3_not_found">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_classify_3_stage_model3_not_found</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the classify_emails_3_stage_pipelines when model3 is missing.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">model1</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model2</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model3</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">classify_emails_3_stage_pipelines</span><span class="p">(</span><span class="s2">&quot;test email&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_classify_3_stage_model1_and_model2_not_found">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_classify_3_stage_model1_and_model2_not_found">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_classify_3_stage_model1_and_model2_not_found</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the classify_emails_3_stage_pipelines when model1 and model2 are missing.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">model1</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model2</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model3</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">classify_emails_3_stage_pipelines</span><span class="p">(</span><span class="s2">&quot;test email&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_classify_3_stage_model1_and_model3_not_found">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_classify_3_stage_model1_and_model3_not_found">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_classify_3_stage_model1_and_model3_not_found</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the classify_emails_3_stage_pipelines when model1 and model3 are missing.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">model1</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model2</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model3</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">classify_emails_3_stage_pipelines</span><span class="p">(</span><span class="s2">&quot;test email&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_classify_3_stage_model2_and_model3_not_found">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_classify_3_stage_model2_and_model3_not_found">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_classify_3_stage_model2_and_model3_not_found</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the classify_emails_3_stage_pipelines when model2 and model3 are missing.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">model1</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model2</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model3</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">classify_emails_3_stage_pipelines</span><span class="p">(</span><span class="s2">&quot;test email&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_classify_3_stage_models_not_found">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_classify_3_stage_models_not_found">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_classify_3_stage_models_not_found</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the classify_emails_3_stage_pipelines when models are missing.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">model1</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model2</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model3</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">classify_emails_3_stage_pipelines</span><span class="p">(</span><span class="s2">&quot;test email&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_classify_3_stage_input_error_not_list_or_str">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_classify_3_stage_input_error_not_list_or_str">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_classify_3_stage_input_error_not_list_or_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the classify_emails_3_stage_pipelines when input is not str or list.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="c1"># All models mocked</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model1</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model2</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model3</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;builtins.print&quot;</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">classify_emails_3_stage_pipelines</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>  <span class="c1"># invalid type</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_classify_3_stage_input_error_non_string_inside_list">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_classify_3_stage_input_error_non_string_inside_list">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_classify_3_stage_input_error_non_string_inside_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the classify_emails_3_stage_pipelines when list contains non-string elements.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">model1</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model2</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model3</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;builtins.print&quot;</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">classify_emails_3_stage_pipelines</span><span class="p">([</span><span class="s2">&quot;ok&quot;</span><span class="p">,</span> <span class="mi">999</span><span class="p">])</span>  <span class="c1"># 999 invalid</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_classify_3_stage_success_all_paths">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_classify_3_stage_success_all_paths">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_classify_3_stage_success_all_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the classify_emails_3_stage_pipelines with correct classification logic through</span>
+<span class="sd">        all 3 stages using mocks.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="c1"># -------------------------</span>
+        <span class="c1"># Mock models and pipelines</span>
+        <span class="c1"># -------------------------</span>
+        <span class="n">model1</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">model2</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">model3</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">model1</span> <span class="o">=</span> <span class="n">model1</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model2</span> <span class="o">=</span> <span class="n">model2</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">model3</span> <span class="o">=</span> <span class="n">model3</span>
+
+        <span class="c1"># Prepare fake pipelines</span>
+        <span class="n">model1</span><span class="o">.</span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">model2</span><span class="o">.</span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">model3</span><span class="o">.</span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="c1"># --------------------</span>
+        <span class="c1"># Input emails to test</span>
+        <span class="c1"># --------------------</span>
+        <span class="n">emails</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;not job related&quot;</span><span class="p">,</span>  <span class="c1"># stage1 → False</span>
+            <span class="s2">&quot;confirmation mail&quot;</span><span class="p">,</span>  <span class="c1"># stage1 True, stage2 True</span>
+            <span class="s2">&quot;invitation mail&quot;</span><span class="p">,</span>  <span class="c1"># stage1 True, stage2 False, stage3 True</span>
+            <span class="s2">&quot;rejection mail&quot;</span><span class="p">,</span>  <span class="c1"># stage1 True, stage2 False, stage3 False</span>
+        <span class="p">]</span>
+
+        <span class="c1"># ---------------------------------------------</span>
+        <span class="c1"># Define model predictions for each input email</span>
+        <span class="c1"># ---------------------------------------------</span>
+
+        <span class="c1"># Stage 1 predictions:</span>
+        <span class="c1"># email0 → False</span>
+        <span class="c1"># email1 → True</span>
+        <span class="c1"># email2 → True</span>
+        <span class="c1"># email3 → True</span>
+        <span class="n">model1</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="kc">False</span><span class="p">],</span>  <span class="c1"># email0</span>
+            <span class="p">[</span><span class="kc">True</span><span class="p">],</span>  <span class="c1"># email1</span>
+            <span class="p">[</span><span class="kc">True</span><span class="p">],</span>  <span class="c1"># email2</span>
+            <span class="p">[</span><span class="kc">True</span><span class="p">],</span>  <span class="c1"># email3</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Stage 2 predictions:</span>
+        <span class="c1"># email1 → True</span>
+        <span class="c1"># email2 → False</span>
+        <span class="c1"># email3 → False</span>
+        <span class="n">model2</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="kc">True</span><span class="p">],</span>  <span class="c1"># email1</span>
+            <span class="p">[</span><span class="kc">False</span><span class="p">],</span>  <span class="c1"># email2</span>
+            <span class="p">[</span><span class="kc">False</span><span class="p">],</span>  <span class="c1"># email3</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Stage 3 predictions:</span>
+        <span class="c1"># email2 → True</span>
+        <span class="c1"># email3 → False</span>
+        <span class="n">model3</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="kc">True</span><span class="p">],</span>  <span class="c1"># email2</span>
+            <span class="p">[</span><span class="kc">False</span><span class="p">],</span>  <span class="c1"># email3</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Run method</span>
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;builtins.print&quot;</span><span class="p">):</span>  <span class="c1"># suppress prints</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">classify_emails_3_stage_pipelines</span><span class="p">(</span><span class="n">emails</span><span class="p">)</span>
+
+        <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;email_index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;Not job-hunt related&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;email_index&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;Confirmation&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;email_index&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;Invitation&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;email_index&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;Rejection&quot;</span><span class="p">},</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_train_multiclassifier_pipeline_invalid_classifier">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_train_multiclassifier_pipeline_invalid_classifier">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_train_multiclassifier_pipeline_invalid_classifier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests if the invalid classifier option triggers ClassifierOptionError route</span>
+<span class="sd">        in train_multiclassifier_pipeline method.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="c1"># Mock CSV loading</span>
+        <span class="n">mock_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;email_text&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;hello&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;email_type&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Invitation&quot;</span><span class="p">],</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">load_data_csv</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">mock_df</span><span class="p">)</span>
+
+        <span class="c1"># Return False for classifier option check → triggers exception</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier_option_check</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># Track print output but remove noise</span>
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;builtins.print&quot;</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">train_multiclassifier_pipeline</span><span class="p">(</span>
+                <span class="n">path</span><span class="o">=</span><span class="s2">&quot;fake/path.csv&quot;</span><span class="p">,</span>
+                <span class="n">classifier_option</span><span class="o">=</span><span class="s2">&quot;INVALID&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Should return None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+        <span class="c1"># The multiclassifier model must be set to None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">multiclassifier_model</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_train_multiclassifier_pipeline_success">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_train_multiclassifier_pipeline_success">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_train_multiclassifier_pipeline_success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the success route of train_multiclassifier_pipeline method.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># Mock CSV loading</span>
+        <span class="c1"># --------------------------</span>
+        <span class="n">mock_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;email_text&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;email_type&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Invitation&quot;</span><span class="p">,</span> <span class="s2">&quot;Rejection&quot;</span><span class="p">],</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">load_data_csv</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">mock_df</span><span class="p">)</span>
+
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># Mock classifier validation</span>
+        <span class="c1"># --------------------------</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier_option_check</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># Mock CLASSIFIERS dict so the classifier setter is a mock</span>
+        <span class="c1"># --------------------------</span>
+        <span class="n">mock_setter</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">:</span> <span class="n">mock_setter</span><span class="p">}</span>
+
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># Mock classifier object + its getter</span>
+        <span class="c1"># --------------------------</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">get_classifier</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="s2">&quot;mock_clf&quot;</span>
+
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># Mock model and builder</span>
+        <span class="c1"># --------------------------</span>
+        <span class="n">mock_model</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_multiclassifier_model_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">mock_model</span><span class="p">)</span>
+
+        <span class="c1"># Run method</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">train_multiclassifier_pipeline</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;fake/path.csv&quot;</span><span class="p">,</span>
+            <span class="n">classifier_option</span><span class="o">=</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span>
+            <span class="n">column_name_train</span><span class="o">=</span><span class="s2">&quot;email_type&quot;</span><span class="p">,</span>
+            <span class="n">column_name_main</span><span class="o">=</span><span class="s2">&quot;email_text&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># Assertions</span>
+        <span class="c1"># --------------------------</span>
+
+        <span class="c1"># CSV loaded</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">load_data_csv</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s2">&quot;fake/path.csv&quot;</span><span class="p">)</span>
+
+        <span class="c1"># classifier option check was used</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier_option_check</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span>
+            <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Correct classifier setter was called</span>
+        <span class="n">mock_setter</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+
+        <span class="c1"># Model was created using the classifier</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_multiclassifier_model_clf</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s2">&quot;mock_clf&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Pipeline procedures</span>
+        <span class="n">mock_model</span><span class="o">.</span><span class="n">build_pipeline</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+        <span class="n">mock_model</span><span class="o">.</span><span class="n">set_X</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="n">mock_df</span><span class="p">[</span><span class="s2">&quot;email_text&quot;</span><span class="p">])</span>
+        <span class="n">mock_model</span><span class="o">.</span><span class="n">set_y</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="n">mock_df</span><span class="p">[</span><span class="s2">&quot;email_type&quot;</span><span class="p">])</span>
+        <span class="n">mock_model</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_view_multiclassifier_accuracy_model_missing">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_view_multiclassifier_accuracy_model_missing">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_view_multiclassifier_accuracy_model_missing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the view_multiclassifier_accuracy method when the multiclassifier model is missing.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">multiclassifier_model</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Force missing model</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;builtins.print&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mock_print</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">view_multiclassifier_accuracy</span><span class="p">()</span>
+
+        <span class="c1"># Should return None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+        <span class="c1"># Should print error message + code</span>
+        <span class="n">mock_print</span><span class="o">.</span><span class="n">assert_any_call</span><span class="p">(</span>
+            <span class="s2">&quot;Model has not been initialized.&quot;</span>
+        <span class="p">)</span>  <span class="c1"># From ModelNotFound()</span>
+        <span class="n">mock_print</span><span class="o">.</span><span class="n">assert_any_call</span><span class="p">(</span>
+            <span class="s2">&quot;Error code: MODEL_NOT_FOUND_003&quot;</span>
+        <span class="p">)</span>  <span class="c1"># Expected error code</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_view_multiclassifier_accuracy_success">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_view_multiclassifier_accuracy_success">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_view_multiclassifier_accuracy_success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the view_multiclassifier_accuracy method success route.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="c1"># Mock model</span>
+        <span class="n">mock_model</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">mock_model</span><span class="o">.</span><span class="n">count_accuracy</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.85</span><span class="p">,</span> <span class="s2">&quot;classification report here&quot;</span><span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">multiclassifier_model</span> <span class="o">=</span> <span class="n">mock_model</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;builtins.print&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mock_print</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">view_multiclassifier_accuracy</span><span class="p">()</span>
+
+        <span class="c1"># Method does not return anything specific</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+        <span class="c1"># Ensure count_accuracy() was called</span>
+        <span class="n">mock_model</span><span class="o">.</span><span class="n">count_accuracy</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+
+        <span class="c1"># Ensure prints occurred in correct order</span>
+        <span class="n">mock_print</span><span class="o">.</span><span class="n">assert_any_call</span><span class="p">(</span><span class="s2">&quot;Multiclassifier accuracy: &quot;</span><span class="p">)</span>
+        <span class="n">mock_print</span><span class="o">.</span><span class="n">assert_any_call</span><span class="p">(</span><span class="mf">0.85</span><span class="p">)</span>
+        <span class="n">mock_print</span><span class="o">.</span><span class="n">assert_any_call</span><span class="p">(</span><span class="s2">&quot;classification report here&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_predict_multiclassifier_model_not_found">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_predict_multiclassifier_model_not_found">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_predict_multiclassifier_model_not_found</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the predict_with_multiclassifier exception route when model is None.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">multiclassifier_model</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;builtins.print&quot;</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">predict_with_multiclassifier</span><span class="p">(</span><span class="s2">&quot;test email&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_predict_multiclassifier_invalid_input_type">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_predict_multiclassifier_invalid_input_type">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_predict_multiclassifier_invalid_input_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the predict_with_multiclassifier exception route when input is invalid.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">multiclassifier_model</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;builtins.print&quot;</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">predict_with_multiclassifier</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_predict_multiclassifier_invalid_list_element">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_predict_multiclassifier_invalid_list_element">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_predict_multiclassifier_invalid_list_element</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the predict_with_multiclassifier exception route when element of input list is invalid.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">multiclassifier_model</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;builtins.print&quot;</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">predict_with_multiclassifier</span><span class="p">([</span><span class="s2">&quot;valid email&quot;</span><span class="p">,</span> <span class="mi">999</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_predict_multiclassifier_success">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_predict_multiclassifier_success">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_predict_multiclassifier_success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the predict_with_multiclassifier success route.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># Mock model and pipeline</span>
+        <span class="c1"># --------------------------</span>
+        <span class="n">mock_model</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">mock_pipeline</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">mock_model</span><span class="o">.</span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">mock_pipeline</span>
+
+        <span class="c1"># Simulate predictions</span>
+        <span class="n">mock_pipeline</span><span class="o">.</span><span class="n">predict</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="s2">&quot;Invitation&quot;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s2">&quot;Other&quot;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s2">&quot;Confirmation&quot;</span><span class="p">],</span>
+        <span class="p">]</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">multiclassifier_model</span> <span class="o">=</span> <span class="n">mock_model</span>
+
+        <span class="n">emails</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;email one&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;email two&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;email three&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;builtins.print&quot;</span><span class="p">):</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">predict_with_multiclassifier</span><span class="p">(</span><span class="n">emails</span><span class="p">)</span>
+
+        <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;email_index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;Invitation&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;email_index&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;Other&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;email_index&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;Confirmation&quot;</span><span class="p">},</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+
+        <span class="c1"># Ensure pipeline.predict was called for each email</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">mock_pipeline</span><span class="o">.</span><span class="n">predict</span><span class="o">.</span><span class="n">call_count</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_train_multiclassifier_all_classifier_options">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_train_multiclassifier_all_classifier_options">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_train_multiclassifier_all_classifier_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that tests all possible supported classifiers usage for multiclassifier training.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="c1"># Mock dataset</span>
+        <span class="n">mock_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="p">{</span><span class="s2">&quot;email_text&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="s2">&quot;email_type&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Invitation&quot;</span><span class="p">,</span> <span class="s2">&quot;Rejection&quot;</span><span class="p">]}</span>
+        <span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">load_data_csv</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">mock_df</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier_option_check</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Mock model</span>
+        <span class="n">mock_model</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_multiclassifier_model_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">mock_model</span><span class="p">)</span>
+
+        <span class="c1"># Mock classifier instance</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">get_classifier</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="s2">&quot;mock_clf&quot;</span>
+
+        <span class="c1"># Prepare fake CLASSIFIERS map</span>
+        <span class="n">fake_classifiers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">fake_classifiers</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;set_</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span> <span class="o">=</span> <span class="n">fake_classifiers</span>
+
+        <span class="c1"># Skip special classifiers here</span>
+        <span class="n">excluded</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;VotingClassifier&quot;</span><span class="p">,</span> <span class="s2">&quot;StackingClassifier&quot;</span><span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">clf_name</span> <span class="ow">in</span> <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">clf_name</span> <span class="ow">in</span> <span class="n">excluded</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">subTest</span><span class="p">(</span><span class="n">classifier</span><span class="o">=</span><span class="n">clf_name</span><span class="p">):</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">train_multiclassifier_pipeline</span><span class="p">(</span>
+                    <span class="n">path</span><span class="o">=</span><span class="s2">&quot;fake.csv&quot;</span><span class="p">,</span> <span class="n">classifier_option</span><span class="o">=</span><span class="n">clf_name</span>
+                <span class="p">)</span>
+
+                <span class="c1"># correct setter called</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span><span class="p">[</span><span class="n">clf_name</span><span class="p">]</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+
+                <span class="c1"># model pipeline executed</span>
+                <span class="n">mock_model</span><span class="o">.</span><span class="n">build_pipeline</span><span class="o">.</span><span class="n">assert_called</span><span class="p">()</span>
+                <span class="n">mock_model</span><span class="o">.</span><span class="n">set_X</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">mock_df</span><span class="p">[</span><span class="s2">&quot;email_text&quot;</span><span class="p">])</span>
+                <span class="n">mock_model</span><span class="o">.</span><span class="n">set_y</span><span class="o">.</span><span class="n">assert_called_with</span><span class="p">(</span><span class="n">mock_df</span><span class="p">[</span><span class="s2">&quot;email_type&quot;</span><span class="p">])</span>
+                <span class="n">mock_model</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">assert_called</span><span class="p">()</span>
+
+                <span class="c1"># reset mocks for next iteration</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span><span class="p">[</span><span class="n">clf_name</span><span class="p">]</span><span class="o">.</span><span class="n">reset_mock</span><span class="p">()</span>
+                <span class="n">mock_model</span><span class="o">.</span><span class="n">reset_mock</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_train_multiclassifier_voting_classifier">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_train_multiclassifier_voting_classifier">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_train_multiclassifier_voting_classifier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that tests StackingClassifier getting set as multiclassifier model.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="n">mock_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;email_text&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="s2">&quot;email_type&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Other&quot;</span><span class="p">]})</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">load_data_csv</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">mock_df</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier_option_check</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">get_classifier</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="s2">&quot;mock_clf&quot;</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">set_voting_classifier_parameters</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="n">mock_model</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_multiclassifier_model_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">mock_model</span><span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;VotingClassifier&quot;</span><span class="p">:</span> <span class="n">MagicMock</span><span class="p">()}</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">train_multiclassifier_pipeline</span><span class="p">(</span>
+            <span class="n">classifier_option</span><span class="o">=</span><span class="s2">&quot;VotingClassifier&quot;</span><span class="p">,</span>
+            <span class="n">estimator_1</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+            <span class="n">estimator_2</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+            <span class="n">estimator_3</span><span class="o">=</span><span class="s2">&quot;C&quot;</span><span class="p">,</span>
+            <span class="n">voting_option</span><span class="o">=</span><span class="s2">&quot;soft&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span><span class="p">[</span><span class="s2">&quot;VotingClassifier&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_voting_classifier_parameters</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span>
+            <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;soft&quot;</span>
+        <span class="p">)</span>
+        <span class="n">mock_model</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_train_multiclassifier_stacking_classifier">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_train_multiclassifier_stacking_classifier">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_train_multiclassifier_stacking_classifier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that tests StackingClassifier getting set as multiclassifier model.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="n">mock_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;email_text&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="s2">&quot;email_type&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Confirmation&quot;</span><span class="p">]})</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">load_data_csv</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">mock_df</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier_option_check</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">get_classifier</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="s2">&quot;mock_clf&quot;</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">set_stacking_classifier_estimators</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="n">mock_model</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_multiclassifier_model_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">mock_model</span><span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;StackingClassifier&quot;</span><span class="p">:</span> <span class="n">MagicMock</span><span class="p">()}</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">train_multiclassifier_pipeline</span><span class="p">(</span>
+            <span class="n">classifier_option</span><span class="o">=</span><span class="s2">&quot;StackingClassifier&quot;</span><span class="p">,</span>
+            <span class="n">estimator_1</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+            <span class="n">estimator_2</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+            <span class="n">estimator_3</span><span class="o">=</span><span class="s2">&quot;C&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span><span class="p">[</span><span class="s2">&quot;StackingClassifier&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_stacking_classifier_estimators</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span>
+        <span class="n">mock_model</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_train_3_stage_pipelines_all_supported_classifiers">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_train_3_stage_pipelines_all_supported_classifiers">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_train_3_stage_pipelines_all_supported_classifiers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that tests all possible supported classifiers usage for 3 stage pipelines training.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># Mock dataset</span>
+        <span class="c1"># --------------------------</span>
+        <span class="n">mock_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;email_text&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;related_to_jobhunt&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+                <span class="s2">&quot;is_confirmation&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+                <span class="s2">&quot;is_invitation&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">load_data_csv</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">mock_df</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier_option_check</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># Mock classifier instance</span>
+        <span class="c1"># --------------------------</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">get_classifier</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="s2">&quot;mock_clf&quot;</span>
+
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># Mock models</span>
+        <span class="c1"># --------------------------</span>
+        <span class="n">model1</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">model2</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">model3</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">set_model1_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">model1</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_model2_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">model2</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_model3_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">model3</span><span class="p">)</span>
+
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># Prepare CLASSIFIERS map</span>
+        <span class="c1"># --------------------------</span>
+        <span class="n">fake_classifiers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">fake_classifiers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;set_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span> <span class="o">=</span> <span class="n">fake_classifiers</span>
+
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># Exclude unsupported classifiers</span>
+        <span class="c1"># --------------------------</span>
+        <span class="n">unsupported</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;VotingClassifier&quot;</span><span class="p">,</span> <span class="s2">&quot;StackingClassifier&quot;</span><span class="p">}</span>
+        <span class="n">supported</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unsupported</span><span class="p">]</span>
+
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># Rotate classifiers across stages</span>
+        <span class="c1"># --------------------------</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">supported</span><span class="p">),</span> <span class="mi">3</span><span class="p">):</span>
+            <span class="n">clf1</span> <span class="o">=</span> <span class="n">supported</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">clf2</span> <span class="o">=</span> <span class="n">supported</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">supported</span><span class="p">)]</span>
+            <span class="n">clf3</span> <span class="o">=</span> <span class="n">supported</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">supported</span><span class="p">)]</span>
+
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">subTest</span><span class="p">(</span><span class="n">stage1</span><span class="o">=</span><span class="n">clf1</span><span class="p">,</span> <span class="n">stage2</span><span class="o">=</span><span class="n">clf2</span><span class="p">,</span> <span class="n">stage3</span><span class="o">=</span><span class="n">clf3</span><span class="p">):</span>
+
+                <span class="n">app</span><span class="o">.</span><span class="n">train_3_stage_pipelines</span><span class="p">(</span>
+                    <span class="n">path1</span><span class="o">=</span><span class="s2">&quot;fake1.csv&quot;</span><span class="p">,</span>
+                    <span class="n">path2</span><span class="o">=</span><span class="s2">&quot;fake2.csv&quot;</span><span class="p">,</span>
+                    <span class="n">path3</span><span class="o">=</span><span class="s2">&quot;fake3.csv&quot;</span><span class="p">,</span>
+                    <span class="n">classifier_option_1</span><span class="o">=</span><span class="n">clf1</span><span class="p">,</span>
+                    <span class="n">classifier_option_2</span><span class="o">=</span><span class="n">clf2</span><span class="p">,</span>
+                    <span class="n">classifier_option_3</span><span class="o">=</span><span class="n">clf3</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="c1"># Ensure correct classifier setters were called</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span><span class="p">[</span><span class="n">clf1</span><span class="p">]</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span><span class="p">[</span><span class="n">clf2</span><span class="p">]</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span><span class="p">[</span><span class="n">clf3</span><span class="p">]</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+
+                <span class="c1"># Ensure training executed</span>
+                <span class="n">model1</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">assert_called</span><span class="p">()</span>
+                <span class="n">model2</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">assert_called</span><span class="p">()</span>
+                <span class="n">model3</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">assert_called</span><span class="p">()</span>
+
+                <span class="c1"># Reset mocks for next rotation</span>
+                <span class="k">for</span> <span class="n">clf</span> <span class="ow">in</span> <span class="p">(</span><span class="n">clf1</span><span class="p">,</span> <span class="n">clf2</span><span class="p">,</span> <span class="n">clf3</span><span class="p">):</span>
+                    <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span><span class="p">[</span><span class="n">clf</span><span class="p">]</span><span class="o">.</span><span class="n">reset_mock</span><span class="p">()</span>
+
+                <span class="n">model1</span><span class="o">.</span><span class="n">reset_mock</span><span class="p">()</span>
+                <span class="n">model2</span><span class="o">.</span><span class="n">reset_mock</span><span class="p">()</span>
+                <span class="n">model3</span><span class="o">.</span><span class="n">reset_mock</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_train_3_stage_pipeline_unsupported_classifiers_fallback">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_train_3_stage_pipeline_unsupported_classifiers_fallback">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_train_3_stage_pipeline_unsupported_classifiers_fallback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that tests if Voting and Stacking classifiers are reset to MultinomialNB</span>
+<span class="sd">        in 3 stage pipeline setup.&quot;&quot;&quot;</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">load_data_csv</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span>
+            <span class="n">return_value</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;email_text&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;related_to_jobhunt&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">],</span>
+                    <span class="s2">&quot;is_confirmation&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">],</span>
+                    <span class="s2">&quot;is_invitation&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">],</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier_option_check</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">get_classifier</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="s2">&quot;mock_clf&quot;</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">:</span> <span class="n">MagicMock</span><span class="p">(),</span>
+            <span class="s2">&quot;VotingClassifier&quot;</span><span class="p">:</span> <span class="n">MagicMock</span><span class="p">(),</span>
+            <span class="s2">&quot;StackingClassifier&quot;</span><span class="p">:</span> <span class="n">MagicMock</span><span class="p">(),</span>
+        <span class="p">}</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">set_model1_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">MagicMock</span><span class="p">())</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_model2_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">MagicMock</span><span class="p">())</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_model3_clf</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">MagicMock</span><span class="p">())</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;builtins.print&quot;</span><span class="p">):</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">train_3_stage_pipelines</span><span class="p">(</span>
+                <span class="n">classifier_option_1</span><span class="o">=</span><span class="s2">&quot;VotingClassifier&quot;</span><span class="p">,</span>
+                <span class="n">classifier_option_2</span><span class="o">=</span><span class="s2">&quot;StackingClassifier&quot;</span><span class="p">,</span>
+                <span class="n">classifier_option_3</span><span class="o">=</span><span class="s2">&quot;VotingClassifier&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">CLASSIFIERS</span><span class="p">[</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">assert_called</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_set_voting_classifier_parameters_invalid_voting_option">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_set_voting_classifier_parameters_invalid_voting_option">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_voting_classifier_parameters_invalid_voting_option</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that tests set_voting_classifier_parameters method exception route when</span>
+<span class="sd">        voting option is invalid.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier_option_check</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">:</span> <span class="n">MagicMock</span><span class="p">()}</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">set_voting_classifier_parameters</span><span class="p">(</span>
+            <span class="n">estimator_1</span><span class="o">=</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span>
+            <span class="n">estimator_2</span><span class="o">=</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span>
+            <span class="n">estimator_3</span><span class="o">=</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span>
+            <span class="n">voting_option</span><span class="o">=</span><span class="s2">&quot;invalid_option&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_voting_hard</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_voting_soft</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_vtc</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_set_voting_classifier_parameters_invalid_estimators">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_set_voting_classifier_parameters_invalid_estimators">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_voting_classifier_parameters_invalid_estimators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the set_voting_classifier_parameters method exception route when</span>
+<span class="sd">        estimators and voting option are invalid.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="c1"># Valid estimator registry</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">:</span> <span class="n">MagicMock</span><span class="p">()}</span>
+
+        <span class="c1"># All combinations with at least one invalid estimator</span>
+        <span class="n">test_cases</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">,</span> <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span> <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span> <span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">,</span> <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span> <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span> <span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">,</span> <span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">,</span> <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">,</span> <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span> <span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span> <span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">,</span> <span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">,</span> <span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">,</span> <span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">),</span>
+        <span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">est1</span><span class="p">,</span> <span class="n">est2</span><span class="p">,</span> <span class="n">est3</span> <span class="ow">in</span> <span class="n">test_cases</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">subTest</span><span class="p">(</span><span class="n">estimator_1</span><span class="o">=</span><span class="n">est1</span><span class="p">,</span> <span class="n">estimator_2</span><span class="o">=</span><span class="n">est2</span><span class="p">,</span> <span class="n">estimator_3</span><span class="o">=</span><span class="n">est3</span><span class="p">):</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">reset_mock</span><span class="p">()</span>
+
+                <span class="c1"># classifier_option_check returns False if estimator is invalid</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier_option_check</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span>
+                    <span class="n">side_effect</span><span class="o">=</span><span class="k">lambda</span> <span class="n">e</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="n">e</span> <span class="o">==</span> <span class="s2">&quot;MultinomialNB&quot;</span>
+                <span class="p">)</span>
+
+                <span class="n">voting_options</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;hard&quot;</span><span class="p">,</span> <span class="s2">&quot;soft&quot;</span><span class="p">,</span> <span class="s2">&quot;Invalid_Option&quot;</span><span class="p">]</span>
+
+                <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">voting_options</span><span class="p">:</span>
+
+                    <span class="n">app</span><span class="o">.</span><span class="n">set_voting_classifier_parameters</span><span class="p">(</span>
+                        <span class="n">estimator_1</span><span class="o">=</span><span class="n">est1</span><span class="p">,</span>
+                        <span class="n">estimator_2</span><span class="o">=</span><span class="n">est2</span><span class="p">,</span>
+                        <span class="n">estimator_3</span><span class="o">=</span><span class="n">est3</span><span class="p">,</span>
+                        <span class="n">voting_option</span><span class="o">=</span><span class="n">option</span><span class="p">,</span>
+                    <span class="p">)</span>
+
+                    <span class="c1"># Voting mode should be set</span>
+                    <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_voting_hard</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+
+                    <span class="c1"># Estimators should NOT be set</span>
+                    <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_vc_clf_1</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span>
+                    <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_vc_clf_2</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span>
+                    <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_vc_clf_3</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span>
+                    <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_vtc</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_set_voting_classifier_parameters_success_default_estimators">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_set_voting_classifier_parameters_success_default_estimators">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_voting_classifier_parameters_success_default_estimators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests success route with default estimators for both hard and soft voting.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">voting_option</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;hard&quot;</span><span class="p">,</span> <span class="s2">&quot;soft&quot;</span><span class="p">):</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">subTest</span><span class="p">(</span><span class="n">voting_option</span><span class="o">=</span><span class="n">voting_option</span><span class="p">):</span>
+
+                <span class="c1"># --------------------------</span>
+                <span class="c1"># Mock classifier</span>
+                <span class="c1"># --------------------------</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+                <span class="c1"># --------------------------</span>
+                <span class="c1"># Mock estimator registry</span>
+                <span class="c1"># --------------------------</span>
+                <span class="n">mock_estimator</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">:</span> <span class="n">mock_estimator</span>
+                <span class="p">}</span>
+
+                <span class="c1"># --------------------------</span>
+                <span class="c1"># All estimator checks pass</span>
+                <span class="c1"># --------------------------</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier_option_check</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                <span class="c1"># --------------------------</span>
+                <span class="c1"># Run method</span>
+                <span class="c1"># --------------------------</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">set_voting_classifier_parameters</span><span class="p">(</span>
+                    <span class="n">estimator_1</span><span class="o">=</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span>
+                    <span class="n">estimator_2</span><span class="o">=</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span>
+                    <span class="n">estimator_3</span><span class="o">=</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span>
+                    <span class="n">voting_option</span><span class="o">=</span><span class="n">voting_option</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="c1"># --------------------------</span>
+                <span class="c1"># Assertions</span>
+                <span class="c1"># --------------------------</span>
+
+                <span class="k">if</span> <span class="n">voting_option</span> <span class="o">==</span> <span class="s2">&quot;hard&quot;</span><span class="p">:</span>
+                    <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_voting_hard</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+                    <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_voting_soft</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_voting_soft</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+                    <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_voting_hard</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span>
+
+                <span class="c1"># Estimators instantiated</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">mock_estimator</span><span class="o">.</span><span class="n">call_count</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+                <span class="c1"># Estimators assigned</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_vc_clf_1</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_vc_clf_2</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_vc_clf_3</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+
+                <span class="c1"># Final classifier built</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_vtc</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_set_voting_classifier_parameters_all_estimators">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_set_voting_classifier_parameters_all_estimators">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_voting_classifier_parameters_all_estimators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that tests set_voting_classifier_parameters method&#39;s success route with</span>
+<span class="sd">        all possible estimators.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># Mock classifier</span>
+        <span class="c1"># --------------------------</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># Use real estimator names but mock constructors</span>
+        <span class="c1"># --------------------------</span>
+        <span class="n">estimator_names</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LogisticRegression&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ComplementNB&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;BernoulliNB&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;SGDClassifier&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;RidgeClassifier&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;RandomForestClassifier&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;GradientBoostingClassifier&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;AdaBoostClassifier&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LinearSVC&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;SVC&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;KNeighborsClassifier&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;DecisionTreeClassifier&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ExtraTreeClassifier&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Build mocked registry</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_ctor&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">estimator_names</span>
+        <span class="p">}</span>
+
+        <span class="c1"># All estimator options valid</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier_option_check</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># Test both voting options</span>
+        <span class="c1"># --------------------------</span>
+        <span class="k">for</span> <span class="n">voting_option</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;hard&quot;</span><span class="p">,</span> <span class="s2">&quot;soft&quot;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">estimator</span> <span class="ow">in</span> <span class="n">estimator_names</span><span class="p">:</span>
+
+                <span class="c1"># Reset mocks between runs</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">reset_mock</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">ctor</span> <span class="ow">in</span> <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                    <span class="n">ctor</span><span class="o">.</span><span class="n">reset_mock</span><span class="p">()</span>
+
+                <span class="n">app</span><span class="o">.</span><span class="n">set_voting_classifier_parameters</span><span class="p">(</span>
+                    <span class="n">estimator_1</span><span class="o">=</span><span class="n">estimator</span><span class="p">,</span>
+                    <span class="n">estimator_2</span><span class="o">=</span><span class="n">estimator</span><span class="p">,</span>
+                    <span class="n">estimator_3</span><span class="o">=</span><span class="n">estimator</span><span class="p">,</span>
+                    <span class="n">voting_option</span><span class="o">=</span><span class="n">voting_option</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="c1"># --------------------------</span>
+                <span class="c1"># Assertions</span>
+                <span class="c1"># --------------------------</span>
+
+                <span class="c1"># Correct voting mode</span>
+                <span class="k">if</span> <span class="n">voting_option</span> <span class="o">==</span> <span class="s2">&quot;hard&quot;</span><span class="p">:</span>
+                    <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_voting_hard</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+                    <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_voting_soft</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_voting_soft</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+                    <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_voting_hard</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span>
+
+                <span class="c1"># Estimator constructor called 3 times</span>
+                <span class="n">ctor</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span><span class="p">[</span><span class="n">estimator</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">ctor</span><span class="o">.</span><span class="n">call_count</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+                <span class="c1"># Estimators assigned</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_vc_clf_1</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_vc_clf_2</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_vc_clf_3</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+
+                <span class="c1"># VotingClassifier finalized</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_vtc</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_set_stacking_classifier_estimators_all_none">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_set_stacking_classifier_estimators_all_none">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_stacking_classifier_estimators_all_none</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that tests set_stacking_classifier_estimators when all estimators are none.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">set_stacking_classifier_estimators</span><span class="p">(</span>
+            <span class="n">estimator_1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">estimator_2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">estimator_3</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+        <span class="c1"># No classifier methods should be called</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_sc_clf_1</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_sc_clf_2</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_sc_clf_3</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_stc</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_set_stacking_classifier_estimators_invalid_estimators">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_set_stacking_classifier_estimators_invalid_estimators">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_stacking_classifier_estimators_invalid_estimators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the set_stacking_classifier_estimators method exception route when estimators are invalid.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="c1"># Registry with only one valid estimator</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">:</span> <span class="n">MagicMock</span><span class="p">()}</span>
+
+        <span class="c1"># All combinations where at least one estimator is invalid</span>
+        <span class="n">test_cases</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">,</span> <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span> <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span> <span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">,</span> <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span> <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span> <span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">,</span> <span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">,</span> <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">,</span> <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span> <span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span> <span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">,</span> <span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">,</span> <span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">,</span> <span class="s2">&quot;InvalidEstimator&quot;</span><span class="p">),</span>
+        <span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">est1</span><span class="p">,</span> <span class="n">est2</span><span class="p">,</span> <span class="n">est3</span> <span class="ow">in</span> <span class="n">test_cases</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">subTest</span><span class="p">(</span><span class="n">estimator_1</span><span class="o">=</span><span class="n">est1</span><span class="p">,</span> <span class="n">estimator_2</span><span class="o">=</span><span class="n">est2</span><span class="p">,</span> <span class="n">estimator_3</span><span class="o">=</span><span class="n">est3</span><span class="p">):</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">reset_mock</span><span class="p">()</span>
+
+                <span class="c1"># estimator is valid only if present in registry</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier_option_check</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span>
+                    <span class="n">side_effect</span><span class="o">=</span><span class="k">lambda</span> <span class="n">e</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="n">e</span> <span class="o">==</span> <span class="s2">&quot;MultinomialNB&quot;</span>
+                <span class="p">)</span>
+
+                <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">set_stacking_classifier_estimators</span><span class="p">(</span>
+                    <span class="n">estimator_1</span><span class="o">=</span><span class="n">est1</span><span class="p">,</span>
+                    <span class="n">estimator_2</span><span class="o">=</span><span class="n">est2</span><span class="p">,</span>
+                    <span class="n">estimator_3</span><span class="o">=</span><span class="n">est3</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+                <span class="c1"># No classifier building should happen</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_sc_clf_1</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_sc_clf_2</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_sc_clf_3</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_stc</span><span class="o">.</span><span class="n">assert_not_called</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_set_stacking_classifier_estimators_success_default">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_set_stacking_classifier_estimators_success_default">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_stacking_classifier_estimators_success_default</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that tests set_stacking_classifier_estimators success route with default estimators.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="c1"># Mock estimator constructor</span>
+        <span class="n">mock_estimator_ctor</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;MultinomialNB_ctor&quot;</span><span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">:</span> <span class="n">mock_estimator_ctor</span>
+        <span class="p">}</span>
+
+        <span class="c1"># All estimator checks pass</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier_option_check</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">set_stacking_classifier_estimators</span><span class="p">(</span>
+            <span class="n">estimator_1</span><span class="o">=</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span>
+            <span class="n">estimator_2</span><span class="o">=</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span>
+            <span class="n">estimator_3</span><span class="o">=</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Constructor called 3 times</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">mock_estimator_ctor</span><span class="o">.</span><span class="n">call_count</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+        <span class="c1"># Estimators assigned</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_sc_clf_1</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_sc_clf_2</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_sc_clf_3</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+
+        <span class="c1"># Final StackingClassifier creation</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_stc</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TestEmailClassifierApp.test_set_stacking_classifier_estimators_all_estimators">
+<a class="viewcode-back" href="../../../tests.interface.html#tests.interface.test_emailclassifierapp.TestEmailClassifierApp.test_set_stacking_classifier_estimators_all_estimators">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_stacking_classifier_estimators_all_estimators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that tests set_stacking_classifier_estimators with all supported estimators.&quot;&quot;&quot;</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">EmailClassifierApp</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="n">estimator_names</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LogisticRegression&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ComplementNB&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;BernoulliNB&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;SGDClassifier&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;RidgeClassifier&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;RandomForestClassifier&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;GradientBoostingClassifier&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;AdaBoostClassifier&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LinearSVC&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;SVC&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;KNeighborsClassifier&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;DecisionTreeClassifier&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ExtraTreeClassifier&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Mock estimator constructors</span>
+        <span class="n">estimators_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">estimator_names</span><span class="p">:</span>
+            <span class="n">estimators_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_ctor&quot;</span><span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span> <span class="o">=</span> <span class="n">estimators_dict</span>
+
+        <span class="c1"># All estimator checks pass</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">classifier_option_check</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># --------------------------</span>
+        <span class="c1"># Iterate through estimators</span>
+        <span class="c1"># --------------------------</span>
+        <span class="k">for</span> <span class="n">estimator_name</span> <span class="ow">in</span> <span class="n">estimator_names</span><span class="p">:</span>
+            <span class="c1"># Reset mocks before each iteration</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">reset_mock</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">ctor</span> <span class="ow">in</span> <span class="n">estimators_dict</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="n">ctor</span><span class="o">.</span><span class="n">reset_mock</span><span class="p">()</span>
+
+            <span class="n">app</span><span class="o">.</span><span class="n">set_stacking_classifier_estimators</span><span class="p">(</span>
+                <span class="n">estimator_1</span><span class="o">=</span><span class="n">estimator_name</span><span class="p">,</span>
+                <span class="n">estimator_2</span><span class="o">=</span><span class="n">estimator_name</span><span class="p">,</span>
+                <span class="n">estimator_3</span><span class="o">=</span><span class="n">estimator_name</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Constructor should be called 3 times</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+                <span class="n">estimators_dict</span><span class="p">[</span><span class="n">estimator_name</span><span class="p">]</span><span class="o">.</span><span class="n">call_count</span><span class="p">,</span>
+                <span class="mi">3</span><span class="p">,</span>
+                <span class="n">msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Estimator </span><span class="si">{</span><span class="n">estimator_name</span><span class="si">}</span><span class="s2"> was not instantiated 3 times&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Estimators assigned</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_sc_clf_1</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_sc_clf_2</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_sc_clf_3</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+
+            <span class="c1"># Final classifier creation</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">set_clf_stc</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span></div>
+</div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Patrick Schröder.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

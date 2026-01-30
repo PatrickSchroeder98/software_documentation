@@ -1,0 +1,21 @@
+src.classifiers package
+=======================
+
+Submodules
+----------
+
+src.classifiers.classifier module
+---------------------------------
+
+.. automodule:: src.classifiers.classifier
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: src.classifiers
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,361 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tests.exceptions.test_exceptions &mdash; Jobhunt Emails Classifier 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Jobhunt Emails Classifier
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">jobhunt_emails_classifier</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Jobhunt Emails Classifier</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tests.exceptions.test_exceptions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tests.exceptions.test_exceptions</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.exceptions.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">PathError</span><span class="p">,</span>
+    <span class="n">ClassifierOptionError</span><span class="p">,</span>
+    <span class="n">ModelNotFound</span><span class="p">,</span>
+    <span class="n">InputDataError</span><span class="p">,</span>
+    <span class="n">VotingOptionForVotingClassifierError</span><span class="p">,</span>
+    <span class="n">VotingClassifierNotSupported</span><span class="p">,</span>
+    <span class="n">EstimatorOptionError</span><span class="p">,</span>
+    <span class="n">StackingClassifierNotSupported</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="TestExceptions">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TestExceptions</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to test exceptions raised by application.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TestExceptions.test_PathError_init">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_PathError_init">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_PathError_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test PathError Exception initialization.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">PathError</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;Provided path is invalid.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="s2">&quot;DL_FILE_NOT_FOUND_001&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_PathError_get_message">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_PathError_get_message">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_PathError_get_message</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test PathError Exception get_message method.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">PathError</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get_message</span><span class="p">(),</span> <span class="s2">&quot;Provided path is invalid.&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_PathError_get_code">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_PathError_get_code">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_PathError_get_code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test PathError Exception get_code method.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">PathError</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get_code</span><span class="p">(),</span> <span class="s2">&quot;DL_FILE_NOT_FOUND_001&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_ClassifierOptionError_init">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_ClassifierOptionError_init">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_ClassifierOptionError_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test ClassifierOptionError Exception initialization.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">ClassifierOptionError</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;Provided classifier option is invalid.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="s2">&quot;CLASSIFIER_NOT_FOUND_002&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_ClassifierOptionError_get_message">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_ClassifierOptionError_get_message">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_ClassifierOptionError_get_message</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test ClassifierOptionError Exception get_message method.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">ClassifierOptionError</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get_message</span><span class="p">(),</span> <span class="s2">&quot;Provided classifier option is invalid.&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_ClassifierOptionError_get_code">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_ClassifierOptionError_get_code">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_ClassifierOptionError_get_code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test ClassifierOptionError Exception get_code method.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">ClassifierOptionError</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get_code</span><span class="p">(),</span> <span class="s2">&quot;CLASSIFIER_NOT_FOUND_002&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_ModelNotFound_init">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_ModelNotFound_init">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_ModelNotFound_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test ModelNotFound Exception initialization.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">ModelNotFound</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;Model has not been initialized.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="s2">&quot;MODEL_NOT_FOUND_003&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_ModelNotFound_get_message">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_ModelNotFound_get_message">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_ModelNotFound_get_message</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test ModelNotFound Exception get_message method.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">ModelNotFound</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get_message</span><span class="p">(),</span> <span class="s2">&quot;Model has not been initialized.&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_ModelNotFound_get_code">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_ModelNotFound_get_code">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_ModelNotFound_get_code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test ModelNotFound Exception get_code method.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">ModelNotFound</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get_code</span><span class="p">(),</span> <span class="s2">&quot;MODEL_NOT_FOUND_003&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_InputDataError_init">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_InputDataError_init">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_InputDataError_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test InputDataError Exception initialization.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">InputDataError</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;Input data is not a string or list of strings.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="s2">&quot;INVALID_DATA_004&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_InputDataError_get_message">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_InputDataError_get_message">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_InputDataError_get_message</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test InputDataError Exception get_message method.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">InputDataError</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">get_message</span><span class="p">(),</span> <span class="s2">&quot;Input data is not a string or list of strings.&quot;</span>
+        <span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_InputDataError_get_code">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_InputDataError_get_code">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_InputDataError_get_code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test InputDataError Exception get_code method.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">InputDataError</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get_code</span><span class="p">(),</span> <span class="s2">&quot;INVALID_DATA_004&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_VotingOptionForVotingClassifierError_init">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_VotingOptionForVotingClassifierError_init">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_VotingOptionForVotingClassifierError_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test VotingOptionForVotingClassifierError Exception initialization.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">VotingOptionForVotingClassifierError</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;Voting option for VotingClassifier is invalid.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="s2">&quot;INVALID_VOTING_OPTION_005&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_VotingOptionForVotingClassifierError_get_message">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_VotingOptionForVotingClassifierError_get_message">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_VotingOptionForVotingClassifierError_get_message</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test VotingOptionForVotingClassifierError Exception get_message method.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">VotingOptionForVotingClassifierError</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">get_message</span><span class="p">(),</span> <span class="s2">&quot;Voting option for VotingClassifier is invalid.&quot;</span>
+        <span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_VotingOptionForVotingClassifierError_get_code">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_VotingOptionForVotingClassifierError_get_code">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_VotingOptionForVotingClassifierError_get_code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test VotingOptionForVotingClassifierError Exception get_code method.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">VotingOptionForVotingClassifierError</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get_code</span><span class="p">(),</span> <span class="s2">&quot;INVALID_VOTING_OPTION_005&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_VotingClassifierNotSupported_init">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_VotingClassifierNotSupported_init">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_VotingClassifierNotSupported_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test VotingClassifierNotSupported Exception initialization.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">VotingClassifierNotSupported</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;VotingClassifier is not supported in this environment.&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="s2">&quot;VOTING_CLASSIFIER_NOT_SUPPORTED_006&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_VotingClassifierNotSupported_get_message">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_VotingClassifierNotSupported_get_message">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_VotingClassifierNotSupported_get_message</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test VotingClassifierNotSupported Exception get_message method.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">VotingClassifierNotSupported</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">get_message</span><span class="p">(),</span> <span class="s2">&quot;VotingClassifier is not supported in this environment.&quot;</span>
+        <span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_VotingClassifierNotSupported_get_code">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_VotingClassifierNotSupported_get_code">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_VotingClassifierNotSupported_get_code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test VotingClassifierNotSupported Exception get_code method.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">VotingClassifierNotSupported</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get_code</span><span class="p">(),</span> <span class="s2">&quot;VOTING_CLASSIFIER_NOT_SUPPORTED_006&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_EstimatorOptionError_init">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_EstimatorOptionError_init">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_EstimatorOptionError_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test EstimatorOptionError Exception initialization.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">EstimatorOptionError</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">,</span>
+            <span class="s2">&quot;Provided estimator option is invalid. Default estimators will be used instead.&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="s2">&quot;ESTIMATOR_NOT_FOUND_007&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_EstimatorOptionError_get_message">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_EstimatorOptionError_get_message">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_EstimatorOptionError_get_message</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test EstimatorOptionError Exception get_message method.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">EstimatorOptionError</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">get_message</span><span class="p">(),</span>
+            <span class="s2">&quot;Provided estimator option is invalid. Default estimators will be used instead.&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_EstimatorOptionError_get_code">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_EstimatorOptionError_get_code">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_EstimatorOptionError_get_code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test EstimatorOptionError Exception get_code method.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">EstimatorOptionError</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get_code</span><span class="p">(),</span> <span class="s2">&quot;ESTIMATOR_NOT_FOUND_007&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_StackingClassifierNotSupported_init">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_StackingClassifierNotSupported_init">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_StackingClassifierNotSupported_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test StackingClassifierNotSupported Exception initialization.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">StackingClassifierNotSupported</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;StackingClassifier is not supported in this environment.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="s2">&quot;STACKING_CLASSIFIER_NOT_SUPPORTED_006&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_StackingClassifierNotSupported_get_message">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_StackingClassifierNotSupported_get_message">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_StackingClassifierNotSupported_get_message</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test StackingClassifierNotSupported Exception get_message method.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">StackingClassifierNotSupported</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get_message</span><span class="p">(),</span> <span class="s2">&quot;StackingClassifier is not supported in this environment.&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="TestExceptions.test_StackingClassifierNotSupported_get_code">
+<a class="viewcode-back" href="../../../tests.exceptions.html#tests.exceptions.test_exceptions.TestExceptions.test_StackingClassifierNotSupported_get_code">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_StackingClassifierNotSupported_get_code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to test StackingClassifierNotSupported Exception get_code method.&quot;&quot;&quot;</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">StackingClassifierNotSupported</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get_code</span><span class="p">(),</span> <span class="s2">&quot;STACKING_CLASSIFIER_NOT_SUPPORTED_006&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">e</span></div>
+</div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Patrick Schröder.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

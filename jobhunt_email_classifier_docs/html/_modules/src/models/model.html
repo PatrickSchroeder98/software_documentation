@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.models.model &mdash; Jobhunt Emails Classifier 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Jobhunt Emails Classifier
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">jobhunt_emails_classifier</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Jobhunt Emails Classifier</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">src.models.model</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for src.models.model</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+
+
+<div class="viewcode-block" id="Model">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Model</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class represents the model used in classification&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clf</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method initializes the model, classificator is given in argument.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_test</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_pred</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Model.set_clf">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.set_clf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_clf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clf</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method sets the classifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span></div>
+
+
+<div class="viewcode-block" id="Model.get_clf">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.get_clf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_clf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method returns the classifier.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clf</span></div>
+
+
+<div class="viewcode-block" id="Model.set_X_train">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.set_X_train">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_X_train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method sets the X training data.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span></div>
+
+
+<div class="viewcode-block" id="Model.get_X_train">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.get_X_train">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_X_train</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method returns the X training data.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span></div>
+
+
+<div class="viewcode-block" id="Model.set_y_train">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.set_y_train">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_y_train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method sets the y training data.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span> <span class="o">=</span> <span class="n">y_train</span></div>
+
+
+<div class="viewcode-block" id="Model.get_y_train">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.get_y_train">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_y_train</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method returns the y training data.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span></div>
+
+
+<div class="viewcode-block" id="Model.set_X_test">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.set_X_test">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_X_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_test</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method sets the X test data.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span></div>
+
+
+<div class="viewcode-block" id="Model.get_X_test">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.get_X_test">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_X_test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method returns the X test data.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_test</span></div>
+
+
+<div class="viewcode-block" id="Model.set_y_test">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.set_y_test">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_y_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method sets the y test data.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span> <span class="o">=</span> <span class="n">y_test</span></div>
+
+
+<div class="viewcode-block" id="Model.get_y_test">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.get_y_test">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_y_test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method returns the y test data.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span></div>
+
+
+<div class="viewcode-block" id="Model.set_X">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.set_X">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_X</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method sets the X data.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span></div>
+
+
+<div class="viewcode-block" id="Model.get_X">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.get_X">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_X</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method returns the X data.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span></div>
+
+
+<div class="viewcode-block" id="Model.set_y">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.set_y">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method sets the y data.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span></div>
+
+
+<div class="viewcode-block" id="Model.get_y">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.get_y">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_y</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method returns the y data.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span></div>
+
+
+<div class="viewcode-block" id="Model.set_test_size">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.set_test_size">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_test_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_size</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method sets the test size.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span> <span class="n">test_size</span></div>
+
+
+<div class="viewcode-block" id="Model.get_test_size">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.get_test_size">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_test_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method returns the test size.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_size</span></div>
+
+
+<div class="viewcode-block" id="Model.get_pipeline">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.get_pipeline">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method returns the pipeline.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span></div>
+
+
+<div class="viewcode-block" id="Model.set_random_state">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.set_random_state">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_random_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">random_state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method sets the random state.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">random_state</span></div>
+
+
+<div class="viewcode-block" id="Model.get_random_state">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.get_random_state">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_random_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method returns the random state.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span></div>
+
+
+<div class="viewcode-block" id="Model.set_y_pred">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.set_y_pred">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_y_pred</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method sets the y_pred.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_pred</span></div>
+
+
+<div class="viewcode-block" id="Model.get_y_pred">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.get_y_pred">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_y_pred</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method returns the y_pred.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_pred</span></div>
+
+
+<div class="viewcode-block" id="Model.build_pipeline">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.build_pipeline">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method builds the pipeline with TfidfVectorizer and chosen classifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+            <span class="p">[(</span><span class="s2">&quot;tfidf&quot;</span><span class="p">,</span> <span class="n">TfidfVectorizer</span><span class="p">()),</span> <span class="p">(</span><span class="s2">&quot;classifier&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clf</span><span class="p">)]</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Model.train">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.train">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method trains the model.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+            <span class="n">test_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">test_size</span><span class="p">,</span>
+            <span class="n">stratify</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+            <span class="n">random_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_y_pred</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Model.count_accuracy">
+<a class="viewcode-back" href="../../../src.models.html#src.models.model.Model.count_accuracy">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">count_accuracy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method returns the accuracy of the model.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">accuracy_score</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_y_test</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_y_pred</span><span class="p">()</span>
+        <span class="p">),</span> <span class="n">classification_report</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_y_test</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_y_pred</span><span class="p">())</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Patrick Schröder.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

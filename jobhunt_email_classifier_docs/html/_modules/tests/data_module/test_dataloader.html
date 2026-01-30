@@ -1,0 +1,183 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tests.data_module.test_dataloader &mdash; Jobhunt Emails Classifier 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Jobhunt Emails Classifier
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">jobhunt_emails_classifier</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Jobhunt Emails Classifier</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tests.data_module.test_dataloader</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tests.data_module.test_dataloader</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.data_module.dataloader</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.exceptions.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">PathError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">unittest.mock</span><span class="w"> </span><span class="kn">import</span> <span class="n">patch</span><span class="p">,</span> <span class="n">MagicMock</span>
+
+
+<div class="viewcode-block" id="TestDataLoader">
+<a class="viewcode-back" href="../../../tests.data_module.html#tests.data_module.test_dataloader.TestDataLoader">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TestDataLoader</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class with tests associated with DataLoader class.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TestDataLoader.test_init">
+<a class="viewcode-back" href="../../../tests.data_module.html#tests.data_module.test_dataloader.TestDataLoader.test_init">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the initialization of a model&quot;&quot;&quot;</span>
+        <span class="n">dl</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">dl</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="k">del</span> <span class="n">dl</span></div>
+
+
+<div class="viewcode-block" id="TestDataLoader.test_set_path">
+<a class="viewcode-back" href="../../../tests.data_module.html#tests.data_module.test_dataloader.TestDataLoader.test_set_path">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the setting of a path&quot;&quot;&quot;</span>
+        <span class="n">dl</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
+        <span class="n">dl</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;./data/example.csv&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">dl</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;./data/example.csv&quot;</span><span class="p">)</span>
+
+        <span class="k">del</span> <span class="n">dl</span></div>
+
+
+<div class="viewcode-block" id="TestDataLoader.test_get_path">
+<a class="viewcode-back" href="../../../tests.data_module.html#tests.data_module.test_dataloader.TestDataLoader.test_get_path">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_get_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the getting of a path&quot;&quot;&quot;</span>
+        <span class="n">dl</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
+        <span class="n">dl</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;./data/example.csv&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">dl</span><span class="o">.</span><span class="n">get_path</span><span class="p">(),</span> <span class="s2">&quot;./data/example.csv&quot;</span><span class="p">)</span>
+
+        <span class="k">del</span> <span class="n">dl</span></div>
+
+
+<div class="viewcode-block" id="TestDataLoader.test_load_data_csv_exception">
+<a class="viewcode-back" href="../../../tests.data_module.html#tests.data_module.test_dataloader.TestDataLoader.test_load_data_csv_exception">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_load_data_csv_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the loading of a csv file that does not exist&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">PathError</span><span class="p">):</span>
+            <span class="n">dl</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
+            <span class="n">dl</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;./data/example.csv&quot;</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">dl</span><span class="o">.</span><span class="n">load_data_csv</span><span class="p">()</span>
+            <span class="k">del</span> <span class="n">df</span>
+        <span class="k">del</span> <span class="n">dl</span></div>
+
+
+<div class="viewcode-block" id="TestDataLoader.test_load_data_csv_success">
+<a class="viewcode-back" href="../../../tests.data_module.html#tests.data_module.test_dataloader.TestDataLoader.test_load_data_csv_success">[docs]</a>
+    <span class="nd">@patch</span><span class="p">(</span><span class="s2">&quot;pandas.read_csv&quot;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_load_data_csv_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_read_csv</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that load_data_csv returns DataFrame when CSV is readable.&quot;&quot;&quot;</span>
+        <span class="c1"># Prepare mock DataFrame</span>
+        <span class="n">mock_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot; email_text &quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">],</span> <span class="s2">&quot; email_type &quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Y&quot;</span><span class="p">]})</span>
+        <span class="n">mock_read_csv</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_df</span>
+
+        <span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
+        <span class="n">loader</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;test/path/to/data.csv&quot;</span><span class="p">)</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_data_csv</span><span class="p">()</span>
+
+        <span class="c1"># Assertions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertListEqual</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span> <span class="p">[</span><span class="s2">&quot;email_text&quot;</span><span class="p">,</span> <span class="s2">&quot;email_type&quot;</span><span class="p">])</span>
+        <span class="n">mock_read_csv</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span>
+            <span class="s2">&quot;test/path/to/data.csv&quot;</span><span class="p">,</span> <span class="n">on_bad_lines</span><span class="o">=</span><span class="s2">&quot;warn&quot;</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Patrick Schröder.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

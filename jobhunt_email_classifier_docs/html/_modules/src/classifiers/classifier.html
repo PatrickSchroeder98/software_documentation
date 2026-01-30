@@ -1,0 +1,407 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.classifiers.classifier &mdash; Jobhunt Emails Classifier 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Jobhunt Emails Classifier
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">jobhunt_emails_classifier</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Jobhunt Emails Classifier</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">src.classifiers.classifier</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for src.classifiers.classifier</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span><span class="p">,</span> <span class="n">SGDClassifier</span><span class="p">,</span> <span class="n">RidgeClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultinomialNB</span><span class="p">,</span> <span class="n">ComplementNB</span><span class="p">,</span> <span class="n">BernoulliNB</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">RandomForestClassifier</span><span class="p">,</span>
+    <span class="n">GradientBoostingClassifier</span><span class="p">,</span>
+    <span class="n">AdaBoostClassifier</span><span class="p">,</span>
+    <span class="n">VotingClassifier</span><span class="p">,</span>
+    <span class="n">StackingClassifier</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearSVC</span><span class="p">,</span> <span class="n">SVC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span><span class="p">,</span> <span class="n">ExtraTreeClassifier</span>
+
+
+<div class="viewcode-block" id="Classifier">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Classifier</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class responsible for classifiers used in predictive model.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Init method that initializes the classifier as none object.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span> <span class="o">=</span> <span class="mi">200</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vc_clf_1</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vc_clf_2</span> <span class="o">=</span> <span class="n">MultinomialNB</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vc_clf_3</span> <span class="o">=</span> <span class="n">LinearSVC</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">voting</span> <span class="o">=</span> <span class="s2">&quot;hard&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sc_clf_1</span> <span class="o">=</span> <span class="n">MultinomialNB</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sc_clf_2</span> <span class="o">=</span> <span class="n">LinearSVC</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sc_clf_3</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;MultinomialNB&quot;</span><span class="p">:</span> <span class="n">MultinomialNB</span><span class="p">,</span>
+            <span class="s2">&quot;LogisticRegression&quot;</span><span class="p">:</span> <span class="n">LogisticRegression</span><span class="p">,</span>
+            <span class="s2">&quot;ComplementNB&quot;</span><span class="p">:</span> <span class="n">ComplementNB</span><span class="p">,</span>
+            <span class="s2">&quot;BernoulliNB&quot;</span><span class="p">:</span> <span class="n">BernoulliNB</span><span class="p">,</span>
+            <span class="s2">&quot;SGDClassifier&quot;</span><span class="p">:</span> <span class="n">SGDClassifier</span><span class="p">,</span>
+            <span class="s2">&quot;RidgeClassifier&quot;</span><span class="p">:</span> <span class="n">RidgeClassifier</span><span class="p">,</span>
+            <span class="s2">&quot;RandomForestClassifier&quot;</span><span class="p">:</span> <span class="n">RandomForestClassifier</span><span class="p">,</span>
+            <span class="s2">&quot;GradientBoostingClassifier&quot;</span><span class="p">:</span> <span class="n">GradientBoostingClassifier</span><span class="p">,</span>
+            <span class="s2">&quot;AdaBoostClassifier&quot;</span><span class="p">:</span> <span class="n">AdaBoostClassifier</span><span class="p">,</span>
+            <span class="s2">&quot;LinearSVC&quot;</span><span class="p">:</span> <span class="n">LinearSVC</span><span class="p">,</span>
+            <span class="s2">&quot;SVC&quot;</span><span class="p">:</span> <span class="n">SVC</span><span class="p">,</span>
+            <span class="s2">&quot;KNeighborsClassifier&quot;</span><span class="p">:</span> <span class="n">KNeighborsClassifier</span><span class="p">,</span>
+            <span class="s2">&quot;DecisionTreeClassifier&quot;</span><span class="p">:</span> <span class="n">DecisionTreeClassifier</span><span class="p">,</span>
+            <span class="s2">&quot;ExtraTreeClassifier&quot;</span><span class="p">:</span> <span class="n">ExtraTreeClassifier</span><span class="p">,</span>
+        <span class="p">}</span>
+
+<div class="viewcode-block" id="Classifier.set_max_iter">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_max_iter">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_max_iter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set maximum number of iterations.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span> <span class="o">=</span> <span class="n">max_iter</span></div>
+
+
+<div class="viewcode-block" id="Classifier.get_max_iter">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.get_max_iter">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_max_iter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return maximum number of iterations.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_vc_clf_1">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_vc_clf_1">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_vc_clf_1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vc_clf_1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set 1st estimator for voting classifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vc_clf_1</span> <span class="o">=</span> <span class="n">vc_clf_1</span></div>
+
+
+<div class="viewcode-block" id="Classifier.get_vc_clf_1">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.get_vc_clf_1">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_vc_clf_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return 1st estimator for voting classifier.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vc_clf_1</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_vc_clf_2">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_vc_clf_2">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_vc_clf_2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vc_clf_2</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set 2nd estimator for voting classifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vc_clf_2</span> <span class="o">=</span> <span class="n">vc_clf_2</span></div>
+
+
+<div class="viewcode-block" id="Classifier.get_vc_clf_2">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.get_vc_clf_2">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_vc_clf_2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return 2nd estimator for voting classifier.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vc_clf_2</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_vc_clf_3">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_vc_clf_3">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_vc_clf_3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vc_clf_3</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set 3rd estimator for voting classifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vc_clf_3</span> <span class="o">=</span> <span class="n">vc_clf_3</span></div>
+
+
+<div class="viewcode-block" id="Classifier.get_vc_clf_3">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.get_vc_clf_3">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_vc_clf_3</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return 3rd estimator for voting classifier.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vc_clf_3</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_voting_hard">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_voting_hard">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_voting_hard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set voting option as &#39;hard&#39; for classifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">voting</span> <span class="o">=</span> <span class="s2">&quot;hard&quot;</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_voting_soft">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_voting_soft">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_voting_soft</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set voting option as &#39;soft&#39; for classifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">voting</span> <span class="o">=</span> <span class="s2">&quot;soft&quot;</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_sc_clf_1">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_sc_clf_1">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_sc_clf_1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sc_clf_1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set 1st estimator for scoring classifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sc_clf_1</span> <span class="o">=</span> <span class="n">sc_clf_1</span></div>
+
+
+<div class="viewcode-block" id="Classifier.get_sc_clf_1">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.get_sc_clf_1">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_sc_clf_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return 1st estimator for scoring classifier.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sc_clf_1</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_sc_clf_2">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_sc_clf_2">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_sc_clf_2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sc_clf_2</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set 2nd estimator for scoring classifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sc_clf_2</span> <span class="o">=</span> <span class="n">sc_clf_2</span></div>
+
+
+<div class="viewcode-block" id="Classifier.get_sc_clf_2">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.get_sc_clf_2">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_sc_clf_2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return 2nd estimator for scoring classifier.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sc_clf_2</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_sc_clf_3">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_sc_clf_3">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_sc_clf_3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sc_clf_3</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set 3rd estimator for scoring classifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sc_clf_3</span> <span class="o">=</span> <span class="n">sc_clf_3</span></div>
+
+
+<div class="viewcode-block" id="Classifier.get_sc_clf_3">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.get_sc_clf_3">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_sc_clf_3</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return 3rd estimator for scoring classifier.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sc_clf_3</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_classifier">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_classifier">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_classifier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classifier</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that can set classifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">classifier</span></div>
+
+
+<div class="viewcode-block" id="Classifier.get_classifier">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.get_classifier">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_classifier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that returns classifier.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_clf_nb">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_clf_nb">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_clf_nb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that can set classifier as MultinomialNB.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_classifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span><span class="p">[</span><span class="s2">&quot;MultinomialNB&quot;</span><span class="p">]())</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_clf_cnb">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_clf_cnb">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_clf_cnb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that can set classifier as ComplementNB.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_classifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span><span class="p">[</span><span class="s2">&quot;ComplementNB&quot;</span><span class="p">]())</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_clf_bnb">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_clf_bnb">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_clf_bnb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that can set classifier as BernoulliNB.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_classifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span><span class="p">[</span><span class="s2">&quot;BernoulliNB&quot;</span><span class="p">]())</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_clf_lr">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_clf_lr">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_clf_lr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that can set classifier as LogisticRegression.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_classifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span><span class="p">[</span><span class="s2">&quot;LogisticRegression&quot;</span><span class="p">]())</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_clf_sgd">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_clf_sgd">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_clf_sgd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that can set classifier as SGDClassifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_classifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span><span class="p">[</span><span class="s2">&quot;SGDClassifier&quot;</span><span class="p">]())</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_clf_rdg">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_clf_rdg">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_clf_rdg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that can set classifier as RidgeClassifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_classifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span><span class="p">[</span><span class="s2">&quot;RidgeClassifier&quot;</span><span class="p">]())</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_clf_rfc">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_clf_rfc">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_clf_rfc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that can set classifier as RandomForestClassifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_classifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span><span class="p">[</span><span class="s2">&quot;RandomForestClassifier&quot;</span><span class="p">]())</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_clf_gbc">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_clf_gbc">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_clf_gbc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that can set classifier as GradientBoostingClassifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_classifier</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span><span class="p">[</span><span class="s2">&quot;GradientBoostingClassifier&quot;</span><span class="p">]()</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_clf_abc">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_clf_abc">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_clf_abc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that can set classifier as AdaBoostClassifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_classifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span><span class="p">[</span><span class="s2">&quot;AdaBoostClassifier&quot;</span><span class="p">]())</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_clf_lsv">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_clf_lsv">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_clf_lsv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that can set classifier as LinearSVC.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_classifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span><span class="p">[</span><span class="s2">&quot;LinearSVC&quot;</span><span class="p">]())</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_clf_svc">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_clf_svc">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_clf_svc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that can set classifier as SVC.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_classifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span><span class="p">[</span><span class="s2">&quot;SVC&quot;</span><span class="p">]())</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_clf_knn">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_clf_knn">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_clf_knn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that can set classifier as KNeighborsClassifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_classifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span><span class="p">[</span><span class="s2">&quot;KNeighborsClassifier&quot;</span><span class="p">]())</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_clf_dtc">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_clf_dtc">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_clf_dtc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that can set classifier as DecisionTreeClassifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_classifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span><span class="p">[</span><span class="s2">&quot;DecisionTreeClassifier&quot;</span><span class="p">]())</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_clf_etc">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_clf_etc">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_clf_etc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that can set classifier as ExtraTreeClassifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_classifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ESTIMATORS_AND_CLASSIFIERS</span><span class="p">[</span><span class="s2">&quot;ExtraTreeClassifier&quot;</span><span class="p">]())</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_clf_vtc">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_clf_vtc">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_clf_vtc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that can set classifier as VotingClassifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_classifier</span><span class="p">(</span>
+            <span class="n">VotingClassifier</span><span class="p">(</span>
+                <span class="n">estimators</span><span class="o">=</span><span class="p">[</span>
+                    <span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vc_clf_1</span><span class="p">()),</span>
+                    <span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vc_clf_2</span><span class="p">()),</span>
+                    <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vc_clf_3</span><span class="p">()),</span>
+                <span class="p">],</span>
+                <span class="n">voting</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">voting</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Classifier.set_clf_stc">
+<a class="viewcode-back" href="../../../src.classifiers.html#src.classifiers.classifier.Classifier.set_clf_stc">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_clf_stc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that can set classifier as StackingClassifier.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_classifier</span><span class="p">(</span>
+            <span class="n">StackingClassifier</span><span class="p">(</span>
+                <span class="n">estimators</span><span class="o">=</span><span class="p">[</span>
+                    <span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_sc_clf_1</span><span class="p">()),</span>
+                    <span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vc_clf_2</span><span class="p">()),</span>
+                    <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_vc_clf_3</span><span class="p">()),</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Patrick Schröder.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

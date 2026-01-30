@@ -1,0 +1,21 @@
+src.interface package
+=====================
+
+Submodules
+----------
+
+src.interface.emailclassifierapp module
+---------------------------------------
+
+.. automodule:: src.interface.emailclassifierapp
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: src.interface
+   :members:
+   :show-inheritance:
+   :undoc-members:

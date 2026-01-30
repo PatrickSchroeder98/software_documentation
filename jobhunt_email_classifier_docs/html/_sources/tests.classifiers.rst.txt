@@ -1,0 +1,21 @@
+tests.classifiers package
+=========================
+
+Submodules
+----------
+
+tests.classifiers.test\_classifier module
+-----------------------------------------
+
+.. automodule:: tests.classifiers.test_classifier
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: tests.classifiers
+   :members:
+   :show-inheritance:
+   :undoc-members:

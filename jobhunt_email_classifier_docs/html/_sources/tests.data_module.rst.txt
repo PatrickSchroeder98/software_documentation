@@ -1,0 +1,21 @@
+tests.data\_module package
+==========================
+
+Submodules
+----------
+
+tests.data\_module.test\_dataloader module
+------------------------------------------
+
+.. automodule:: tests.data_module.test_dataloader
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: tests.data_module
+   :members:
+   :show-inheritance:
+   :undoc-members:

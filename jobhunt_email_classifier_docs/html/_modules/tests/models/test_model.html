@@ -1,0 +1,500 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tests.models.test_model &mdash; Jobhunt Emails Classifier 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Jobhunt Emails Classifier
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">jobhunt_emails_classifier</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Jobhunt Emails Classifier</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tests.models.test_model</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tests.models.test_model</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultinomialNB</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.models.model</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.classifiers.classifier</span><span class="w"> </span><span class="kn">import</span> <span class="n">Classifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+
+<div class="viewcode-block" id="TestModel">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TestModel</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class with tests associated with Model class.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TestModel.test_init">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_init">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the initialization of a model&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">clf</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">y_pred</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">pipeline</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">test_size</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">random_state</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">y_train</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">X_test</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">y_test</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_set_clf">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_set_clf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_clf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the set_clf method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">clf2</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">set_clf</span><span class="p">(</span><span class="n">clf2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">clf</span><span class="p">,</span> <span class="n">clf2</span><span class="p">)</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">clf2</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_get_clf">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_get_clf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_get_clf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the get_clf method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_clf</span><span class="p">(),</span> <span class="n">clf</span><span class="p">)</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_set_X_train">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_set_X_train">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_X_train</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the set_X_train method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">set_X_train</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_get_X_train">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_get_X_train">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_get_X_train</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the get_X_train method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">X_train</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_X_train</span><span class="p">(),</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_set_y_train">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_set_y_train">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_y_train</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the set_y_train method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">set_y_train</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">y_train</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_get_y_train">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_get_y_train">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_get_y_train</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the get_y_train method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">y_train</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_y_train</span><span class="p">(),</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_set_X_test">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_set_X_test">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_X_test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the set_X_test method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">set_X_test</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">X_test</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_get_X_test">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_get_X_test">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_get_X_test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the get_X_test method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">X_test</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_X_test</span><span class="p">(),</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_set_y_test">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_set_y_test">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_y_test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the set_y_test method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">set_y_test</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">y_test</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_get_y_test">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_get_y_test">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_get_y_test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the get_y_test method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">y_test</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_y_test</span><span class="p">(),</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_set_X">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_set_X">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_X</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the set_X method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">set_X</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_get_X">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_get_X">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_get_X</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the get_X method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_X</span><span class="p">(),</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_set_y">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_set_y">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_y</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the set_y method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">set_y</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_get_y">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_get_y">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_get_y</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the get_y method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_y</span><span class="p">(),</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_set_test_size">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_set_test_size">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_test_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the set_test_size method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">set_test_size</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">test_size</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_get_test_size">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_get_test_size">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_get_test_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the get_test_size method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_test_size</span><span class="p">(),</span> <span class="mf">0.3</span><span class="p">)</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_get_pipeline">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_get_pipeline">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_get_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the get_pipeline method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">clf</span><span class="o">.</span><span class="n">set_clf_nb</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s2">&quot;tfidf&quot;</span><span class="p">,</span> <span class="n">TfidfVectorizer</span><span class="p">()),</span> <span class="p">(</span><span class="s2">&quot;classifier&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">clf</span><span class="p">)])</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">p</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_pipeline</span><span class="p">(),</span> <span class="n">p</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_set_random_state">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_set_random_state">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_random_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the set_random_state method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">set_random_state</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">random_state</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_get_random_state">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_get_random_state">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_get_random_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the get_random_state method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_random_state</span><span class="p">(),</span> <span class="mi">42</span><span class="p">)</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_set_y_pred">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_set_y_pred">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_set_y_pred</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the set_y_pred method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">set_y_pred</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">y_pred</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_get_y_pred">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_get_y_pred">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_get_y_pred</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the get_y_pred method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_y_pred</span><span class="p">(),</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_build_pipeline">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_build_pipeline">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_build_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the build_pipeline method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">clf</span><span class="o">.</span><span class="n">set_clf_nb</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">classifier</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">pipeline</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">build_pipeline</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">pipeline</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">steps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;tfidf&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">steps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">TfidfVectorizer</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">steps</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;classifier&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">steps</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">MultinomialNB</span><span class="p">)</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_train">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_train">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_train</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the train method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">clf</span><span class="o">.</span><span class="n">set_clf_nb</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">classifier</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;This is jobhunt related&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Y&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;This is jobhunt related&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Y&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;This is jobhunt related&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Y&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;True&quot;</span><span class="p">,</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span> <span class="s2">&quot;False&quot;</span><span class="p">]</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">build_pipeline</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">X_train</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">X_test</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">y_train</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">y_test</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">X_train</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">X_test</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">y_train</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">y_test</span><span class="p">)</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="TestModel.test_count_accuracy">
+<a class="viewcode-back" href="../../../tests.models.html#tests.models.test_model.TestModel.test_count_accuracy">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_count_accuracy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the count_accuracy method of the model.&quot;&quot;&quot;</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">()</span>
+        <span class="n">clf</span><span class="o">.</span><span class="n">set_clf_nb</span><span class="p">()</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">classifier</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;This is jobhunt related&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Y&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;This is jobhunt related&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Y&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;This is jobhunt related&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Y&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;True&quot;</span><span class="p">,</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span> <span class="s2">&quot;False&quot;</span><span class="p">]</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">build_pipeline</span><span class="p">()</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">count_accuracy</span><span class="p">()</span>
+
+        <span class="c1"># --- structural tests ---</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># --- check accuracy value ---</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">float</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertGreaterEqual</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertLessEqual</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">1.0</span><span class="p">)</span>
+
+        <span class="c1"># --- check classification report ---</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s2">&quot;precision&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s2">&quot;recall&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s2">&quot;f1-score&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">del</span> <span class="n">clf</span><span class="p">,</span> <span class="n">model</span></div>
+</div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Patrick Schröder.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

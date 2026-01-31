@@ -28,7 +28,7 @@
                 <td colspan="2">Project Description</td>
             </tr>
             <tr>
-                <td colspan="2">This project focuses on the development of a Natural Language Processing (NLP) based email classifier designed to support job seekers in managing recruitment-related communication. Using Scikit-learn pipelines, the system automatically categorizes incoming emails into key classes such as Invitation, Rejection, Confirmation, or Other. The solution demonstrates the use of machine learning, TF-IDF vectorization, and multiple model architectures (Naive Bayes, Logistic Regression, and a Two-Stage Pipeline). It highlights both the practical application of NLP techniques and the implementation of clean, modular Python code for a real-world use case.</td>
+                <td colspan="2">This project presents a production-oriented Natural Language Processing (NLP) email classification system designed to assist job seekers in organizing and interpreting recruitment-related email communication. Built with Python and Scikit-learn, the application automatically classifies emails into meaningful categories such as Invitation, Rejection, Confirmation, or Non job-hunt related, significantly reducing manual effort during job searches. The system supports two complementary classification architectures: the three-stage binary pipelines, where emails are progressively filtered through specialized models (job-related detection → confirmation detection → invitation vs rejection); and a multiclassifier pipeline, capable of predicting all classes directly using a single model. Both approaches are implemented using modular Scikit-learn pipelines with TF-IDF vectorization and a flexible classifier registry supporting a wide range of algorithms, including Naive Bayes, Logistic Regression, SVMs, ensemble methods, and meta-classifiers such as VotingClassifier and StackingClassifier.</td>
             </tr>
             <tr class="highlight-row">
                 <td>Problem</td>
@@ -43,6 +43,10 @@
                 <td>Using NLP will allow user to set up an automatic classifier, saving time.</td>
             </tr>
             <tr>
+                <td>More than one classifer type is needed for more flexibility.</td>
+                <td>Application architecture will allow support for multiple classifiers.</td>
+            </tr>
+            <tr>
                 <td>User needs an easy way to interact with library.</td>
                 <td>An interface class will allow user to interact with the application in an easy way.</td>
             </tr>
@@ -51,7 +55,7 @@
             </tr>
             <tr>
                 <td>Project Start Date: 01.10.2025</td>
-                <td>Project End Date: 30.01.2026</td>
+                <td>Project End Date: 31.01.2026</td>
             </tr>
             <tr class="highlight-row">
                 <td colspan="2">Solution Scope</td>

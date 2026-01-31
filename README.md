@@ -34,6 +34,7 @@ The full documentation of project can be found on my [Software Documentation Web
 
 
 ## Changelog:  
+1.5.5 - updated JEC scope project description  
 1.5.4 - added code documentation to JEC project documentation, minor fixes  
 1.5.3 - updated JEC documentation  
 1.5.2 - updated CDE documentation  

@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.core package &mdash; Cloud Data Extractor 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="./_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="./_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="./_static/jquery.js?v=5d32c60e"></script>
+      <script src="./_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="./_static/documentation_options.js?v=8d563738"></script>
+      <script src="./_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="./_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="./_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="./genindex.html" />
+    <link rel="search" title="Search" href="./search.html" />
+    <link rel="next" title="src.exceptions package" href="./src.exceptions.html" />
+    <link rel="prev" title="src package" href="./src.html" /> 
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.ico">
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Cloud Data Extractor
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">cloud_data_extractor</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="src.html">src package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="src.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">src.core package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.exceptions.html">src.exceptions package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.interface.html">src.interface package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src.html#module-src">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html">tests package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Cloud Data Extractor</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">cloud_data_extractor</a></li>
+          <li class="breadcrumb-item"><a href="src.html">src package</a></li>
+      <li class="breadcrumb-item active">src.core package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/src.core.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-core-package">
+<h1>src.core package<a class="headerlink" href="#src-core-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-src.core.datareader">
+<span id="src-core-datareader-module"></span><h2>src.core.datareader module<a class="headerlink" href="#module-src.core.datareader" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.core.datareader.DataReader">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">src.core.datareader.</span></span><span class="sig-name descname"><span class="pre">DataReader</span></span><a class="reference internal" href="_modules/src/core/datareader.html#DataReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.datareader.DataReader" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class responsible for reading the extracted data and returning it in chosen format.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.datareader.DataReader.fetch_as_dataframe">
+<span class="sig-name descname"><span class="pre">fetch_as_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/datareader.html#DataReader.fetch_as_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.datareader.DataReader.fetch_as_dataframe" title="Link to this definition"></a></dt>
+<dd><p>Method to fetch data as Pandas dataframe.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.datareader.DataReader.fetch_as_dicts">
+<span class="sig-name descname"><span class="pre">fetch_as_dicts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/datareader.html#DataReader.fetch_as_dicts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.datareader.DataReader.fetch_as_dicts" title="Link to this definition"></a></dt>
+<dd><p>Method to fetch data as dictionaries.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.core.firestoreconnection">
+<span id="src-core-firestoreconnection-module"></span><h2>src.core.firestoreconnection module<a class="headerlink" href="#module-src.core.firestoreconnection" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.core.firestoreconnection.FirestoreConnection">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">src.core.firestoreconnection.</span></span><span class="sig-name descname"><span class="pre">FirestoreConnection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/firestoreconnection.html#FirestoreConnection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.firestoreconnection.FirestoreConnection" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class that handles firestore connection.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.firestoreconnection.FirestoreConnection.certificate_credentials">
+<span class="sig-name descname"><span class="pre">certificate_credentials</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/firestoreconnection.html#FirestoreConnection.certificate_credentials"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.firestoreconnection.FirestoreConnection.certificate_credentials" title="Link to this definition"></a></dt>
+<dd><p>Method for getting the firestore connection credentials.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.firestoreconnection.FirestoreConnection.db_client">
+<span class="sig-name descname"><span class="pre">db_client</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/firestoreconnection.html#FirestoreConnection.db_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.firestoreconnection.FirestoreConnection.db_client" title="Link to this definition"></a></dt>
+<dd><p>Method for getting the firestore database client.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.firestoreconnection.FirestoreConnection.get_collection_name">
+<span class="sig-name descname"><span class="pre">get_collection_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/firestoreconnection.html#FirestoreConnection.get_collection_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.firestoreconnection.FirestoreConnection.get_collection_name" title="Link to this definition"></a></dt>
+<dd><p>Method for getting the collection name.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.firestoreconnection.FirestoreConnection.get_credentials">
+<span class="sig-name descname"><span class="pre">get_credentials</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/firestoreconnection.html#FirestoreConnection.get_credentials"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.firestoreconnection.FirestoreConnection.get_credentials" title="Link to this definition"></a></dt>
+<dd><p>Method for getting the credentials of firestore connection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.firestoreconnection.FirestoreConnection.get_db">
+<span class="sig-name descname"><span class="pre">get_db</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/firestoreconnection.html#FirestoreConnection.get_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.firestoreconnection.FirestoreConnection.get_db" title="Link to this definition"></a></dt>
+<dd><p>Method for getting the database of firestore connection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.firestoreconnection.FirestoreConnection.get_path">
+<span class="sig-name descname"><span class="pre">get_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/firestoreconnection.html#FirestoreConnection.get_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.firestoreconnection.FirestoreConnection.get_path" title="Link to this definition"></a></dt>
+<dd><p>Method for getting the path of firestore connection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.firestoreconnection.FirestoreConnection.get_results">
+<span class="sig-name descname"><span class="pre">get_results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/firestoreconnection.html#FirestoreConnection.get_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.firestoreconnection.FirestoreConnection.get_results" title="Link to this definition"></a></dt>
+<dd><p>Method for getting the results of firestore connection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.firestoreconnection.FirestoreConnection.initialize_firestore">
+<span class="sig-name descname"><span class="pre">initialize_firestore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/firestoreconnection.html#FirestoreConnection.initialize_firestore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.firestoreconnection.FirestoreConnection.initialize_firestore" title="Link to this definition"></a></dt>
+<dd><p>Method for initializing firestore connection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.firestoreconnection.FirestoreConnection.save_collection">
+<span class="sig-name descname"><span class="pre">save_collection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/firestoreconnection.html#FirestoreConnection.save_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.firestoreconnection.FirestoreConnection.save_collection" title="Link to this definition"></a></dt>
+<dd><p>Method for getting the firestore collection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.firestoreconnection.FirestoreConnection.set_collection_name">
+<span class="sig-name descname"><span class="pre">set_collection_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/firestoreconnection.html#FirestoreConnection.set_collection_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.firestoreconnection.FirestoreConnection.set_collection_name" title="Link to this definition"></a></dt>
+<dd><p>Method for setting the collection name.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.firestoreconnection.FirestoreConnection.set_credentials">
+<span class="sig-name descname"><span class="pre">set_credentials</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/firestoreconnection.html#FirestoreConnection.set_credentials"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.firestoreconnection.FirestoreConnection.set_credentials" title="Link to this definition"></a></dt>
+<dd><p>Method for setting the credentials of firestore connection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.firestoreconnection.FirestoreConnection.set_db">
+<span class="sig-name descname"><span class="pre">set_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/firestoreconnection.html#FirestoreConnection.set_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.firestoreconnection.FirestoreConnection.set_db" title="Link to this definition"></a></dt>
+<dd><p>Method for setting the database of firestore connection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.firestoreconnection.FirestoreConnection.set_path">
+<span class="sig-name descname"><span class="pre">set_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/firestoreconnection.html#FirestoreConnection.set_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.firestoreconnection.FirestoreConnection.set_path" title="Link to this definition"></a></dt>
+<dd><p>Method for setting the path of firestore connection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.firestoreconnection.FirestoreConnection.set_results">
+<span class="sig-name descname"><span class="pre">set_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/firestoreconnection.html#FirestoreConnection.set_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.firestoreconnection.FirestoreConnection.set_results" title="Link to this definition"></a></dt>
+<dd><p>Method for setting the results of firestore connection.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.core.log">
+<span id="src-core-log-module"></span><h2>src.core.log module<a class="headerlink" href="#module-src.core.log" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.core.log.Log">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">src.core.log.</span></span><span class="sig-name descname"><span class="pre">Log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'log/logs.log'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/log.html#Log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.log.Log" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Logging wrapper around Python logging module.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.log.Log.debug">
+<span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/log.html#Log.debug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.log.Log.debug" title="Link to this definition"></a></dt>
+<dd><p>Method logs debug message.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.log.Log.error">
+<span class="sig-name descname"><span class="pre">error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/log.html#Log.error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.log.Log.error" title="Link to this definition"></a></dt>
+<dd><p>Method logs error message.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.log.Log.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/log.html#Log.info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.log.Log.info" title="Link to this definition"></a></dt>
+<dd><p>Method logs information message.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.core.log.Log.warning">
+<span class="sig-name descname"><span class="pre">warning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/core/log.html#Log.warning"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.core.log.Log.warning" title="Link to this definition"></a></dt>
+<dd><p>Method logs warning message.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.core">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.core" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="src.html" class="btn btn-neutral float-left" title="src package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="src.exceptions.html" class="btn btn-neutral float-right" title="src.exceptions package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Patrick Schröder.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

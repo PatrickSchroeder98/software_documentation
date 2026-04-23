@@ -1,0 +1,446 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tests.core.test_datareader &mdash; Cloud Data Extractor 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Cloud Data Extractor
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">cloud_data_extractor</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Cloud Data Extractor</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tests.core.test_datareader</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tests.core.test_datareader</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.core.datareader</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataReader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">unittest.mock</span><span class="w"> </span><span class="kn">import</span> <span class="n">MagicMock</span><span class="p">,</span> <span class="n">patch</span>
+
+
+<div class="viewcode-block" id="TestDataReader">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TestDataReader</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class with tests of the DataReader.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TestDataReader.test_init">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_init">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the initialization of a class&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">dr</span><span class="p">),</span> <span class="n">DataReader</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_normalize_none">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_normalize_none">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_normalize_none</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the normalization of a None object.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="n">dr</span><span class="o">.</span><span class="n">_normalize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_normalize_not_iterable">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_normalize_not_iterable">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_normalize_not_iterable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the normalization of an object that is not iterable.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">dr</span><span class="o">.</span><span class="n">_normalize</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_normalize_string_iterable_rejected">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_normalize_string_iterable_rejected">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_normalize_string_iterable_rejected</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the normalization of a string.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">dr</span><span class="o">.</span><span class="n">_normalize</span><span class="p">(</span><span class="s2">&quot;string&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_normalize_empty_iterable">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_normalize_empty_iterable">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_normalize_empty_iterable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the normalization of an empty object.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">_normalize</span><span class="p">([])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">[])</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_normalize_dict_items">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_normalize_dict_items">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_normalize_dict_items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the normalization of a dictionary items.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">_normalize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNot</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_normalize_firestore_like_object">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_normalize_firestore_like_object">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_normalize_firestore_like_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the normalization of a Firestore object.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="n">mock_snapshot</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">mock_snapshot</span><span class="o">.</span><span class="n">to_dict</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">_normalize</span><span class="p">([</span><span class="n">mock_snapshot</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">[{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}])</span>
+        <span class="n">mock_snapshot</span><span class="o">.</span><span class="n">to_dict</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_normalize_to_dict_not_callable">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_normalize_to_dict_not_callable">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_normalize_to_dict_not_callable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the normalization of a not callable object.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="k">class</span><span class="w"> </span><span class="nc">BadObject</span><span class="p">:</span>
+            <span class="n">to_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;not&quot;</span><span class="p">:</span> <span class="s2">&quot;callable&quot;</span><span class="p">}</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">dr</span><span class="o">.</span><span class="n">_normalize</span><span class="p">([</span><span class="n">BadObject</span><span class="p">()])</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_normalize_to_dict_returns_non_dict">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_normalize_to_dict_returns_non_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_normalize_to_dict_returns_non_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the normalization functionality behaviour when returning a non-dict.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="n">mock_snapshot</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">mock_snapshot</span><span class="o">.</span><span class="n">to_dict</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="s2">&quot;not a dict&quot;</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">dr</span><span class="o">.</span><span class="n">_normalize</span><span class="p">([</span><span class="n">mock_snapshot</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_normalize_to_dict_raises_exception">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_normalize_to_dict_raises_exception">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_normalize_to_dict_raises_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the normalization functionality behaviour when raising an exception.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="n">mock_snapshot</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">mock_snapshot</span><span class="o">.</span><span class="n">to_dict</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Failure&quot;</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="n">dr</span><span class="o">.</span><span class="n">_normalize</span><span class="p">([</span><span class="n">mock_snapshot</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_normalize_unsupported_type">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_normalize_unsupported_type">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_normalize_unsupported_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the normalization functionality behaviour when unsupported type.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">dr</span><span class="o">.</span><span class="n">_normalize</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_normalize_item_none">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_normalize_item_none">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_normalize_item_none</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the normalization of a None object.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">dr</span><span class="o">.</span><span class="n">_normalize</span><span class="p">([</span><span class="kc">None</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_fetch_as_dicts_success">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_fetch_as_dicts_success">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_fetch_as_dicts_success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the fetching data as dictionaries functionality success route.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;_normalize&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}])</span> <span class="k">as</span> <span class="n">mock_norm</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">fetch_as_dicts</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">[{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}])</span>
+            <span class="n">mock_norm</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_fetch_as_dicts_type_error">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_fetch_as_dicts_type_error">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_fetch_as_dicts_type_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the fetching data as dictionaries functionality type error route.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;_normalize&quot;</span><span class="p">,</span> <span class="n">side_effect</span><span class="o">=</span><span class="ne">TypeError</span><span class="p">()):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">fetch_as_dicts</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_fetch_as_dicts_value_error">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_fetch_as_dicts_value_error">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_fetch_as_dicts_value_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the fetching data as dictionaries functionality value error route.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;_normalize&quot;</span><span class="p">,</span> <span class="n">side_effect</span><span class="o">=</span><span class="ne">ValueError</span><span class="p">()):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">fetch_as_dicts</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_fetch_as_dicts_memory_error">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_fetch_as_dicts_memory_error">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_fetch_as_dicts_memory_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the fetching data as dictionaries functionality memory error route.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;_normalize&quot;</span><span class="p">,</span> <span class="n">side_effect</span><span class="o">=</span><span class="ne">MemoryError</span><span class="p">(</span><span class="s2">&quot;Out of memory&quot;</span><span class="p">)):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">fetch_as_dicts</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_fetch_as_dicts_logs_info">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_fetch_as_dicts_logs_info">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_fetch_as_dicts_logs_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests information logging functionality during fetching data as dictionaries.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+        <span class="n">dr</span><span class="o">.</span><span class="n">_DataReader__log</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;_normalize&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="p">[]):</span>
+            <span class="n">dr</span><span class="o">.</span><span class="n">fetch_as_dicts</span><span class="p">([])</span>
+
+            <span class="n">dr</span><span class="o">.</span><span class="n">_DataReader__log</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span>
+                <span class="s2">&quot;Saving data as dictionary...&quot;</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_fetch_as_dicts_logs_error_on_exception">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_fetch_as_dicts_logs_error_on_exception">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_fetch_as_dicts_logs_error_on_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests error logging functionality during fetching data as dictionaries.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+        <span class="n">dr</span><span class="o">.</span><span class="n">_DataReader__log</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;_normalize&quot;</span><span class="p">,</span> <span class="n">side_effect</span><span class="o">=</span><span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Bad type&quot;</span><span class="p">)):</span>
+            <span class="n">dr</span><span class="o">.</span><span class="n">fetch_as_dicts</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">dr</span><span class="o">.</span><span class="n">_DataReader__log</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">called</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_fetch_as_dataframe_success">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_fetch_as_dataframe_success">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_fetch_as_dataframe_success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the fetching data as dataframe functionality success route.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;_normalize&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}]):</span>
+            <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;src.core.datareader.pd.DataFrame&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mock_df</span><span class="p">:</span>
+                <span class="n">mock_df</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="s2">&quot;DF_OBJECT&quot;</span>
+
+                <span class="n">result</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">fetch_as_dataframe</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;DF_OBJECT&quot;</span><span class="p">)</span>
+                <span class="n">mock_df</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">([{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}])</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_fetch_as_dataframe_normalize_type_error">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_fetch_as_dataframe_normalize_type_error">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_fetch_as_dataframe_normalize_type_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the fetching data as dataframe functionality normalization type error route.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;_normalize&quot;</span><span class="p">,</span> <span class="n">side_effect</span><span class="o">=</span><span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Bad type&quot;</span><span class="p">)):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">fetch_as_dataframe</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_fetch_as_dataframe_normalize_value_error">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_fetch_as_dataframe_normalize_value_error">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_fetch_as_dataframe_normalize_value_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the fetching data as dataframe functionality normalization value error route.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;_normalize&quot;</span><span class="p">,</span> <span class="n">side_effect</span><span class="o">=</span><span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;None&quot;</span><span class="p">)):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">fetch_as_dataframe</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_fetch_as_dataframe_normalize_memory_error">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_fetch_as_dataframe_normalize_memory_error">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_fetch_as_dataframe_normalize_memory_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the fetching data as dataframe functionality normalization memory error route.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;_normalize&quot;</span><span class="p">,</span> <span class="n">side_effect</span><span class="o">=</span><span class="ne">MemoryError</span><span class="p">(</span><span class="s2">&quot;OOM&quot;</span><span class="p">)):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">fetch_as_dataframe</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_fetch_as_dataframe_invalid_normalized_type">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_fetch_as_dataframe_invalid_normalized_type">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_fetch_as_dataframe_invalid_normalized_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the fetching data as dataframe functionality when normalized type is not supported.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;_normalize&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="s2">&quot;not a list&quot;</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">fetch_as_dataframe</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_fetch_as_dataframe_dataframe_value_error">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_fetch_as_dataframe_dataframe_value_error">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_fetch_as_dataframe_dataframe_value_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the fetching data as dataframe functionality value error route.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;_normalize&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}]):</span>
+            <span class="k">with</span> <span class="n">patch</span><span class="p">(</span>
+                <span class="s2">&quot;src.core.datareader.pd.DataFrame&quot;</span><span class="p">,</span> <span class="n">side_effect</span><span class="o">=</span><span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Bad DF&quot;</span><span class="p">)</span>
+            <span class="p">):</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">fetch_as_dataframe</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_fetch_as_dataframe_dataframe_type_error">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_fetch_as_dataframe_dataframe_type_error">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_fetch_as_dataframe_dataframe_type_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the fetching data as dataframe functionality type error route.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;_normalize&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}]):</span>
+            <span class="k">with</span> <span class="n">patch</span><span class="p">(</span>
+                <span class="s2">&quot;src.core.datareader.pd.DataFrame&quot;</span><span class="p">,</span> <span class="n">side_effect</span><span class="o">=</span><span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Bad DF&quot;</span><span class="p">)</span>
+            <span class="p">):</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">fetch_as_dataframe</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_fetch_as_dataframe_dataframe_memory_error">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_fetch_as_dataframe_dataframe_memory_error">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_fetch_as_dataframe_dataframe_memory_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the fetching data as dataframe functionality memory error route.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;_normalize&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}]):</span>
+            <span class="k">with</span> <span class="n">patch</span><span class="p">(</span>
+                <span class="s2">&quot;src.core.datareader.pd.DataFrame&quot;</span><span class="p">,</span> <span class="n">side_effect</span><span class="o">=</span><span class="ne">MemoryError</span><span class="p">(</span><span class="s2">&quot;OOM&quot;</span><span class="p">)</span>
+            <span class="p">):</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">fetch_as_dataframe</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_fetch_as_dataframe_logs_info">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_fetch_as_dataframe_logs_info">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_fetch_as_dataframe_logs_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the information logging functionality during fetching data as dataframe.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+        <span class="n">dr</span><span class="o">.</span><span class="n">_DataReader__log</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;_normalize&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="p">[]):</span>
+            <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;src.core.datareader.pd.DataFrame&quot;</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()):</span>
+                <span class="n">dr</span><span class="o">.</span><span class="n">fetch_as_dataframe</span><span class="p">([])</span>
+
+                <span class="n">dr</span><span class="o">.</span><span class="n">_DataReader__log</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span>
+                    <span class="s2">&quot;Saving data as dataframe...&quot;</span>
+                <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDataReader.test_fetch_as_dataframe_logs_error">
+<a class="viewcode-back" href="../../../tests.core.html#tests.core.test_datareader.TestDataReader.test_fetch_as_dataframe_logs_error">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_fetch_as_dataframe_logs_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method tests the error logging functionality during fetching data as dataframe.&quot;&quot;&quot;</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">DataReader</span><span class="p">()</span>
+        <span class="n">dr</span><span class="o">.</span><span class="n">_DataReader__log</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;_normalize&quot;</span><span class="p">,</span> <span class="n">side_effect</span><span class="o">=</span><span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Bad type&quot;</span><span class="p">)):</span>
+            <span class="n">dr</span><span class="o">.</span><span class="n">fetch_as_dataframe</span><span class="p">(</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">dr</span><span class="o">.</span><span class="n">_DataReader__log</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">called</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Patrick Schröder.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

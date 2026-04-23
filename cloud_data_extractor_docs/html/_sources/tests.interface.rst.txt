@@ -1,0 +1,29 @@
+tests.interface package
+=======================
+
+Submodules
+----------
+
+tests.interface.test\_clouddataextractor module
+-----------------------------------------------
+
+.. automodule:: tests.interface.test_clouddataextractor
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.interface.test\_datareaderui module
+-----------------------------------------
+
+.. automodule:: tests.interface.test_datareaderui
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: tests.interface
+   :members:
+   :show-inheritance:
+   :undoc-members:

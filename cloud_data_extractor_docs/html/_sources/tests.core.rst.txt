@@ -1,0 +1,37 @@
+tests.core package
+==================
+
+Submodules
+----------
+
+tests.core.test\_datareader module
+----------------------------------
+
+.. automodule:: tests.core.test_datareader
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.core.test\_firestoreconnection module
+-------------------------------------------
+
+.. automodule:: tests.core.test_firestoreconnection
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.core.test\_log module
+---------------------------
+
+.. automodule:: tests.core.test_log
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: tests.core
+   :members:
+   :show-inheritance:
+   :undoc-members:

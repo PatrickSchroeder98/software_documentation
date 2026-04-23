@@ -1,0 +1,29 @@
+src.interface package
+=====================
+
+Submodules
+----------
+
+src.interface.clouddataextractor module
+---------------------------------------
+
+.. automodule:: src.interface.clouddataextractor
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+src.interface.datareaderui module
+---------------------------------
+
+.. automodule:: src.interface.datareaderui
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: src.interface
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,8 @@
+cloud_data_extractor
+====================
+
+.. toctree::
+   :maxdepth: 4
+
+   src
+   tests

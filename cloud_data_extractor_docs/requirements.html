@@ -25,38 +25,47 @@
         <h1>Functional requirements</h1>
         <table>
             <tr>
+                <th>ID</th>
                 <th>Requirement</th>
                 <th>Description</th>
             </tr>
             <tr>
+                <td>FR-01</td>
                 <td>Credential Loading</td>
                 <td>The library must allow users to authenticate using a Google Cloud service account JSON file.</td>
             </tr>
             <tr>
+                <td>FR-02</td>
                 <td>Collection Retrieval</td>
                 <td>The library must retrieve all documents from a specified Firestore collection.</td>
             </tr>
             <tr>
+                <td>FR3-03</td>
                 <td>Document Conversion</td>
                 <td>Retrieved Firestore documents must be converted into Python dictionaries.</td>
             </tr>
             <tr>
+                <td>FR3-04</td>
                 <td>DataFrame Output</td>
                 <td>The library must provide a method to convert Firestore data into a pandas DataFrame.</td>
             </tr>
             <tr>
+                <td>FR3-05</td>
                 <td>Error Handling</td>
                 <td>The system must raise user-friendly, custom exceptions for credential errors, connection issues, or invalid input.</td>
             </tr>
             <tr>
+                <td>FR3-06</td>
                 <td>Input Validation</td>
                 <td>The library must validate required parameters.</td>
             </tr>
             <tr>
+                <td>FR3-07</td>
                 <td>Example Usage Code</td>
                 <td>The project must include example scripts demonstrating typical usage patterns.</td>
             </tr>
             <tr>
+                <td>FR3-08</td>
                 <td>Efficient Data Fetching</td>
                 <td>The library must support a high-level functions that return Firestore data with minimal amount of calls.</td>
             </tr>
@@ -65,58 +74,72 @@
         <h1>Non-functional requirements</h1>
         <table>
             <tr>
+                <th>ID</th>
                 <th>Requirement</th>
                 <th>Description</th>
             </tr>
             <tr>
+                <td>NFR-01</td>
                 <td>Programming Language</td>
                 <td>Library will be written in Python programming language.</td>
             </tr>
             <tr>
+                <td>NFR-02</td>
                 <td>Code Quality</td>
                 <td>The library must follow Python best practices, clean code standards, and type annotations.</td>
             </tr>
             <tr>
+                <td>NFR-03</td>
                 <td>Python Version Compatibility</td>
                 <td>The library must support Python 3.9+ or higher.</td>
             </tr>
             <tr>
+                <td>NFR-04</td>
                 <td>Performance Efficiency</td>
                 <td>Data retrieval and conversion must perform efficiently for small-to-medium datasets.</td>
             </tr>
             <tr>
+                <td>NFR-05</td>
                 <td>Usability & Simplicity</td>
                 <td>The library must be intuitive, minimal, and easy for developers to integrate.</td>
             </tr>
             <tr>
+                <td>NFR-06</td>
                 <td>Maintainability</td>
                 <td>Code must be modular, well-documented, and easy to extend or refactor.</td>
             </tr>
             <tr>
+                <td>NFR-07</td>
                 <td>Security</td>
                 <td>Sensitive credentials must not be stored internally; the library must handle only user-provided file paths.</td>
             </tr>
             <tr>
+                <td>NFR-08</td>
                 <td>Reliability</td>
                 <td>The library must be able to connect to Firestore as long as credentials and network conditions are valid.</td>
             </tr>
             <tr>
+                <td>NFR-09</td>
                 <td>Dependency Stability</td>
                 <td>Official Google Cloud libraries must be used in the library to minimize breaking changes.</td>
             </tr>
             <tr>
+                <td>NFR-10</td>
                 <td>Test Coverage</td>
                 <td>Core components must be covered by unit tests to ensure reliability.</td>
             </tr>
             <tr>
+                <td>NFR-11</td>
                 <td>Documentation Quality</td>
                 <td>All functions, modules, and usage examples must be clearly documented.</td>
             </tr>
             <tr>
+                <td>NFR-12</td>
                 <td>Portability</td>
                 <td>The library must run on Windows operating systems.</td>
             </tr>
             <tr>
+                <td>NFR-13</td>
                 <td>Minimal External Requirements</td>
                 <td>The library must function with only the required dependencies, without any external libraries.</td>
             </tr>

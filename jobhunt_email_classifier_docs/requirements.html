@@ -25,34 +25,42 @@
         <h1>Functional requirements</h1>
         <table>
             <tr>
+                <th>ID</th>
                 <th>Requirement</th>
                 <th>Description</th>
             </tr>
             <tr>
+                <td>FR-01</td>
                 <td>Dataset loading</td>
                 <td>The system shall be able to load a CSV dataset containing email texts and their labels.</td>
             </tr>
             <tr>
+                <td>FR-02</td>
                 <td>Preprocessing text data</td>
                 <td>The system shall convert email text into numerical features using NLP techniques.</td>
             </tr>
             <tr>
+                <td>FR-03</td>
                 <td>Training of classification models</td>
                 <td>The system shall allow training of multiple machine learning models.</td>
             </tr>
             <tr>
+                <td>FR-04</td>
                 <td>Evaluation of models</td>
                 <td>The system shall generate performance metrics after training.</td>
             </tr>
             <tr>
+                <td>FR-05</td>
                 <td>Classification of new emails</td>
                 <td>The system shall predict the category of a new, unseen email provided by the user.</td>
             </tr>
             <tr>
+                <td>FR-06</td>
                 <td>Model selection by user</td>
                 <td>The system shall allow the user to choose which classifier to run for inference.</td>
             </tr>
             <tr>
+                <td>FR-07</td>
                 <td>User interface</td>
                 <td>The system shall expose a simple interface (CLI or API) where users can train models, test predictions, and select classifiers.</td>
             </tr>
@@ -61,38 +69,47 @@
         <h1>Non-functional requirements</h1>
         <table>
             <tr>
+                <th>ID</th>
                 <th>Requirement</th>
                 <th>Description</th>
             </tr>
             <tr>
+                <td>NFR-01</td>
                 <td>Language</td>
                 <td>Application interface shall be created in English language.</td>
             </tr>
             <tr>
+                <td>NFR-02</td>
                 <td>Performance</td>
                 <td>The system shall classify a single email in less than 1 second on a standard laptop.</td>
             </tr>
             <tr>
+                <td>NFR-03</td>
                 <td>Usability</td>
                 <td>The interface shall be intuitive and easy to navigate.</td>
             </tr>
             <tr>
+                <td>NFR-04</td>
                 <td>Portability</td>
                 <td>The application shall run on any system with Python 3.9+ and the required dependencies installed.</td>
             </tr>
             <tr>
+                <td>NFR-05</td>
                 <td>Maintainability</td>
                 <td>The code shall follow an object-oriented and modular design to allow easy extension.</td>
             </tr>
             <tr>
+                <td>NFR-06</td>
                 <td>Reliability</td>
                 <td>The system shall provide consistent classification results for the same input and model.</td>
             </tr>
             <tr>
+                <td>NFR-07</td>
                 <td>Transparency</td>
                 <td>The project shall include clear documentation to ensure reproducibility.</td>
             </tr>
             <tr>
+                <td>NFR-08</td>
                 <td>Scalability</td>
                 <td>The design shall allow integration with external APIs or inbox parsers in the future without major refactoring.</td>
             </tr>

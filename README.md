@@ -34,6 +34,7 @@ The full documentation of project can be found on my [Software Documentation Web
 
 
 ## Changelog:  
+1.5.7 - updated requirements IDs in every project documentation  
 1.5.6 - finished CDE project documentation  
 1.5.5 - finished JEC project documentation  
 1.5.4 - added code documentation to JEC project documentation, minor fixes  
